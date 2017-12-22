@@ -1,6 +1,6 @@
 # Weather Web App
 
-Basic weather web app implementing public API.
+Basic weather web app employing public API.
 
 Developed as a part of 
 [Task 10 of Kottans FrontEnd Course](https://github.com/kottans/frontend/blob/master/test10.md)
