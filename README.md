@@ -49,6 +49,7 @@ Developed as a part of
    - only caches external inquiry when new inquiry from
      `AppController` arrives
    - cached record: datetime, city, units, forecast depth
+ * `External Data Provider` - [Open Weather Map](https://openweathermap.org/api)
 
 ### Time Track
 
