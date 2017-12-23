@@ -51,8 +51,9 @@ Developed as a part of
 
 ### Time Track
 
-* `TOTAL= 00h10`
-* `171222 00h10` - setup
-* `171222 00h00` - initial research
+ * `TOTAL= 00h55`
+ * `171222 00h10` - setup
+ * `171222 00h20` - initial research
+ * `171223 00h25` - app architecture design
 
 [TOC :arrow_double_up: ](#table-of-contents)
