@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- icons
+        design:  http://google.github.io/material-design-icons/
+        listing: https://material.io/icons/
+    -->
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+</head>
+<body>
+    <div id="app-container">
+        <div id="nav-bar">
+            <div class="app-logo"><i class="material-icons">cloud</i> WeatherApp</div>
+            <div id="unit-switch" class="unit-switch" title="Switch units">
+                <div class="unit-switch-item active"><p>&#8451;</p></div>
+                <div class="unit-switch-item"><p>&#8457;</p></div>
+            </div>
+        </div>
+        <div id="location-bar">
+            <div class="row">
+                <button id="gps" class="btn-row" title="Detect my location"><i class="material-icons">gps_fixed</i></button>
+                <button id="favourite-mark-on" class="favourite-no btn-row" title="Add to favourites"><i class="material-icons">star_border</i></button>
+                <button id="favourite-mark-off" class="favourite-yes btn-row" title="Remove from favourites"><i class="material-icons">star</i></button>
+                <button id="favourite-dropdown" class="btn-row" title="Favourites list"><i class="material-icons">arrow_drop_down</i></button>
+                <input type="text" id="search-input" class="search btn-row" placeholder="Type in city name or geo coordinates" />
+                <button id="search-action" class="btn-row" title="Get weather info"><i class="material-icons">search</i></button>
+            </div>
+            <div id="auto-complete-container" class="city-container"></div>
+            <div id="favorites-container" class="city-container"></div>
+            <div id="history-container" class="city-container"></div>
+        </div>
+        <div id="warning-offline" class="warning">
+            <div class="row">
+                <!-- data unavailability reason -->
+                <div>Seems like you're offline.</div>
+                <div>Data provider query limit has been reached.</div>
+                <!-- presented data explanation -->
+                <div> And there is no cached data for selected location.</div>
+                <div> The data presented is <span>x hours</span> old.</div>
+            </div>
+            <div class="row justified">
+                <!-- retry block -->
+                <div>Please, try again later.</div>
+                <div><a href="#">RETRY</a></div>
+            </div>
+        </div>
+        <div id="weather-container">
+            <div id="weather-today">
+
+                <div class="loader loader-small"></div>
+            </div>
+            <div id="weather-forecast">
+
+                <div class="loader loader-big"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
