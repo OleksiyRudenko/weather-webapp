@@ -20,9 +20,10 @@ class CityListService {
         throw new Error('Network response was not ok.');
       })
       .then(data => {
-        data.map(entry => {
-          this._cityList.push({id: entry.id, name:entry.name + ', ' + entry.country});
-        });
+        let list = data.map(entry =>
+          ({id: entry.id, name:entry.name + ', ' + entry.country, nameUC: (entry.name + ', ' + entry.country).toUpperCase()})
+        ).filter(el => /^[^\d\W]/.test(el.name));
+        this._cityList = list.sort((a,b) => a.nameUC < b.nameUC ? -1 : 1 );
       })
       .catch(error => {
         console.error(error);
