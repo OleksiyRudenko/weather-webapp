@@ -13,7 +13,7 @@ class CityListService {
   }
 
   loadSource() {
-    fetch(window.location.protocol + "//" + window.location.host + "/" + this._appConfig.cityList, {method: 'get'})
+    fetch(this._appConfig.baseUrl + this._appConfig.cityList, {method: 'get'})
       .then(response => {
         if (response.ok)
          return response.json();
