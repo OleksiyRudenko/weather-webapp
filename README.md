@@ -53,10 +53,11 @@ Developed as a part of
 
 ### Time Track
 
- * `TOTAL= 05h25`
+ * `TOTAL= 05h40`
  * `171222 00h10` - setup
  * `171222 00h20` - initial research
  * `171223 01h35` - app architecture design
  * `171224 03h20` - view
+ * `171224 00h15` - unit switch controller
 
 [TOC :arrow_double_up: ](#table-of-contents)
