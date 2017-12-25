@@ -1,7 +1,7 @@
 /** Class representing unit switch controller. */
 class UnitSwitchController {
   /**
-   * Create weather service.
+   * Create unit switch controller.
    * @constructor
    * @param {object} appConfig - application config
    */
