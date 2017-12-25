@@ -1,4 +1,6 @@
-/** Class representing storage service. */
+/** Class representing storage service.
+ * Uses https://github.com/jakearchibald/idb -- https://www.npmjs.com/package/idb
+ */
 class StorageService {
   /**
    * Create storage service.
