@@ -67,18 +67,23 @@ class StorageService {
    * @param {array|object} recordSet - is either an object to store or array of objects to store
    */
   put(storeName, recordSet) {
-    if (Array.isArray(recordSet)) {
-      recordSet.forEach(e => this.put(storeName, e));
-    } else {
-      this._dbPromise.then(db => {
-        let tx = db.transaction(storeName, 'readwrite');
-        let store = tx.objectStore(storeName);
-        store.put(recordSet);
-        return tx.complete;
-      }).catch(e => {
-        console.log(e);
-      });
+    // put single object into an array
+    if (!Array.isArray(recordSet)) {
+      recordSet = [recordSet];
     }
+    this._dbPromise.then(db => {
+      const tx = db.transaction(storeName, 'readwrite');
+      const store = tx.objectStore(storeName);
+      return Promise.all(recordSet.map(item => {
+          return store.put(item);
+        }) // map
+      ).catch(e => {
+        tx.abort();
+        console.log(e);
+      }).then(() => {
+        console.log('Added ' + recordSet.length + ' items to ' + storeName);
+      });
+    });
   }
 
 }
