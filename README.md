@@ -53,14 +53,14 @@ Developed as a part of
 
 ### Time Track
 
- * `TOTAL= 07h55`
+ * `TOTAL= 11h45`
  * `171222 00h10` - setup
  * `171222 00h20` - initial research
  * `171223 01h35` - app architecture design
  * `171224 03h20` - view
  * `171224 00h15` - unit switch controller and settings service
  * `171224 00h20` - storage service
- * `171224 01h10` - city list feature
+ * `171224 05h00` - city list feature
  * `180102 00h45` - research on `webpack`
 
 [TOC :arrow_double_up: ](#table-of-contents)
