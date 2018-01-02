@@ -4,16 +4,18 @@ import CityHistoryService from './CityHistoryService';
 import WeatherService from './WeatherService';
 import StorageService from './StorageService'; */
 
-let Services = {
-  SettingsService: new SettingsService(appConfig),
-  CityListService: new CityListService(appConfig),
-  FavCityService: new FavCityService(appConfig),
-  CityHistoryService: new CityHistoryService(appConfig),
-  WeatherService: new WeatherService(appConfig),
-  StorageService: new StorageService(appConfig),
+const storageService = new StorageService(appConfig);
+
+const Services = {
+  SettingsService: new SettingsService(appConfig, storageService),
+  CityListService: new CityListService(appConfig, storageService),
+  FavCityService: new FavCityService(appConfig, storageService),
+  CityHistoryService: new CityHistoryService(appConfig, storageService),
+  WeatherService: new WeatherService(appConfig, storageService),
+  StorageService: storageService,
 };
 
-let Controllers = {
+const Controllers = {
   UnitSwitchController: new UnitSwitchController(Services.SettingsService, 'unit-switch'),
   CityInputController: new CityInputController(Services.CityListService, 'search-input'),
 };

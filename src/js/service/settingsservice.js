@@ -4,9 +4,11 @@ class SettingsService {
    * Create settings service.
    * @constructor
    * @param {object} appConfig - application config
+   * @param {object} storageService - storage service
    */
-  constructor(appConfig) {
+  constructor(appConfig, storageService) {
     this._appConfig = appConfig;
+    this._storageService = storageService;
     this._settings = {
       Units: 'metric',
     };

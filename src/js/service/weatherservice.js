@@ -5,7 +5,7 @@ class WeatherService {
    * @constructor
    * @param {object} appConfig - application config
    */
-  constructor(appConfig) {
+  constructor(appConfig, storageService) {
     this._appConfig = appConfig;
   }
 }
