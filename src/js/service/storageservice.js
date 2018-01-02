@@ -33,9 +33,18 @@ class StorageService {
     });
   }
 
-  storeCount(store) {
+  /**
+   * Returns number of objects in a store
+   * @param {string} storeName
+   * @returns {number}
+   */
+  storeCount(storeName) {
     return this._dbPromise.then(db => {
-
+      const tx = db.transaction(storeName, 'readonly');
+      const store = tx.objectStore(storeName);
+      return store.count();
     });
   }
+
+
 }
