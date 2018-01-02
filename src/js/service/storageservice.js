@@ -61,4 +61,24 @@ class StorageService {
     });
   }
 
+  /**
+   * Insert/update store
+   * @param {string} storeName
+   * @param {array|object} recordSet - is either an object to store or array of objects to store
+   */
+  put(storeName, recordSet) {
+    if (Array.isArray(recordSet)) {
+      recordSet.forEach(e => this.put(e));
+    } else {
+      this._dbPromise.then(db => {
+        let tx = db.transaction(storeName, 'readwrite');
+        let store = tx.objectStore(storeName);
+        store.add(recordSet);
+        return tx.complete;
+      }).catch(e => {
+        console.log(e);
+      });
+    }
+  }
+
 }
