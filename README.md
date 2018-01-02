@@ -53,7 +53,7 @@ Developed as a part of
 
 ### Time Track
 
- * `TOTAL= 11h45`
+ * `TOTAL= 13h25`
  * `171222 00h10` - setup
  * `171222 00h20` - initial research
  * `171223 01h35` - app architecture design
@@ -62,5 +62,6 @@ Developed as a part of
  * `171224 00h20` - storage service
  * `171224 05h00` - city list feature
  * `180102 00h45` - research on `webpack`
+ * `180103 01h40` - storage.put progress controller
 
 [TOC :arrow_double_up: ](#table-of-contents)
