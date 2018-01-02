@@ -74,7 +74,10 @@ class StorageService {
     return this._dbPromise.then(db => {
       const tx = db.transaction(storeName, 'readwrite');
       const store = tx.objectStore(storeName);
-      return Promise.all(recordSet.map(item => {
+      return Promise.all(recordSet.map((item, index) => {
+          if (!(index%100)) {
+            console.log('Add 100 items to ' + storeName);
+          }
           return store.put(item);
         }) // map
       ).catch(e => {
