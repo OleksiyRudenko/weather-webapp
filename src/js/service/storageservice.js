@@ -37,7 +37,7 @@ class StorageService {
   /**
    * Returns number of objects in a store
    * @param {string} storeName
-   * @returns {number}
+   * @returns {Promise<T>}
    */
   storeCount(storeName) {
     return this._dbPromise.then(db => {
