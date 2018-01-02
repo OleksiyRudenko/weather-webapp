@@ -10,6 +10,7 @@ class StorageService {
   constructor(appConfig) {
     this._appConfig = appConfig;
     this._dbPromise = this.dbOpen(this._appConfig.storage.dbVersion);
+    this.logSummary();
   }
 
   /**
@@ -43,8 +44,21 @@ class StorageService {
       const tx = db.transaction(storeName, 'readonly');
       const store = tx.objectStore(storeName);
       return store.count();
-    });
+    }).catch(e => e);
   }
 
+  /**
+   * Logs database summary
+   */
+  logSummary() {
+    const storeList = [].concat.apply([], this._appConfig.storage.store).map(e => e.storeName);
+    storeList.forEach(storeName => {
+      this.storeCount(storeName).then(v => {
+        console.log(storeName + '.length == ' + v);
+      }).catch(e => {
+        console.log(e);
+      });
+    });
+  }
 
 }
