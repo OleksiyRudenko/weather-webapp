@@ -15,24 +15,24 @@ const appConfig = {
       [
         {
           storeName: 'settings',
-          keyPath: {keyPath: 'option'},
+          storeOptions: {keyPath: 'option'},
           fields: ['option', 'value'], // option = {Units|...}; Units={metric|imperial}
         },
         {
           storeName: 'cities',
-          keyPath: {keyPath: 'id'},
+          storeOptions: {keyPath: 'id'},
           fields: ['id', 'name', 'nameUC'], // city name, city name uppercase
           index: [['nameUC']], // indices; when single literal then index name == index key name
         },
         {
           storeName: 'favcity',
-          keyPath: {keyPath: 'id'},
+          storeOptions: {keyPath: 'id'},
           fields: ['id', 'name', 'nameUC'], // city name, city name uppercase
           index: [['nameUC']],
         },
         {
           storeName: 'cityhistory',
-          keyPath: {keyPath: 'id'},
+          storeOptions: {keyPath: 'id'},
           fields: ['id', 'name', 'nameUC', 'lastQueried', 'queryCount'], // city name, city name uppercase
           index: [['nameUC'], ['lastQueried'], ['queryCount']],
         },
