@@ -71,7 +71,7 @@ class StorageService {
     if (!Array.isArray(recordSet)) {
       recordSet = [recordSet];
     }
-    this._dbPromise.then(db => {
+    return this._dbPromise.then(db => {
       const tx = db.transaction(storeName, 'readwrite');
       const store = tx.objectStore(storeName);
       return Promise.all(recordSet.map(item => {
