@@ -34,7 +34,11 @@
             <div id="favorites-container" class="city-container"></div>
             <div id="history-container" class="city-container"></div>
         </div>
-        <div id="warning-offline" class="warning">
+        <div id="progress-notification" class="notification progress">
+            <span id="progress-action"></span><span id="progress-count"></span><span id="progress-count-unit"></span>
+            <span id="progress-of"></span><span id="progress-total"></span><span id="progress-total-unit"></span>
+        </div>
+        <div id="warning-offline" class="notification warning">
             <div class="row">
                 <!-- data unavailability reason -->
                 <div>Seems like you're offline.</div>
@@ -71,6 +75,7 @@
     <script src="js/service/storageservice.js"></script>
     <script src="js/service/weatherservice.js"></script>
     <!-- include controllers -->
+    <script src="js/controller/progresscontroller.js"></script>
     <script src="js/controller/unitswitchcontroller.js"></script>
     <script src="js/controller/cityinputcontroller.js"></script>
     <!-- app bootstrapper -->

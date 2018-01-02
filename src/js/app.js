@@ -4,7 +4,8 @@ import CityHistoryService from './CityHistoryService';
 import WeatherService from './WeatherService';
 import StorageService from './StorageService'; */
 
-const storageService = new StorageService(appConfig);
+const progressController = new ProgressController(appConfig);
+const storageService = new StorageService(appConfig, progressController);
 
 const Services = {
   SettingsService: new SettingsService(appConfig, storageService),
@@ -18,6 +19,7 @@ const Services = {
 const Controllers = {
   UnitSwitchController: new UnitSwitchController(Services.SettingsService, 'unit-switch'),
   CityInputController: new CityInputController(Services.CityListService, 'search-input'),
+  ProgressController: progressController,
 };
 
 console.log('App ready');

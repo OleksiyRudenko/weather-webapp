@@ -6,9 +6,11 @@ class StorageService {
    * Create storage service.
    * @constructor
    * @param {object} appConfig - application config
+   * @param {object} progressController - progress message controller
    */
-  constructor(appConfig) {
+  constructor(appConfig, progressController) {
     this._appConfig = appConfig;
+    this._progressController = progressController;
     this._dbPromise = this.dbOpen(this._appConfig.storage.dbVersion);
     this.logSummary();
   }
@@ -71,19 +73,27 @@ class StorageService {
     if (!Array.isArray(recordSet)) {
       recordSet = [recordSet];
     }
+    const recordSetLength = recordSet.length;
+    const showProgress = (recordSetLength > 20);
+    let increment = (recordSetLength <= 100) ? 10 : (recordSetLength <= 1000) ? 20 : 100;
+    if (showProgress) this._progressController.show('Adding records to ' + storeName, '', recordSetLength);
     return this._dbPromise.then(db => {
       const tx = db.transaction(storeName, 'readwrite');
       const store = tx.objectStore(storeName);
       return Promise.all(recordSet.map((item, index) => {
-          if (!(index%100)) {
-            console.log('Add 100 items to ' + storeName);
+          if (!(index%increment)) {
+            this._progressController.addCount(increment);
+            console.log('Adding another ' + increment);
           }
           return store.put(item);
         }) // map
       ).catch(e => {
+        this._progressController.hide(100);
         tx.abort();
         console.log(e);
       }).then(() => {
+        this._progressController.setCount(recordSetLength);
+        this._progressController.hide(2500);
         console.log('Added ' + recordSet.length + ' items to ' + storeName);
       });
     });

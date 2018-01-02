@@ -134,28 +134,47 @@ input.search {
     color: yellow;
 }
 
-/* Connectivity Warning */
+/* Embedded Notifications super class */
 
-.warning {
+.notification {
     border-radius: 0.5em;
-    background-color: lightpink;
-    border: 1px solid lightcoral;
+    border: 1px solid #aaa;
+    background-color: #ccc;
     margin-left: 0.5em;
     margin-right: 0.5em;
     font-size: 80%;
+    display: none;
 }
 
-#warning-offline a {
+.notification a {
     color: Blue;
     font-weight: bolder;
     font-size: 120%;
     text-decoration: none;
 }
 
-#warning-offline {
+.display-block {
+    display: block;
+}
+
+/* Progress counter */
+
+.progress {
+    background-color: #ffffaa;
+    border-color: #ffff33;
+}
+
+/* Connectivity Warning */
+
+.warning {
+    background-color: lightpink;
+    border-color: lightcoral;
+}
+
+/* #warning-offline {
     display: flex;
     flex-direction: column;
-}
+} */
 
 /* ======= helpers ====== */
 /* --- loader ---

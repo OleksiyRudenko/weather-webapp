@@ -6,6 +6,17 @@ const appConfig = {
     apiKey: '0f034f0e9216aaa8ed94c3d87af01e18',
     apiParamName: 'APPID',
   },
+  notification: {
+    progress: {
+      container: 'progress-notification',
+      action: 'progress-action',
+      count: 'progress-count',
+      countUnit: 'progress-count-unit',
+      ofConjunction: 'progress-of',
+      total: 'progress-total',
+      totalUnit: 'progress-total-unit',
+    }
+  },
   cityList: 'assets/city.list.json',
   storage: {
     dbName: 'weatherapp-rdnk',
