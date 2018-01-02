@@ -14,6 +14,9 @@ class CityListService {
     this.loadSource();
   }
 
+  /**
+   * Import data (cities list) from external resource and customize it as appropriate
+   */
   loadSource() {
     fetch(this._appConfig.baseUrl + this._appConfig.cityList, {method: 'get'})
       .then(response => {
