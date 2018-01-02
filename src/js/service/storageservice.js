@@ -9,5 +9,27 @@ class StorageService {
    */
   constructor(appConfig) {
     this._appConfig = appConfig;
+    this._dbPromise = this.dbOpen(this._appConfig.storage.dbVersion);
+  }
+
+  /**
+   * Create IDB open promise that creates required stores as per dbVersion
+   * @param {number} dbVersion - current db version
+   * @returns {*|Promise<Cache>|void|IDBOpenDBRequest|Window|Document}
+   */
+  dbOpen(dbVersion) {
+    return idb.open(this._appConfig.storage.dbName, dbVersion, upgradeDb => {
+      const storeVersionedList = this._appConfig.storage.store; // store list
+      for (let i=0; i <= upgradeDb.oldVersion; i++) {
+        storeVersionedList[i].forEach(storeEntry => {
+          let store = upgradeDb.createObjectStore(storeEntry.storeName, storeEntry.keyPath);
+          if (!!storeEntry.index) { // any indices? .index = [ indexSpec,... ]; indexSpec = [indexName, indexKeyName_optional]
+            storeEntry.index.forEach(index => {
+              store.createIndex(index[0], index[index.length-1]);
+            });
+          }
+        });
+      }
+    });
   }
 }
