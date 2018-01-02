@@ -68,12 +68,12 @@ class StorageService {
    */
   put(storeName, recordSet) {
     if (Array.isArray(recordSet)) {
-      recordSet.forEach(e => this.put(e));
+      recordSet.forEach(e => this.put(storeName, e));
     } else {
       this._dbPromise.then(db => {
         let tx = db.transaction(storeName, 'readwrite');
         let store = tx.objectStore(storeName);
-        store.add(recordSet);
+        store.put(recordSet);
         return tx.complete;
       }).catch(e => {
         console.log(e);
