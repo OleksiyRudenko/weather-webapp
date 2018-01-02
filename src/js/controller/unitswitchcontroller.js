@@ -3,7 +3,8 @@ class UnitSwitchController {
   /**
    * Create unit switch controller.
    * @constructor
-   * @param {object} appConfig - application config
+   * @param {object} settingsService - settings service
+   * @param {string} unitSwitchElId - unit switch element id
    */
   constructor(settingsService, unitSwitchElId) {
     this._settingsService = settingsService;
@@ -12,6 +13,10 @@ class UnitSwitchController {
     this._unitSwitchEl.ontouchstart = this.onClick.bind(this);
   }
 
+  /**
+   * click handler
+   * @param {object} e - click event
+   */
   onClick(e) {
     this._settingsService.switchUnits();
     const list = this._unitSwitchEl.children;
