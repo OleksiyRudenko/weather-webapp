@@ -39,6 +39,7 @@ class CityInputController {
    */
   onUserCharInput(e) {
     const target = this._elControls.textInput;
+    // see https://stackoverflow.com/questions/2353550/how-to-capture-a-backspace-on-the-onkeydown-event for keys/codes details
     const keyCode = e.keyCode;
     const key = e.key;
     const code = e.code;
