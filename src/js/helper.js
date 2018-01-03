@@ -38,7 +38,7 @@ function elementIdsToHtmlElements(idSet, properties) {
  */
 function sanitizeWhitespaces(str, trimTails) {
   console.log('>' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
-  str = str.replace(/\s\s/g,' ');
+  str = str.replace(/\s\s+/g,' ');
   str = str.replace(/^\s/,'');
   if (trimTails) str = str.replace(/\s$/,'');
   console.log('<' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
@@ -76,4 +76,28 @@ function getCaretPosition(htmlElement) {
 
   // Return results
   return iCaretPos;
+}
+
+/**
+ * Sets caret position
+ * source: https://stackoverflow.com/questions/512528/set-keyboard-caret-position-in-html-textbox
+ * @param {Element} htmlElement - Input text HTML element
+ * @param {number} caretPos - Position to place caret at
+ */
+function setCaretPosition(htmlElement, caretPos) {
+  if(htmlElement) {
+    if(htmlElement.createTextRange) {
+      const range = htmlElement.createTextRange();
+      range.move('character', caretPos);
+      range.select();
+    }
+    else {
+      if(htmlElement.selectionStart) {
+        htmlElement.focus();
+        htmlElement.setSelectionRange(caretPos, caretPos);
+      }
+      else
+        htmlElement.focus();
+    }
+  }
 }
