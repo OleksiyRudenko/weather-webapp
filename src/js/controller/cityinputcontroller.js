@@ -42,14 +42,17 @@ class CityInputController {
     const keyCode = e.keyCode;
     const key = e.key;
     const code = e.code;
+    let caretPosition = getCaretPosition(target);
 
-    console.log('>"'+target.value.replace(/\s/g,'*')+'"');
+    console.log('>"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
     // skip initial spaces and every second space
     if (['Space', 'Backspace', 'Delete'].includes(code)) {
       target.value = sanitizeWhitespaces(target.value);
     }
     target.value = sanitizeWhitespaces(target.value);
-    console.log('<"'+target.value.replace(/\s/g,'*')+'"');
+
+    caretPosition = getCaretPosition(target);
+    console.log('<"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
   }
 
   /**
