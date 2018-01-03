@@ -23,7 +23,7 @@ class CityListService {
       if (!count) {
         this.loadSource().then(cityList => {
           console.log(cityList.length + ' entries in the city list.');
-          // cityList = cityList.slice(0, 50789);
+          cityList = cityList.slice(0, 1234);
           this._storageService.put(this._storeName, cityList).then(()=>{
             console.log('idb.cities updated.');
           });

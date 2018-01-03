@@ -13,6 +13,7 @@ class SettingsService {
     this._settings = {
       Units: 'metric',
     };
+    this.settingsPromise = this.loadSettings();
   }
 
   get units() { return this._settings.Units; }
@@ -21,6 +22,7 @@ class SettingsService {
 
   switchUnits() {
     this._settings.Units = (this._settings.Units === 'metric') ? 'imperial' : 'metric';
+    this.updateStorage();
   }
 
   /**
@@ -31,8 +33,8 @@ class SettingsService {
       option: 'Units',
       value: this._settings.Units,
     };
-    this._storageService.put(this._storeName,data).then(()=>{
-      console.log('Settings store updated')
+    this._storageService.put(this._storeName,data).then(() => {
+      console.log('Settings store updated');
     });
   }
 
@@ -40,6 +42,14 @@ class SettingsService {
    * Load settings from store
    */
   loadSettings() {
-    // this._storageService.getAll();
+    this._storageService.storeCount(this._storeName).then(count => {
+      if (!count) {
+        this.updateStorage();
+      }
+    });
+    return this._storageService.getAll(this._storeName).then(items => {
+      items.forEach(e => this._settings[e.option]=e.value);
+      return new Promise((resolve, reject) => resolve(this._settings));
+    });
   }
 }

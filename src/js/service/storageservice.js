@@ -99,4 +99,23 @@ class StorageService {
     });
   }
 
+  /**
+   * Get all records from store or optionally from store index optionally filtering by index key field value
+   * @param {string} storeName
+   * @param {string} indexName
+   * @param {string|number} keyValue
+   * @returns {Promise<T>}
+   */
+  getAll(storeName, indexName, keyValue) {
+    return this._dbPromise.then(db => {
+      const tx = db.transaction(storeName, 'readonly');
+      const store = tx.objectStore(storeName);
+      let queryTarget = store;
+      if (indexName) {
+        queryTarget = store.index(indexName);
+      }
+      return queryTarget.getAll(keyValue);
+    });
+  }
+
 }
