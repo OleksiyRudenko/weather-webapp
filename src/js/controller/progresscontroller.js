@@ -7,15 +7,9 @@ class ProgressController {
    */
   constructor(appConfig) {
     const config = appConfig.notification.progress;
+    const elementConfigKey = ['action', 'count', 'countUnit', 'ofConjunction', 'total', 'totalUnit'];
     this._elContainer = document.getElementById(config.container);
-    this._elMessage = {
-      action: document.getElementById(config.action),
-      count: document.getElementById(config.count),
-      countUnit: document.getElementById(config.countUnit),
-      ofConjunction: document.getElementById(config.ofConjunction),
-      total: document.getElementById(config.total),
-      totalUnit: document.getElementById(config.totalUnit),
-    };
+    this._elMessage =  elementIdsToHtmlElements(config, elementConfigKey);
     this._count = 0;
     this._total = 0;
   }

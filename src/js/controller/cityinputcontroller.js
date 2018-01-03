@@ -10,11 +10,7 @@ class CityInputController {
     const config = appConfig.search;
     const elementConfigKey = ['gps', 'favNo', 'favYes', 'favDropDown', 'textInput', 'searchAction'];
     this._elContainer = document.getElementById(config.container);
-    this._elControls = elementConfigKey.reduce((accumulator, key) => {
-      accumulator[key] = document.getElementById(config[key]);
-      return accumulator;
-    },{});
-    console.log(this._elControls);
+    this._elControls =  elementIdsToHtmlElements(config, elementConfigKey);
   }
 
   /**

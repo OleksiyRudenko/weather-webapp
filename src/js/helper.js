@@ -13,3 +13,19 @@ function attachOnClickEvent(htmlElement, eventHandler, scope) {
   htmlElement.onclick = eventHandler.bind(scope);
   htmlElement.ontouchstart = eventHandler.bind(scope);
 }
+
+/**
+ *
+ * @param {object} idSet - A set of keyval pairs <key: HtmlElementId>
+ * @param {string[]=} properties - An optional list of properties to include into resulting set
+ * @returns {object} - A set of keyval pairs <key: HtmlElement>
+ */
+function elementIdsToHtmlElements(idSet, properties) {
+  if (!properties) {
+    properties = Object.keys(idSet);
+  }
+  return properties.reduce((accumulator, key) => {
+    accumulator[key] = document.getElementById(idSet[key]);
+    return accumulator;
+  },{});
+}
