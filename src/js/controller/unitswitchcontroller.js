@@ -9,8 +9,7 @@ class UnitSwitchController {
   constructor(settingsService, unitSwitchElId) {
     this._settingsService = settingsService;
     this._unitSwitchEl = document.getElementById(unitSwitchElId);
-    this._unitSwitchEl.onclick = this.onClick.bind(this);
-    this._unitSwitchEl.ontouchstart = this.onClick.bind(this);
+    attachOnClickEvent(this._unitSwitchEl, this.onClick, this);
     this.render();
   }
 
