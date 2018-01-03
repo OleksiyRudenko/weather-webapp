@@ -44,3 +44,36 @@ function sanitizeWhitespaces(str, trimTails) {
   console.log('<' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
   return str;
 }
+
+/**
+ * Detect caret position
+ * Source: https://stackoverflow.com/questions/2897155/get-cursor-position-in-characters-within-a-text-input-field
+ * @param {Element} htmlElement - Input text HTML element
+ * @returns {number} - caret position
+ */
+function getCaretPosition(htmlElement) {
+  // Initialize
+  let iCaretPos = 0;
+
+  // IE Support
+  if (document.selection) {
+    // Set focus on the element
+    oField.focus();
+
+    // To get cursor position, get empty selection range
+    const oSel = document.selection.createRange();
+
+    // Move selection start to 0 position
+    oSel.moveStart('character', -oField.value.length);
+
+    // The caret position is selection length
+    iCaretPos = oSel.text.length;
+  }
+
+  // Firefox support
+  else if (htmlElement.selectionStart || htmlElement.selectionStart == '0')
+    iCaretPos = htmlElement.selectionDirection === 'backward' ? htmlElement.selectionStart : htmlElement.selectionEnd;
+
+  // Return results
+  return iCaretPos;
+}
