@@ -132,6 +132,10 @@ input.search {
     border-right: none; */
 }
 
+input.search::placeholder {
+    font-size: 80%;
+}
+
 .favourite-no {
     color: #ccc;
 }
