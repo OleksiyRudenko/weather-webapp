@@ -29,3 +29,15 @@ function elementIdsToHtmlElements(idSet, properties) {
     return accumulator;
   },{});
 }
+
+/**
+ * Removes leading, trailing and double whitespaces
+ * @param {string} str
+ * @returns {string}
+ */
+function sanitizeWhitespaces(str) {
+  console.log('>' + str.length + ':"' + str + '"');
+  str =  str.replace(/\s\s/g,' ').replace(/^\s\s*/,'').replace(/\s\s*$/,'');
+  console.log('<' + str.length + ':"' + str + '"');
+  return str;
+}
