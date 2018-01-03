@@ -19,7 +19,7 @@ class CityInputController {
    */
   attachClickHandlers() {
     attachOnClickEvent(this._elControls.searchAction, this.actionSearch, this);
-    this._elControls.textInput.onkeydown = this.onUserCharInput.bind(this);
+    this._elControls.textInput.onkeyup = this.onUserCharInput.bind(this); // onkeydown/keypress caused missing last key pressed
     this._elControls.textInput.onblur = this.onUserInputBlur.bind(this);
   }
 
@@ -43,11 +43,13 @@ class CityInputController {
     const key = e.key;
     const code = e.code;
 
+    console.log('>"'+target.value.replace(/\s/g,'*')+'"');
     // skip initial spaces and every second space
     if (['Space', 'Backspace', 'Delete'].includes(code)) {
-      target.value =sanitizeWhitespaces(target.value);
+      target.value = sanitizeWhitespaces(target.value);
     }
-
+    target.value = sanitizeWhitespaces(target.value);
+    console.log('<"'+target.value.replace(/\s/g,'*')+'"');
   }
 
   /**
@@ -56,7 +58,7 @@ class CityInputController {
    */
   onUserInputBlur(e) {
     const target = this._elControls.textInput;
-    target.value = sanitizeWhitespaces(target.value);
+    target.value = sanitizeWhitespaces(target.value, true);
 
   }
 }

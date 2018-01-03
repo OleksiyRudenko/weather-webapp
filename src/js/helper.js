@@ -32,12 +32,15 @@ function elementIdsToHtmlElements(idSet, properties) {
 
 /**
  * Removes leading, trailing and double whitespaces
- * @param {string} str
- * @returns {string}
+ * @param {string} str - String to sanitize
+ * @param {boolean=} [trimTails] - Will trim trailing whitespaces if true
+ * @returns {string} - Sanitized string
  */
-function sanitizeWhitespaces(str) {
-  console.log('>' + str.length + ':"' + str + '"');
-  str =  str.replace(/\s\s/g,' ').replace(/^\s\s*/,'').replace(/\s\s*$/,'');
-  console.log('<' + str.length + ':"' + str + '"');
+function sanitizeWhitespaces(str, trimTails) {
+  console.log('>' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
+  str = str.replace(/\s\s/g,' ');
+  str = str.replace(/^\s/,'');
+  if (trimTails) str = str.replace(/\s$/,'');
+  console.log('<' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
   return str;
 }
