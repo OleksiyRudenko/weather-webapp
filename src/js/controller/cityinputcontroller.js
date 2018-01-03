@@ -20,6 +20,7 @@ class CityInputController {
   attachClickHandlers() {
     attachOnClickEvent(this._elControls.searchAction, this.actionSearch, this);
     this._elControls.textInput.onkeydown = this.onUserCharInput.bind(this);
+    this._elControls.textInput.onblur = this.onUserInputBlur.bind(this);
   }
 
   /**
