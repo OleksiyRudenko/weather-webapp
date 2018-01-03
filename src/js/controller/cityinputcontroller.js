@@ -3,11 +3,17 @@ class CityInputController {
   /**
    * Create city input controller.
    * @constructor
-   * @param {object} cityListService - city list service
-   * @param {string} cityInputElId - city/geolocation search text input element id
+   * @param {object} appConfig - city list service
+   * @param {object} services - app services register
    */
-  constructor(cityListService, cityInputElId) {
-    this._cityListService = cityListService;
-    this._cityInputElId = document.getElementById(cityInputElId);
+  constructor(appConfig, services) {
+    const config = appConfig.search;
+    const elementConfigKey = ['gps', 'favNo', 'favYes', 'favDropDown', 'textInput', 'searchAction'];
+    this._elContainer = document.getElementById(config.container);
+    this._elControls = elementConfigKey.reduce((accumulator, key) => {
+      accumulator[key] = document.getElementById(config[key]);
+      return accumulator;
+    },{});
+    console.log(this._elControls);
   }
 }

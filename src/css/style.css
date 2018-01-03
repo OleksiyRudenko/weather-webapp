@@ -92,12 +92,18 @@ div.justified {
 /* Location bar */
 
 button {
+    cursor: pointer;
     color: #333;
+}
+
+.btn-inactive {
+    color: #99aaff;
+    cursor: default;
 }
 
 .btn-row {
     border: 1px solid #84a5ff;
-    background-color: cornflowerblue;
+    background-color: #6495ed; /* cornflowerblue; */
     border-radius: unset;
     padding: 1vmin;
 }
@@ -132,6 +138,10 @@ input.search {
 
 .favourite-yes {
     color: yellow;
+}
+
+.display-none {
+    display: none;
 }
 
 /* Embedded Notifications super class */

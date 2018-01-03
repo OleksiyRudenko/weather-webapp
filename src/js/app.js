@@ -18,7 +18,7 @@ const Services = {
 
 const Controllers = {
   UnitSwitchController: new UnitSwitchController(Services.SettingsService, 'unit-switch'),
-  CityInputController: new CityInputController(Services.CityListService, 'search-input'),
+  CityInputController: new CityInputController(appConfig, Services),
   ProgressController: progressController,
 };
 

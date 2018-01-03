@@ -17,6 +17,15 @@ const appConfig = {
       totalUnit: 'progress-total-unit',
     }
   },
+  search: {
+    container: 'search-bar',
+    gps: 'gps',
+    favNo: 'favourite-no',
+    favYes: 'favourite-yes',
+    favDropDown: 'favourite-dropdown',
+    textInput: 'search-input',
+    searchAction: 'search-action',
+  },
   cityList: 'assets/city.list.json',
   storage: {
     dbName: 'weatherapp-rdnk',
