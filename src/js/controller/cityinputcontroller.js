@@ -16,4 +16,19 @@ class CityInputController {
     },{});
     console.log(this._elControls);
   }
+
+  /**
+   * Attach click handlers to HTML elements
+   */
+  attachClickHandlers() {
+    // attachOnClickEvent(this._unitSwitchEl, this.onClick, this);
+  }
+
+  /**
+   * Search button click handler
+   * @param {object} e - click event
+   */
+  actionSearch(e) {
+
+  }
 }
