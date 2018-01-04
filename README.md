@@ -64,6 +64,6 @@ Developed as a part of
  * `180102 00h45` - research on `webpack`
  * `180103 01h40` - storage.put progress controller
  * `180103 02h45` - feature:search _(UI management took 2hrs of efforts)_
- * `180103 01h00` - feature:weather
+ * `180104 01h00` - feature:weather
 
 [TOC :arrow_double_up: ](#table-of-contents)
