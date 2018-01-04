@@ -29,7 +29,7 @@ class WeatherService {
       .then(response => {
         if (response.ok)
           return response.json();
-        throw new Error('WeatherService: Network response was not ok.');
+        throw new Error('WeatherService: Network response was not ok:' + response.status);
       })
       .then(data => {
         return data;

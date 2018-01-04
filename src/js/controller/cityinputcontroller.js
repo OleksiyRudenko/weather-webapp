@@ -12,6 +12,7 @@ class CityInputController {
     const elementConfigKey = ['gps', 'favNo', 'favYes', 'favDropDown', 'textInput', 'searchAction'];
 
     this._services = services;
+    this._weatherController = weatherController;
 
     // class settings
     this._settings = {
@@ -62,7 +63,7 @@ class CityInputController {
         };
         break;
     }
-    renderForecasts(
+    this.renderForecasts(
       this._services.WeatherService.apiRequest(apiQueryClass[0], userInputType, queryData),
       this._services.WeatherService.apiRequest(apiQueryClass[1], userInputType, queryData)
     );
@@ -114,11 +115,12 @@ class CityInputController {
   }
 
   /**
-   * Renders forecasts to UI
+   * Renders forecasts to UI via WeatherController
    * @param {Promise} current json
    * @param {Promise} forecast json
    */
-  renderForecasts(current,forecast) {
-
+  renderForecasts(current, forecast) {
+    this._weatherController.renderToday(current);
+    this._weatherController.renderForecast(forecast);
   }
 }
