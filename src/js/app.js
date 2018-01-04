@@ -5,6 +5,7 @@ import WeatherService from './WeatherService';
 import StorageService from './StorageService'; */
 
 const progressController = new ProgressController(appConfig);
+const weatherController = new WeatherController(appConfig);
 const storageService = new StorageService(appConfig, progressController);
 
 const Services = {
@@ -18,8 +19,9 @@ const Services = {
 
 const Controllers = {
   UnitSwitchController: new UnitSwitchController(Services.SettingsService, 'unit-switch'),
-  CityInputController: new CityInputController(appConfig, Services),
+  CityInputController: new CityInputController(appConfig, Services, weatherController),
   ProgressController: progressController,
+  WeatherController: weatherController,
 };
 
 console.log('App ready');

@@ -5,8 +5,9 @@ class CityInputController {
    * @constructor
    * @param {object} appConfig - city list service
    * @param {object} services - app services register
+   * @param {WeatherController} weatherController - weather controller
    */
-  constructor(appConfig, services) {
+  constructor(appConfig, services, weatherController) {
     const config = appConfig.search;
     const elementConfigKey = ['gps', 'favNo', 'favYes', 'favDropDown', 'textInput', 'searchAction'];
 
