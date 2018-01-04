@@ -38,8 +38,11 @@ class CityInputController {
    * @param {object} e - click event
    */
   actionSearch(e) {
+    const apiQueryClass = ['current', 'forecast5'];
     if (this._elControls.textInput.value.length < this._settings.minChar) return;
-
+    // predict user input content type if [\d.,\w] only then geo coords
+    const userInputType = /^[\-\d\s,.]+$/.test(this._elControls.textInput.value) ? 'latlon' : 'cityname';
+    console.log('Search by ' + userInputType);
   }
 
   /**
@@ -55,10 +58,16 @@ class CityInputController {
     let caretPosition = getCaretPosition(target);
 
     console.log('>"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
-    // skip initial spaces and every second space
-    if (['Space', 'Backspace', 'Delete'].includes(code)) {
-      target.value = sanitizeWhitespaces(target.value);
+    // remove letters if input value starts with [\-.\d] as an indication of geocoords input
+    if (target.value.length > 0 && /^[\-\d.,]/.test(target.value)) {
+      target.value = target.value.replace(/[^\-\d.,\s]/g,'');
     }
+
+    // skip initial spaces and every second space
+    /*if (['Space', 'Backspace', 'Delete'].includes(code)) {
+      target.value = sanitizeWhitespaces(target.value);
+    } */
+
     target.value = sanitizeWhitespaces(target.value);
 
     caretPosition = getCaretPosition(target);
