@@ -2,14 +2,15 @@ const appConfig = {
   baseUrl: window.location.protocol + "//" + window.location.host
     + window.location.pathname.split('/').slice(0,-1).join('/') + '/',
   api: {
+    apiUrl : 'http://api.openweathermap.org/data/2.5/',
     apiEndpoint : {
       current: {
-        cityname : 'api.openweathermap.org/data/2.5/weather?q={city name},{country code}',
-        latlon : 'api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}',
+        cityname : { path: 'weather', params: ['q'] }, // ?q={city name},{country code}
+        latlon : { path: 'weather', params: ['lat', 'lon'] }, //?lat={lat}&lon={lon}
       },
       forecast5 : {
-        cityname : 'api.openweathermap.org/data/2.5/forecast?q={city name},{country code}',
-        latlon : 'api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}',
+        cityname : { path: 'forecast', params: ['q'] }, // ?q={city name},{country code}
+        latlon : { path: 'weather', params: ['lat', 'lon'] }, //?lat={lat}&lon={lon}
       },
     },
     apiKey: '0f034f0e9216aaa8ed94c3d87af01e18',
@@ -34,6 +35,11 @@ const appConfig = {
     favDropDown: 'favourite-dropdown',
     textInput: 'search-input',
     searchAction: 'search-action',
+  },
+  weatherView: {
+    container: 'weather-container',
+    today: 'weather-today',
+    forecast: 'weather-forecast',
   },
   cityList: 'assets/city.list.json',
   storage: {

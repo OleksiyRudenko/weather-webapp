@@ -10,12 +10,14 @@ class CityInputController {
     const config = appConfig.search;
     const elementConfigKey = ['gps', 'favNo', 'favYes', 'favDropDown', 'textInput', 'searchAction'];
 
+    this._services = services;
+
     // class settings
     this._settings = {
       minChar: 3,
     };
 
-    // chores
+    // html elements
     this._elContainer = document.getElementById(config.container);
     this._elControls =  elementIdsToHtmlElements(config, elementConfigKey);
 
@@ -41,8 +43,28 @@ class CityInputController {
     const apiQueryClass = ['current', 'forecast5'];
     if (this._elControls.textInput.value.length < this._settings.minChar) return;
     // predict user input content type if [\d.,\w] only then geo coords
-    const userInputType = /^[\-\d\s,.]+$/.test(this._elControls.textInput.value) ? 'latlon' : 'cityname';
+    const userInput = this._elControls.textInput.value;
+    const userInputType = /^[\-\d\s,.]+$/.test(userInput) ? 'latlon' : 'cityname';
     console.log('Search by ' + userInputType);
+    let queryData = {};
+    switch (userInputType) {
+      case 'cityname':
+        queryData = {
+          q: userInput,
+        };
+        break;
+      case 'latlon':
+        const coordComponents = userInput.split(/[\s,]/);
+        queryData = {
+          lat: coordComponents[0],
+          lon: coordComponents[coordComponents.length-1],
+        };
+        break;
+    }
+    renderForecasts(
+      this._services.WeatherService.apiRequest(apiQueryClass[0], userInputType, queryData),
+      this._services.WeatherService.apiRequest(apiQueryClass[1], userInputType, queryData)
+    );
   }
 
   /**
@@ -87,6 +109,15 @@ class CityInputController {
   onUserInputBlur(e) {
     const target = this._elControls.textInput;
     target.value = sanitizeWhitespaces(target.value, true);
+
+  }
+
+  /**
+   * Renders forecasts to UI
+   * @param {Promise} current json
+   * @param {Promise} forecast json
+   */
+  renderForecasts(current,forecast) {
 
   }
 }
