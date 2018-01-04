@@ -9,8 +9,17 @@ class CityInputController {
   constructor(appConfig, services) {
     const config = appConfig.search;
     const elementConfigKey = ['gps', 'favNo', 'favYes', 'favDropDown', 'textInput', 'searchAction'];
+
+    // class settings
+    this._settings = {
+      minChar: 3,
+    };
+
+    // chores
     this._elContainer = document.getElementById(config.container);
     this._elControls =  elementIdsToHtmlElements(config, elementConfigKey);
+
+    // chores
     this.attachClickHandlers();
   }
 
@@ -29,9 +38,8 @@ class CityInputController {
    * @param {object} e - click event
    */
   actionSearch(e) {
-    if (this._elControls.textInput.value.length >=3) {
+    if (this._elControls.textInput.value.length < this._settings.minChar) return;
 
-    }
   }
 
   /**
@@ -55,6 +63,12 @@ class CityInputController {
 
     caretPosition = getCaretPosition(target);
     console.log('<"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
+
+    if (target.value.length >= this._settings.minChar) {
+      this._elControls.searchAction.classList.remove('btn-inactive');
+    } else {
+      this._elControls.searchAction.classList.add('btn-inactive');
+    }
   }
 
   /**
