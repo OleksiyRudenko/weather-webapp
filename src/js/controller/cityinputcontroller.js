@@ -58,8 +58,8 @@ class CityInputController {
       case 'latlon':
         const coordComponents = userInput.split(/[\s,]/);
         queryData = {
-          lat: coordComponents[0],
-          lon: coordComponents[coordComponents.length-1],
+          lon: coordComponents[0],
+          lat: coordComponents[coordComponents.length-1],
         };
         break;
     }
