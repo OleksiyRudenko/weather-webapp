@@ -37,11 +37,11 @@ function elementIdsToHtmlElements(idSet, properties) {
  * @returns {string} - Sanitized string
  */
 function sanitizeWhitespaces(str, trimTails) {
-  console.log('>' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
+  // DEBUG: console.log('>' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
   str = str.replace(/\s\s+/g,' ');
   str = str.replace(/^\s/,'');
   if (trimTails) str = str.replace(/\s$/,'');
-  console.log('<' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
+  // DEBUG: console.log('<' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
   return str;
 }
 

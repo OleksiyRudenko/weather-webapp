@@ -84,7 +84,7 @@ class CityInputController {
     const code = e.code;
     let caretPosition = getCaretPosition(target);
 
-    console.log('>"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
+    // DEBUG: console.log('>"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
     // remove letters if input value starts with [\-.\d] as an indication of geocoords input
     if (target.value.length > 0 && /^[\-\d.,]/.test(target.value)) {
       target.value = target.value.replace(/[^\-\d.,\s]/g,'');
@@ -98,7 +98,7 @@ class CityInputController {
     target.value = sanitizeWhitespaces(target.value);
 
     caretPosition = getCaretPosition(target);
-    console.log('<"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
+    // DEBUG: console.log('<"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
 
     if (target.value.length >= this._settings.minChar) {
       this._elControls.searchAction.classList.remove('btn-inactive');
