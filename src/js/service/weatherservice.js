@@ -25,6 +25,9 @@ class WeatherService {
     // add api key
     query += '&' + this._config.apiParamName + '=' + this._config.apiKey;
 
+    console.log('Weather service "' + query + '" from:');
+    console.log(queryData);
+
     return fetch(query, {method: 'get'})
       .then(response => {
         if (response.ok)

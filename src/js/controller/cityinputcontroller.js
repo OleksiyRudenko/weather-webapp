@@ -63,6 +63,9 @@ class CityInputController {
         };
         break;
     }
+    // add units explicitly
+    queryData.units = this._services.SettingsService.units;
+    // render forecast
     this.renderForecasts(
       this._services.WeatherService.apiRequest(apiQueryClass[0], userInputType, queryData),
       this._services.WeatherService.apiRequest(apiQueryClass[1], userInputType, queryData)
