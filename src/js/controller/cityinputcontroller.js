@@ -53,6 +53,7 @@ class CityInputController {
       case 'cityname':
         queryData = {
           q: userInput,
+          // type: 'like',
         };
         break;
       case 'latlon':
