@@ -202,6 +202,7 @@ input.search::placeholder {
     height: 120px;
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
+    display: none;
 }
 
 .loader-big {
@@ -212,6 +213,10 @@ input.search::placeholder {
 .loader-small {
     width: 60px;
     height: 60px;
+}
+
+.loader-visible {
+    display: block;
 }
 
 /* Safari */

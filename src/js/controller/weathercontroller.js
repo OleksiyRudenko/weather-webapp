@@ -16,9 +16,14 @@ class WeatherController {
    * @param {Promise} weatherData
    */
   renderToday(weatherData) {
+    const elProgressSpinner = document.querySelector('.loader-small');
+    // console.log(elProgressSpinner);
+    elProgressSpinner.classList.add('loader-visible');
     weatherData.then(data => {
+      elProgressSpinner.classList.remove('loader-visible');
       this._element.today.innerHTML = 'TODAY: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
     }).catch(error => {
+      elProgressSpinner.classList.remove('loader-visible');
       this._element.today.innerText = 'Today: ' + error;
     });
   }
@@ -28,9 +33,13 @@ class WeatherController {
    * @param {Promise} weatherData
    */
   renderForecast(weatherData) {
+    const elProgressSpinner = document.querySelector('.loader-big');
+    elProgressSpinner.classList.add('loader-visible');
     weatherData.then(data => {
+      elProgressSpinner.classList.remove('loader-visible');
       this._element.forecast.innerHTML = 'Forecast: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
     }).catch(error => {
+      elProgressSpinner.classList.remove('loader-visible');
       this._element.forecast.innerText = 'Forecast: ' + error;
     });
   }
