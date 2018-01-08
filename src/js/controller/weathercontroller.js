@@ -4,11 +4,18 @@ class WeatherController {
    * Create weather controller.
    * @constructor
    * @param {object} appConfig - city list service
+   * @param {SettingsService} settingsService - settings service
    */
-  constructor(appConfig) {
+  constructor(appConfig, settingsService, weatherService) {
     const config = appConfig.weatherView;
 
+    this._settingsService = settingsService;
+    this._weatherService = weatherService;
+
     this._element = elementIdsToHtmlElements(config);
+    this._elWeatherToday = null;
+
+    console.log(this._element);
   }
 
   /**
@@ -16,16 +23,36 @@ class WeatherController {
    * @param {Promise} weatherData
    */
   renderToday(weatherData) {
-    const elProgressSpinner = document.querySelector('.loader-small');
+    const idPrefix = 'wt-';
     // console.log(elProgressSpinner);
-    elProgressSpinner.classList.add('loader-visible');
+    this.exposeElement('today', 'Spinner');
+    // elProgressSpinner.classList.add('loader-visible');
     weatherData.then(data => {
-      elProgressSpinner.classList.remove('loader-visible');
+      // console.log(data);
       data = this.extractWeatherDataCurrent(data);
-      this._element.today.innerHTML = 'TODAY: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      // enrich data
+      data.windSpeedUnits = this._settingsService.windSpeedUnits;
+
+      // create references to today weather HTML elements if not yet
+      if (!this._elWeatherToday) {
+        this._elWeatherToday = objectKeysToHtmlElements(data, idPrefix);
+      }
+
+      // console.log(this._elWeatherToday);
+
+      // put data across HTML elements
+      Object.keys(data).forEach(key => {
+        if (key in this._elWeatherToday) {
+          this._elWeatherToday[key].innerHTML = data[key];
+        }
+      });
+
+      this.exposeElement('today', 'Main');
+
+      document.getElementById('weather-today-debug').innerHTML = 'TODAY: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
     }).catch(error => {
-      elProgressSpinner.classList.remove('loader-visible');
-      this._element.today.innerText = 'Today: ' + error;
+      this.exposeElement('today', 'Error');
+      this._element.todayError.innerText = 'No weather data for given location or inexistent location (error code: '+ error + ')';
     });
   }
 
@@ -34,20 +61,21 @@ class WeatherController {
    * @param {Object} src - API fetch data
    */
   extractWeatherDataCurrent(src) {
+    console.log('<img src="' + this._weatherService.apiIconUrl(src.weather[0].icon) + '" />');
     return {
       dt: src.dt,
       geocity: src.name,
       geocountry: src.sys.country,
       geolat: src.coord.lat,
       geolon: src.coord.lon,
-      descr: src.weather.main,
-      descrDetails: src.weather.description,
-      descrIcon: src.weather.icon,
+      descr: src.weather[0].main,
+      descrDetails: src.weather[0].description,
+      descrIcon: '<img src="' + this._weatherService.apiIconUrl(src.weather[0].icon) + '" />',
       temp: Math.round(src.main.temp),
       pressure: Math.round(src.main.pressure),
       humidity: src.main.humidity,
       windSpeed: Math.round(src.wind.speed),
-      windAzimuth: Math.round(src.wind.deg),
+      windAzimuth: this.degree2arrow(Math.round(src.wind.deg)),
       clouds: src.clouds.all,
     };
   }
@@ -57,15 +85,24 @@ class WeatherController {
    * @param {Promise} weatherData
    */
   renderForecast(weatherData) {
-    const elProgressSpinner = document.querySelector('.loader-big');
-    elProgressSpinner.classList.add('loader-visible');
+    this.exposeElement('forecast', 'Spinner');
     weatherData.then(data => {
-      elProgressSpinner.classList.remove('loader-visible');
       data = this.extractWeatherDataForecast(data);
-      this._element.forecast.innerHTML = 'Forecast: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      const forecastItems = data.weatherSchedule.map(item => `<div>
+        <div>${item.descrIcon}</div>
+        <div>${item.temp}&deg;</div>
+        <div>${item.dtHours}:00</div>
+        <div>${item.dtDate}</div>
+        </div>`
+      );
+
+      this._element.forecastMain.innerHTML = forecastItems.join('');
+      this.exposeElement('forecast', 'Main');
+
+      this._element.forecastDebug.innerHTML = 'Forecast: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
     }).catch(error => {
-      elProgressSpinner.classList.remove('loader-visible');
-      this._element.forecast.innerText = 'Forecast: ' + error;
+      this.exposeElement('forecast', 'Error');
+      this._element.forecastError.innerText = 'No forecast data for given location or inexistent location (error code: '+ error + ')';
     });
   }
 
@@ -84,7 +121,7 @@ class WeatherController {
 
     let weatherList = src.list.filter(item => {
       const time = item.dt_txt.substring(11,13);
-      console.log('Time: ' + time);
+      // console.log('Time: ' + time);
       return (time === '18' || time === '12');
 
     });
@@ -94,15 +131,62 @@ class WeatherController {
       dtHours: item.dt_txt.substring(11,13),
       descr: item.weather[0].main,
       descrDetails: item.weather[0].description,
-      descrIcon: item.weather[0].icon,
+      descrIcon: '<img src="' + this._weatherService.apiIconUrl(item.weather[0].icon) + '" />',
       temp: Math.round(item.main.temp),
       pressure: Math.round(item.main.pressure),
       humidity: item.main.humidity,
       windSpeed: Math.round(item.wind.speed),
-      windAzimuth: Math.round(item.wind.deg),
+      windAzimuth: this.degree2arrow(Math.round(item.wind.deg)),
       clouds: item.clouds.all,
     }));
 
     return result;
+  }
+
+  /**
+   * Converts degree [0, 360] to the relevant HTML entity
+   * @param degree
+   */
+  degree2arrow(degree) {
+    degree = degree % 360;
+    const presets = {
+      0: 'uarr',
+      22: 'nearr',
+      67: 'rarr',
+      112: 'searr',
+      157: 'darr',
+      202: 'swarr',
+      247: 'larr',
+      292: 'nwarr',
+      337: 'uarr',
+    };
+    return '&'
+      + Object.keys(presets).reduce((acc, degKey) => {
+        return (degree > degKey) ? presets[degKey] : acc;
+      }, '')
+      + ';';
+  }
+
+  /**
+   * Exposes one of elements from a set
+   * @param {string} set - {today|forecast}
+   * @param {string} exposedElementName - {Main|Debug|Error|Spinner|none}
+   */
+  exposeElement(set, exposedElementName) {
+    const elNames = ['Main', 'Debug', 'Error', 'Spinner'];
+    exposedElementName = exposedElementName.charAt(0).toUpperCase() + exposedElementName.slice(1);
+    // console.log('====== Exposing ' + set + exposedElementName);
+    // console.log(this._element);
+    elNames.forEach(elname => {
+      const el = this._element[set + elname];
+      if (elname === exposedElementName) {
+        // console.log('Exposing ' + set + elname);
+        el.classList.add('weather-visible');
+      }
+      else {
+        // console.log('Hiding ' + set + elname);
+        el.classList.remove('weather-visible');
+      }
+    });
   }
 }

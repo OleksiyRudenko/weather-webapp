@@ -25,6 +25,10 @@ p {
     -webkit-margin-after: 0px;
 }
 
+div {
+    box-sizing: border-box;
+}
+
 div.row {
     display: flex;
     flex-direction: row;
@@ -189,6 +193,100 @@ input.search::placeholder {
     display: flex;
     flex-direction: column;
 } */
+
+/* ======= Weather ====== */
+
+.weather {
+    display: none;
+    width: 100%;
+}
+
+.weather-visible {
+    display: inline-block;
+}
+
+/* ------- Today -------- */
+
+.wt-row {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.wt-status-bar {
+    display: inline-flex;
+    align-items: flex-end;
+}
+
+.weather-item {
+    padding: 0 1em 0 1em;
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.weather-item:nth-child(1) {
+    padding: 0 1em 0 0;
+    justify-content: flex-start;
+}
+
+.weather-item:nth-last-child(1) {
+    padding: 0 0 0 1em;
+    justify-content: flex-end;
+}
+
+
+.wt-header {
+    font-weight: bold;
+    font-size: 90%;
+}
+
+.wt-data {
+}
+
+.wt-main {
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+}
+
+.wt-main-item {
+    padding: 0 10px 0 10px;
+}
+
+.wt-main-item:nth-child(1) {
+    padding: 0 10px 0 0;
+}
+
+.wt-main-item:nth-last-child(1) {
+    padding: 0 0 0 10px;
+}
+
+.wt-description {
+    justify-content: center;
+    font-size: 140%;
+}
+
+#weather-today-main {
+}
+
+#weather-today-spinner {
+}
+
+#weather-today-error {
+}
+
+#weather-today-debug {
+}
+
+
+
+/* ------- Forecast -------- */
 
 /* ======= helpers ====== */
 /* --- loader ---
