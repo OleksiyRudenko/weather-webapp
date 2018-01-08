@@ -38,8 +38,14 @@ const appConfig = {
   },
   weatherView: {
     container: 'weather-container',
-    today: 'weather-today',
-    forecast: 'weather-forecast',
+    todayMain: 'weather-today-main',
+    todayDebug: 'weather-today-debug',
+    todayError: 'weather-today-error',
+    todaySpinner: 'weather-today-spinner',
+    forecastMain: 'weather-forecast-main',
+    forecastDebug: 'weather-forecast-debug',
+    forecastError: 'weather-forecast-error',
+    forecastSpinner: 'weather-forecast-spinner',
   },
   cityList: 'assets/city.list.json',
   storage: {
