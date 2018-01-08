@@ -5,6 +5,7 @@ class WeatherController {
    * @constructor
    * @param {object} appConfig - city list service
    * @param {SettingsService} settingsService - settings service
+   * @param {WeatherService} weatherService - weather service
    */
   constructor(appConfig, settingsService, weatherService) {
     const config = appConfig.weatherView;
