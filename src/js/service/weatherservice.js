@@ -42,4 +42,36 @@ class WeatherService {
         throw error;
       });
   }
+
+  /**
+   * Returns promise to provide an icon
+   * @param {string} iconId
+   * @returns {Promise<Response>} image url to use as a value for image.src
+   */
+  apiRequestIcon(iconId) {
+    let query = this.apiIconUrl(iconId);
+    return fetch(query, {method: 'get'})
+      .then(response => {
+        if (response.ok)
+          return response.blob();
+        throw response.status;
+      })
+      .then(blob => {
+        const objUrl = URL.createObjectURL(blob);
+        return objUrl;
+      })
+      .catch(error => {
+        console.error(error);
+        throw error;
+      });
+  }
+
+  /**
+   * Build url to reach icon
+   * @param {string} iconId
+   * @returns {string} url
+   */
+  apiIconUrl(iconId) {
+    return this._config.iconUrl + iconId + this._config.iconExt;
+  }
 }
