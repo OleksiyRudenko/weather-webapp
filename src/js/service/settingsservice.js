@@ -13,12 +13,19 @@ class SettingsService {
     this._settings = {
       Units: 'metric',
     };
+    this._units = {
+      windSpeed: {
+        metric: 'm/s',
+        imperial: 'mph',
+      }
+    };
     this.settingsPromise = this.loadSettings();
   }
 
   get units() { return this._settings.Units; }
   setImperial() { this._settings.Units = 'imperial'; }
   setMetric() { this._settings.Units = 'metric'; }
+  get windSpeedUnits() { return this._units.windSpeed[this._settings.Units]; }
 
   switchUnits() {
     this._settings.Units = (this._settings.Units === 'metric') ? 'imperial' : 'metric';
