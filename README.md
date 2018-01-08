@@ -53,7 +53,7 @@ Developed as a part of
 
 ### Time Track
 
- * `TOTAL= 19h45`
+ * `TOTAL= 23h45`
  * `171222 00h10` - setup
  * `171222 00h20` - initial research
  * `171223 01h35` - app architecture design
@@ -64,6 +64,6 @@ Developed as a part of
  * `180102 00h45` - research on `webpack`
  * `180103 01h40` - storage.put progress controller
  * `180103 03h15` - feature:search _(UI management took 2hrs of efforts)_
- * `180104 01h50` - feature:weather
+ * `180104 05h50` - feature:weather
 
 [TOC :arrow_double_up: ](#table-of-contents)
