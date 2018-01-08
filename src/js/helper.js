@@ -31,6 +31,25 @@ function elementIdsToHtmlElements(idSet, properties) {
 }
 
 /**
+ * Builds associative object where keys refer to HTML Elements.
+ * @param {object} srcObject - Keys are HTML elements major part of element id
+ * @param {string=} idPrefix - An optional prefix added to element key to get complete element id
+ * @param {string[]=} keys - An optional list of properties to include into resulting set
+ * @returns {object} - A set of keyval pairs <key: HtmlElement>
+ */
+function objectKeysToHtmlElements(srcObject, idPrefix='', keys=null) {
+  if (!keys) {
+    keys = Object.keys(srcObject);
+  }
+
+  return keys.reduce((accumulator, key) => {
+    const elRef = document.getElementById(idPrefix + key);
+    if (elRef) accumulator[key] = elRef;
+    return accumulator;
+  },{});
+}
+
+/**
  * Removes leading, trailing and double whitespaces
  * @param {string} str - String to sanitize
  * @param {boolean=} [trimTails] - Will trim trailing whitespaces if true
