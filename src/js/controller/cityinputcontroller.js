@@ -85,7 +85,7 @@ class CityInputController {
     const code = e.code;
     const eventType = e.type; // keyup, keydown
     let caretPosition = getCaretPosition(target);
-    console.log(e);
+    // console.log(e);
 
     // DEBUG: console.log('>"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
     // remove letters if input value starts with [\-.\d] as an indication of geocoords input
