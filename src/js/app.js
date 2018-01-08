@@ -16,7 +16,7 @@ const Services = {
   StorageService: storageService,
 };
 
-const weatherController = new WeatherController(appConfig, Services.SettingsService);
+const weatherController = new WeatherController(appConfig, Services.SettingsService, Services.WeatherService);
 
 const Controllers = {
   UnitSwitchController: new UnitSwitchController(Services.SettingsService, 'unit-switch'),
