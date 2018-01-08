@@ -83,7 +83,9 @@ class CityInputController {
     const keyCode = e.keyCode;
     const key = e.key;
     const code = e.code;
+    const eventType = e.type; // keyup, keydown
     let caretPosition = getCaretPosition(target);
+    console.log(e);
 
     // DEBUG: console.log('>"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
     // remove letters if input value starts with [\-.\d] as an indication of geocoords input
@@ -103,6 +105,10 @@ class CityInputController {
 
     if (target.value.length >= this._settings.minChar) {
       this._elControls.searchAction.classList.remove('btn-inactive');
+      if (eventType === 'keyup' && code === 'Enter') {
+        this._elControls.textInput.blur();
+        this._elControls.searchAction.click();
+      }
     } else {
       this._elControls.searchAction.classList.add('btn-inactive');
     }
