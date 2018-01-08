@@ -54,14 +54,43 @@
             </div>
         </div>
         <div id="weather-container">
-            <div id="weather-today">
+            <div id="weather-today-main">
+                <div class="wt-row wt-status-bar">
+                    <div class="weather-item">
+                        <span class="wt-header">Wind:</span>
+                        <span class="wt-data" id="wt-windSpeed"></span>
+                        <span class="wt-data" id="wt-windSpeedUnits"></span>
+                        <span class="wt-windAzimuth" id="wt-windAzimuth"></span>
+                    </div>
+                    <div class="weather-item">
+                        <span class="wt-header">Humidity:</span>
+                        <span class="wt-data" id="wt-humidity"></span>%
+                    </div>
+                    <div class="weather-item">
+                        <span class="wt-header">Pressure:</span>
+                        <span class="wt-data" id="wt-pressure"></span> hPa
+                    </div>
+                </div>
+                <div class="wt-row wt-main">
+                    <div class="wt-icon" id="wt-icon"></div>
+                    <div><span class="wt-temp" id="wt-temp"></span>&deg;</div>
+                    <div class="wt-descr" id="wt-descr"></div>
+                </div>
+                <div class="wt-row wt-description">
+                    <div class="wt-descr" id="wt-descrDetails"></div>
+                </div>
+            </div>
+            <div id="weather-today-debug"></div>
+            <div id="weather-today-error"></div>
+            <div id="weather-today-spinner" class="loader loader-small"></div>
+
+
+            <div id="weather-forecast-main">
 
             </div>
-            <div class="loader loader-small"></div>
-            <div id="weather-forecast">
-
-            </div>
-            <div class="loader loader-big"></div>
+            <div id="weather-forecast-debug"></div>
+            <div id="weather-forecast-error"></div>
+            <div id="weather-forecast-spinner" class="loader loader-big"></div>
         </div>
     </div>
     <script src="js/config.js"></script>
