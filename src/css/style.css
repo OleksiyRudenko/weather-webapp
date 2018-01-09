@@ -253,6 +253,8 @@ input.search::placeholder {
     justify-content: center;
     align-items: center;
     font-size: 200%;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
 }
 
 .wt-main-item {
@@ -265,6 +267,11 @@ input.search::placeholder {
 
 .wt-main-item:nth-last-child(1) {
     padding: 0 0 0 10px;
+}
+
+.wt-descrIcon {
+    background-color: #fff;
+    border-radius: 5px;
 }
 
 .wt-description {
@@ -285,8 +292,51 @@ input.search::placeholder {
 }
 
 
-
 /* ------- Forecast -------- */
+
+#weather-forecast-main {
+    padding-top: 1em;
+}
+
+.wf-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0.5em;
+    margin: 0.2em;
+}
+
+/* .wf-item:nth-child(1) {
+    padding: 0.5em 0.5em 0.5em 0;
+}
+
+.wf-item:nth-last-child(1) {
+    padding: 0.5em 0 0.5em 0.5em;
+} */
+
+.wf-icon {
+}
+
+.wf-descr {
+    font-size: 60%;
+    text-align: center;
+}
+
+.wf-temp {
+    font-size: 120%;
+    text-align: center;
+}
+
+.wf-time {
+    font-size: 80%;
+    text-align: center;
+}
+
+.wf-date {
+    text-align: center;
+}
 
 /* ======= helpers ====== */
 /* --- loader ---

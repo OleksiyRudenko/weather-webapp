@@ -50,7 +50,7 @@ class WeatherController {
 
       this.exposeElement('today', 'Main');
 
-      document.getElementById('weather-today-debug').innerHTML = 'TODAY: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      // document.getElementById('weather-today-debug').innerHTML = 'TODAY: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
     }).catch(error => {
       this.exposeElement('today', 'Error');
       this._element.todayError.innerText = 'No weather data for given location or inexistent location (error code: '+ error + ')';
@@ -89,18 +89,19 @@ class WeatherController {
     this.exposeElement('forecast', 'Spinner');
     weatherData.then(data => {
       data = this.extractWeatherDataForecast(data);
-      const forecastItems = data.weatherSchedule.map(item => `<div>
-        <div>${item.descrIcon}</div>
-        <div>${item.temp}&deg;</div>
-        <div>${item.dtHours}:00</div>
-        <div>${item.dtDate}</div>
+      const forecastItems = data.weatherSchedule.map(item => `<div class="wf-item">
+        <div class="wf-icon">${item.descrIcon}</div>
+        <div class="wf-descr">${item.descr}</div>
+        <div class="wf-temp">${item.temp}&deg;</div>
+        <div class="wf-time">${item.dtHours}:00</div>
+        <div class="wf-date">${item.dtDate}</div>
         </div>`
       );
 
       this._element.forecastMain.innerHTML = forecastItems.join('');
       this.exposeElement('forecast', 'Main');
 
-      this._element.forecastDebug.innerHTML = 'Forecast: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      // this._element.forecastDebug.innerHTML = 'Forecast: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
     }).catch(error => {
       this.exposeElement('forecast', 'Error');
       this._element.forecastError.innerText = 'No forecast data for given location or inexistent location (error code: '+ error + ')';
@@ -123,12 +124,12 @@ class WeatherController {
     let weatherList = src.list.filter(item => {
       const time = item.dt_txt.substring(11,13);
       // console.log('Time: ' + time);
-      return (time === '18' || time === '12');
+      return (time === '09' || time === '12' || time === '15' || time === '18');
 
     });
     weatherList.sort((a,b) => a.dt - b.dt);
     result.weatherSchedule = weatherList.map(item => ({
-      dtDate: item.dt_txt.substring(5,7) + '/' + item.dt_txt.substring(8,10),
+      dtDate: item.dt_txt.substring(8,10) + '/' + item.dt_txt.substring(5,7),
       dtHours: item.dt_txt.substring(11,13),
       descr: item.weather[0].main,
       descrDetails: item.weather[0].description,
