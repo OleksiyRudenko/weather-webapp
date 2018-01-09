@@ -95,7 +95,7 @@ class CityInputController {
     }
 
     // skip initial spaces and every second space
-    /*if (['Space', 'Backspace', 'Delete'].includes(code)) {
+    /*if (['Space', 'Backspace', 'Delete'].includes(key)) {
       target.value = sanitizeWhitespaces(target.value);
     } */
 
@@ -106,7 +106,7 @@ class CityInputController {
 
     if (target.value.length >= this._settings.minChar) {
       this._elControls.searchAction.classList.remove('btn-inactive');
-      if (eventType === 'keyup' && code === 'Enter') {
+      if (eventType === 'keyup' && key === 'Enter') {
         this._elControls.textInput.blur();
         this._elControls.searchAction.click();
       }
