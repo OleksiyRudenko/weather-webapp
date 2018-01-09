@@ -62,7 +62,7 @@ class WeatherController {
    * @param {Object} src - API fetch data
    */
   extractWeatherDataCurrent(src) {
-    console.log('<img src="' + this._weatherService.apiIconUrl(src.weather[0].icon) + '" />');
+    // console.log('<img src="' + this._weatherService.apiIconUrl(src.weather[0].icon) + '" />');
     return {
       dt: src.dt,
       geocity: src.name,
