@@ -272,6 +272,9 @@ input.search::placeholder {
 .wt-descrIcon {
     background-color: #fff;
     border-radius: 5px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 .wt-description {
