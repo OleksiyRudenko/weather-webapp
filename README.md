@@ -51,6 +51,8 @@ Developed as a part of
    - cached record: datetime, city, units, forecast depth
  * `External Data Provider` - [Open Weather Map](https://openweathermap.org/api)
 
+[TOC :arrow_double_up: ](#table-of-contents)
+
 ### Time Track
 
  * `TOTAL= 24h05`
