@@ -100,16 +100,17 @@ button {
     color: #333;
 }
 
-.btn-inactive {
-    color: #99aaff;
-    cursor: default;
-}
-
 .btn-row {
     border: 1px solid #84a5ff;
     background-color: #6495ed; /* cornflowerblue; */
     border-radius: unset;
     padding: 1vmin;
+}
+
+.btn-inactive {
+    color: #99aaff;
+    background-color: #aaa;
+    cursor: default;
 }
 
 button.btn-row {
