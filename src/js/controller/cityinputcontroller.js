@@ -69,7 +69,8 @@ class CityInputController {
     // render forecast
     this.renderForecasts(
       this._services.WeatherService.apiRequest(apiQueryClass[0], userInputType, queryData),
-      this._services.WeatherService.apiRequest(apiQueryClass[1], userInputType, queryData)
+      this._services.WeatherService.apiRequest(apiQueryClass[1], userInputType, queryData),
+      (userInputType === 'cityname') ? this._elControls.textInput : null
     );
   }
 
@@ -128,9 +129,10 @@ class CityInputController {
    * Renders forecasts to UI via WeatherController
    * @param {Promise} current json
    * @param {Promise} forecast json
+   * @param {Element|null} cityNameElement - input field to update
    */
-  renderForecasts(current, forecast) {
-    this._weatherController.renderToday(current);
+  renderForecasts(current, forecast, cityNameElement) {
+    this._weatherController.renderToday(current, cityNameElement);
     this._weatherController.renderForecast(forecast);
   }
 }

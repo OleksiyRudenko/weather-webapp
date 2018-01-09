@@ -22,8 +22,9 @@ class WeatherController {
   /**
    * Renders current weather data view
    * @param {Promise} weatherData
+   * @param {Element|null} cityNameElement - input field to update
    */
-  renderToday(weatherData) {
+  renderToday(weatherData, cityNameElement) {
     const idPrefix = 'wt-';
     // console.log(elProgressSpinner);
     this.exposeElement('today', 'Spinner');
@@ -33,6 +34,11 @@ class WeatherController {
       data = this.extractWeatherDataCurrent(data);
       // enrich data
       data.windSpeedUnits = this._settingsService.windSpeedUnits;
+
+      // update user input
+      if (cityNameElement) {
+        cityNameElement.value = data.geocity + ',' + data.geocountry;
+      }
 
       // create references to today weather HTML elements if not yet
       if (!this._elWeatherToday) {
