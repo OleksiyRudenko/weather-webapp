@@ -128,12 +128,18 @@ class CityInputController {
     } else {
       this._elControls.searchAction.classList.add('btn-inactive');
     }
-    if (target.value.length === 0) {
+    console.log(eventType + '>' + key + ':' + code + ':' + keyCode);
+    if (eventType === 'keyup' && target.value.length === 0 && key !== 'Escape') {
       this.onUserInputFocus({
         target: this._elControls.textInput,
       });
     } else {
       // hide history
+      this._searchHistoryController.hide();
+    }
+    // hide history on escape key
+    if (eventType === 'keyup' && key === 'Escape') {
+      console.log('HIDE');
       this._searchHistoryController.hide();
     }
   }
