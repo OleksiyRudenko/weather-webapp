@@ -77,6 +77,9 @@ class CityInputController {
         // update user input field
         this._elControls.textInput.value = value;
         // update search history
+        this._services.CityHistoryService.addEntry({
+          name: value,
+        });
 
         // manage favourites
       }
