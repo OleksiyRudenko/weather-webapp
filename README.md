@@ -67,5 +67,6 @@ Developed as a part of
  * `180103 01h40` - storage.put progress controller
  * `180103 03h35` - feature:search _(UI management took 2hrs of efforts)_
  * `180104 06h10` - feature:weather
+ * `180110 00h00` - feature:history
 
 [TOC :arrow_double_up: ](#table-of-contents)
