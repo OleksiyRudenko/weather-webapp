@@ -381,3 +381,25 @@ input.search::placeholder {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* ======== City List Containers ========= */
+
+.city-container {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #999;
+    display: none;
+    width: 100%;
+}
+
+.city-container-visible {
+    display: block;
+}
+
+.city-list-element {
+    padding: 0 0.5em 0 0.5em;
+}
+
+.city-list-element:hover {
+    background-color: #84a5ff;
+}

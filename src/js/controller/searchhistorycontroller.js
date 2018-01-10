@@ -9,6 +9,8 @@ class SearchHistoryController {
   constructor(appConfig, cityHistoryService) {
     this._config = appConfig.historyView;
     this._cityHistoryService = cityHistoryService;
+    this._elContainer = document.getElementById(this._config.container);
+    this._isActive = false;
   }
 
   /**
@@ -17,7 +19,11 @@ class SearchHistoryController {
   show() {
     this._cityHistoryService.getItems().then(list => {
       // show history
-      console.log(list);
+      this._elContainer.innerHTML = '<div class="city-list-element">'
+        + list.join('</div><div class="city-list-element">')
+        + '</div>';
+      this._elContainer.classList.add('city-container-visible');
+      this._isActive = true;
     });
   }
 
@@ -25,7 +31,8 @@ class SearchHistoryController {
    * Hides search history list
    */
   hide() {
-
+    this._isActive = false;
+    this._elContainer.classList.remove('city-container-visible');
   }
 
 }
