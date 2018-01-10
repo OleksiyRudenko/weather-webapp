@@ -2,7 +2,7 @@ const appConfig = {
   baseUrl: window.location.protocol + "//" + window.location.host
     + window.location.pathname.split('/').slice(0,-1).join('/') + '/',
   api: {
-    apiUrl : 'http://api.openweathermap.org/data/2.5/',
+    apiUrl : 'https://api.openweathermap.org/data/2.5/',
     apiEndpoint : {
       current: {
         cityname : { path: 'weather', params: ['q'] }, // ?q={city name},{country code}
@@ -15,7 +15,7 @@ const appConfig = {
     },
     apiKey: '0f034f0e9216aaa8ed94c3d87af01e18',
     apiParamName: 'APPID',
-    iconUrl: 'http://openweathermap.org/img/w/',
+    iconUrl: 'https://openweathermap.org/img/w/',
     iconExt: '.png',
   },
   notification: {
