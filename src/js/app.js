@@ -27,4 +27,6 @@ const Controllers = {
   SearchHistoryController: searchHistoryController,
 };
 
+Controllers.SearchHistoryController.setTargets(Controllers.CityInputController.getTargets());
+
 console.log('App ready');

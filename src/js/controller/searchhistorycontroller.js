@@ -20,9 +20,9 @@ class SearchHistoryController {
   show() {
     this._cityHistoryService.getItems().then(list => {
       // show history
-      this._elContainer.innerHTML = '<div class="city-list-element">'
-        + list.join('</div><div class="city-list-element">')
-        + '</div>';
+      this._elContainer.innerHTML = list.map((value, index) =>
+        '<div id="city-list-element-' + index + '" class="city-list-element">' + value + '</div>'
+      ).join('');
       this._elContainer.classList.add('city-container-visible');
       this._isActive = true;
     });
@@ -41,10 +41,27 @@ class SearchHistoryController {
    * @param {Event} e
    */
   onClick(e) {
-    const target = event.target;
-    console.log('Clicked on ' + target.value);
+    const target = e.target;
+    console.log('Clicked on ' + target.textContent);
     console.log(e);
+    // Update user text input
+    this._actionTargets.textInputElement.value = target.textContent;
 
+    // Hide list
+    this._isActive = false;
+    this._elContainer.classList.remove('city-container-visible');
+
+    // invoke search
+    this._actionTargets.actionSearchElement.click();
+
+  }
+
+  /**
+   * Sets action targets
+   * @param {Object} targets { textInputElement:, actionSearchElement: }
+   */
+  setTargets(targets) {
+    this._actionTargets = targets;
   }
 
 }

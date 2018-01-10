@@ -171,4 +171,16 @@ class CityInputController {
     console.log(result);
     return result;
   }
+
+  /**
+   * Provides action targets
+   * @returns {Object} { textInputElement:, actionSearchElement: }
+   */
+  getTargets() {
+    return {
+      textInputElement: this._elControls.textInput,
+      actionSearchElement: this._elControls.searchAction,
+    };
+
+  }
 }
