@@ -10,6 +10,7 @@ Developed as a part of
 ## Table of Contents
 
 - [App Architecture](#app-architecture)
+- [Known Issues](#known-issues)
 - [Time Track](#time-track)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -55,9 +56,14 @@ Developed as a part of
 
 ### Known Issues
 
- *
- *
- *
+ - [ ] Styling is poor
+ - [ ] Forecast data removal is done not via style management
+ - [ ] Current location not detected
+ - [ ] Pre-loaded city list is not used
+ - [ ] Favourites management is not implemented
+ - [ ] Favourites drop-down is not implemented
+ - [ ] Search by geo coordinates is not validated
+ - [ ] Search errors are technical in style
 
 [TOC :arrow_double_up: ](#table-of-contents)
 
