@@ -17,6 +17,8 @@ Developed as a part of
 
 ### App Architecture
 
+> NB! Architecture description doesn't reflect latest updates.
+
 ![Weather App Architecture diagram](weather-app-architecture.png)
 
  * `View` - represented with HTML and CSS
