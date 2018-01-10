@@ -17,9 +17,17 @@ Developed as a part of
 
 ### App Architecture
 
-> NB! Architecture description doesn't reflect latest updates.
-
 ![Weather App Architecture diagram](weather-app-architecture.png)
+
+**Diagram legend**
+
+ * Green box - browser feature
+ * Blue box - App Controller
+ * Magenta box - App Service
+ * Grey box - Incomplete App Controller / Service
+ * Yellow box - external service
+
+> NB! Architecture description below doesn't reflect latest updates.
 
  * `View` - represented with HTML and CSS
  * `AppController` - main app controller
