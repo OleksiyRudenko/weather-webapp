@@ -152,7 +152,7 @@ class CityInputController {
     const target = this._elControls.textInput;
     target.value = sanitizeWhitespaces(target.value, true);
     console.log('Blurring out');
-    setTimeout(this._searchHistoryController.hide.bind(this._searchHistoryController), 100);
+    setTimeout(this._searchHistoryController.hide.bind(this._searchHistoryController), 200);
   }
 
   /**
