@@ -53,6 +53,14 @@ Developed as a part of
 
 [TOC :arrow_double_up: ](#table-of-contents)
 
+### Known Issues
+
+ *
+ *
+ *
+
+[TOC :arrow_double_up: ](#table-of-contents)
+
 ### Time Track
 
  * `TOTAL= 26h25`
