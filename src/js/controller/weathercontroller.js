@@ -69,6 +69,7 @@ class WeatherController {
    */
   extractWeatherDataCurrent(src) {
     // console.log('<img src="' + this._weatherService.apiIconUrl(src.weather[0].icon) + '" />');
+    console.log('Wind azimuth: ' + src.wind.deg);
     return {
       dt: src.dt,
       geocity: src.name,
@@ -82,7 +83,7 @@ class WeatherController {
       pressure: Math.round(src.main.pressure),
       humidity: src.main.humidity,
       windSpeed: Math.round(src.wind.speed),
-      windAzimuth: this.degree2arrow(Math.round(src.wind.deg)),
+      windAzimuth: this.degree2arrow('deg' in src.wind ? Math.round(src.wind.deg) : null),
       clouds: src.clouds.all,
     };
   }
@@ -145,7 +146,7 @@ class WeatherController {
       pressure: Math.round(item.main.pressure),
       humidity: item.main.humidity,
       windSpeed: Math.round(item.wind.speed),
-      windAzimuth: this.degree2arrow(Math.round(item.wind.deg)),
+      windAzimuth: this.degree2arrow('deg' in item.wind ? Math.round(item.wind.deg) : null),
       clouds: item.clouds.all,
     }));
 
@@ -157,6 +158,7 @@ class WeatherController {
    * @param degree
    */
   degree2arrow(degree) {
+    if (degree === null) return '';
     degree = degree % 360;
     const presets = {
       0: 'uarr',
@@ -169,6 +171,7 @@ class WeatherController {
       292: 'nwarr',
       337: 'uarr',
     };
+    console.log('Degree: ' + degree);
     return '&'
       + Object.keys(presets).reduce((acc, degKey) => {
         return (degree >= degKey) ? presets[degKey] : acc;
