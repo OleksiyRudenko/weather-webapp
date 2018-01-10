@@ -90,6 +90,7 @@ Developed as a part of
  - [ ] Favourites drop-down is not implemented
  - [ ] Search by geo coordinates is not validated
  - [ ] Search errors are technical in style
+ - [ ] Units switch doesn't update current data
 
 [TOC :arrow_double_up: ](#table-of-contents)
 
