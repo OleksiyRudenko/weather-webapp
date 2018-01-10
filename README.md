@@ -5,16 +5,31 @@ Basic weather web app employing public API.
 Developed as a part of 
 [Task 10 of Kottans FrontEnd Course](https://github.com/kottans/frontend/blob/master/test10.md)
 
+![Weather App UI - Search History](weather-app-ui-searchhistory.png)
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
+- [Features](#features)
 - [App Architecture](#app-architecture)
 - [Known Issues](#known-issues)
 - [Deployment](#deployment)
 - [Time Track](#time-track)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+### Features
+
+ * Search by City name
+ * Search by geo coordinates
+ * Current weather and 5 days forecast
+ * 20 latest cities searched are available in history track
+   (stored per browser)
+ * Switch between imperial and metric units
+   (stored per browser)
+ * [Open Weather Map](https://openweathermap.org/api) is a weather
+   data source
 
 ### App Architecture
 
