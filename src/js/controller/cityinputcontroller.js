@@ -151,7 +151,7 @@ class CityInputController {
   onUserInputBlur(e) {
     const target = this._elControls.textInput;
     target.value = sanitizeWhitespaces(target.value, true);
-
+    this._searchHistoryController.hide();
   }
 
   /**
