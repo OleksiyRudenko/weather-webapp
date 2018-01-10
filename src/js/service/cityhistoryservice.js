@@ -25,4 +25,18 @@ class CityHistoryService {
       console.log('Search item added. {' + item.name + ', ' + item.lastQueried + '}');
     });
   }
+
+  /**
+   * Get {limit} last history items
+   * @param {number} limit=20 - Search limit
+   * @returns {Promise} Ordered list of citynames
+   */
+  getItems(limit=20) {
+    return this._storageService.getAll(this._storeName).then(items => {
+      items.sort((a,b) => b.lastQueried - a.lastQueried);
+      items = items.slice(0,limit).map(item => item.name);
+      items.sort();
+      return items;
+    });
+  }
 }

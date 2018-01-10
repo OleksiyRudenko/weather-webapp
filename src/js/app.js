@@ -17,12 +17,14 @@ const Services = {
 };
 
 const weatherController = new WeatherController(appConfig, Services.SettingsService, Services.WeatherService);
+const searchHistoryController = new SearchHistoryController(appConfig, Services.CityHistoryService);
 
 const Controllers = {
   UnitSwitchController: new UnitSwitchController(Services.SettingsService, 'unit-switch'),
-  CityInputController: new CityInputController(appConfig, Services, weatherController),
+  CityInputController: new CityInputController(appConfig, Services, weatherController, searchHistoryController),
   ProgressController: progressController,
   WeatherController: weatherController,
+  SearchHistoryController: searchHistoryController,
 };
 
 console.log('App ready');

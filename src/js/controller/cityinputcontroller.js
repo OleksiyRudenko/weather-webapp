@@ -6,13 +6,15 @@ class CityInputController {
    * @param {object} appConfig - city list service
    * @param {object} services - app services register
    * @param {WeatherController} weatherController - weather controller
+   * @param {SearchHistoryController} searchHistoryController
    */
-  constructor(appConfig, services, weatherController) {
+  constructor(appConfig, services, weatherController, searchHistoryController) {
     const config = appConfig.search;
     const elementConfigKey = ['gps', 'favNo', 'favYes', 'favDropDown', 'textInput', 'searchAction'];
 
     this._services = services;
     this._weatherController = weatherController;
+    this._searchHistoryController = searchHistoryController;
 
     // class settings
     this._settings = {
@@ -34,6 +36,7 @@ class CityInputController {
     attachOnClickEvent(this._elControls.searchAction, this.actionSearch, this);
     this._elControls.textInput.onkeydown = this.onUserCharInput.bind(this);
     this._elControls.textInput.onkeyup = this.onUserCharInput.bind(this); // onkeydown/keypress caused missing last key pressed
+    this._elControls.textInput.onfocus = this.onUserInputFocus.bind(this);
     this._elControls.textInput.onblur = this.onUserInputBlur.bind(this);
   }
 
@@ -125,6 +128,14 @@ class CityInputController {
     } else {
       this._elControls.searchAction.classList.add('btn-inactive');
     }
+    if (target.value.length === 0) {
+      this.onUserInputFocus({
+        target: this._elControls.textInput,
+      });
+    } else {
+      // hide history
+      this._searchHistoryController.hide();
+    }
   }
 
   /**
@@ -135,6 +146,16 @@ class CityInputController {
     const target = this._elControls.textInput;
     target.value = sanitizeWhitespaces(target.value, true);
 
+  }
+
+  /**
+   * Called when user focuses on input field and/or input field is empty
+   * @param {Event} e
+   */
+  onUserInputFocus(e) {
+    console.log(e);
+    if (e.target.value.length === 0)
+      this._searchHistoryController.show();
   }
 
   /**

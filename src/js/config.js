@@ -49,6 +49,9 @@ const appConfig = {
     forecastError: 'weather-forecast-error',
     forecastSpinner: 'weather-forecast-spinner',
   },
+  historyView: {
+    container: 'history-container',
+  },
   cityList: 'assets/city.list.json',
   storage: {
     dbName: 'weatherapp-rdnk',
