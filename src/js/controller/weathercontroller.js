@@ -22,23 +22,19 @@ class WeatherController {
   /**
    * Renders current weather data view
    * @param {Promise} weatherData
-   * @param {Element|null} cityNameElement - input field to update
+   * @param {boolean} updateCityName - whether city name update expected
+   * returns {Promise|null} - updated city name if required
    */
-  renderToday(weatherData, cityNameElement) {
+  renderToday(weatherData, updateCityName) {
     const idPrefix = 'wt-';
     // console.log(elProgressSpinner);
     this.exposeElement('today', 'Spinner');
     // elProgressSpinner.classList.add('loader-visible');
-    weatherData.then(data => {
+    return weatherData.then(data => {
       // console.log(data);
       data = this.extractWeatherDataCurrent(data);
       // enrich data
       data.windSpeedUnits = this._settingsService.windSpeedUnits;
-
-      // update user input
-      if (cityNameElement) {
-        cityNameElement.value = data.geocity + ',' + data.geocountry;
-      }
 
       // create references to today weather HTML elements if not yet
       if (!this._elWeatherToday) {
@@ -57,9 +53,13 @@ class WeatherController {
       this.exposeElement('today', 'Main');
 
       // document.getElementById('weather-today-debug').innerHTML = 'TODAY: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
+
+      // update city name if required
+      return updateCityName ? data.geocity + ',' + data.geocountry : null;
     }).catch(error => {
       this.exposeElement('today', 'Error');
       this._element.todayError.innerText = 'No weather data for given location or inexistent location (error code: '+ error + ')';
+      throw error;
     });
   }
 

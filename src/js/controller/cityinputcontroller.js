@@ -67,11 +67,20 @@ class CityInputController {
     // add units explicitly
     queryData.units = this._services.SettingsService.units;
     // render forecast
-    this.renderForecasts(
+    const cityNameUpdate = this.renderForecasts(
       this._services.WeatherService.apiRequest(apiQueryClass[0], userInputType, queryData),
       this._services.WeatherService.apiRequest(apiQueryClass[1], userInputType, queryData),
-      (userInputType === 'cityname') ? this._elControls.textInput : null
+      (userInputType === 'cityname') ? true : false
     );
+    cityNameUpdate.then(value => {
+      if (value) {
+        // update user input field
+        this._elControls.textInput.value = value;
+        // update search history
+
+        // manage favourites
+      }
+    });
   }
 
   /**
@@ -129,10 +138,13 @@ class CityInputController {
    * Renders forecasts to UI via WeatherController
    * @param {Promise} current json
    * @param {Promise} forecast json
-   * @param {Element|null} cityNameElement - input field to update
+   * @param {boolean} updateCityName - whether city name update expected
+   * returns {Promise|null} - updated city name if required
    */
-  renderForecasts(current, forecast, cityNameElement) {
-    this._weatherController.renderToday(current, cityNameElement);
+  renderForecasts(current, forecast, updateCityName) {
     this._weatherController.renderForecast(forecast);
+    const result = this._weatherController.renderToday(current, updateCityName);
+    console.log(result);
+    return result;
   }
 }
