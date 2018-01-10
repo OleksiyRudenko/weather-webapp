@@ -11,6 +11,7 @@ Developed as a part of
 
 - [App Architecture](#app-architecture)
 - [Known Issues](#known-issues)
+- [Deployment](#deployment)
 - [Time Track](#time-track)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -74,6 +75,16 @@ Developed as a part of
  - [ ] Favourites drop-down is not implemented
  - [ ] Search by geo coordinates is not validated
  - [ ] Search errors are technical in style
+
+[TOC :arrow_double_up: ](#table-of-contents)
+
+### Deployment
+
+**Deploy to github pages, `src/` only
+
+1. `git subtree split --prefix src -b gh-pages` - create a subtree
+2. `git push -f origin gh-pages:gh-pages` - push forcely
+3. `git branch -D gh-pages` - remove local branch
 
 [TOC :arrow_double_up: ](#table-of-contents)
 
