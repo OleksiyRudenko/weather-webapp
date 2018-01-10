@@ -93,6 +93,7 @@ class WeatherController {
    */
   renderForecast(weatherData) {
     this.exposeElement('forecast', 'Spinner');
+    this._element.forecastMain.innerHTML = '';
     weatherData.then(data => {
       data = this.extractWeatherDataForecast(data);
       const forecastItems = data.weatherSchedule.map(item => `<div class="wf-item">
