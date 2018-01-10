@@ -95,6 +95,10 @@ div.justified {
 
 /* Location bar */
 
+#search-bar {
+    position: relative;
+}
+
 button {
     cursor: pointer;
     color: #333;
@@ -385,11 +389,11 @@ input.search::placeholder {
 /* ======== City List Containers ========= */
 
 .city-container {
-    position: relative;
+    position: absolute;
     background-color: #fff;
     border: 1px solid #999;
     display: none;
-    width: 100%;
+    width: calc(100% - 1rem);
 }
 
 .city-container-visible {
