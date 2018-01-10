@@ -11,6 +11,7 @@ class SearchHistoryController {
     this._cityHistoryService = cityHistoryService;
     this._elContainer = document.getElementById(this._config.container);
     this._isActive = false;
+    attachOnClickEvent(this._elContainer, this.onClick, this);
   }
 
   /**
@@ -33,6 +34,17 @@ class SearchHistoryController {
   hide() {
     this._isActive = false;
     this._elContainer.classList.remove('city-container-visible');
+  }
+
+  /**
+   * Handles item click
+   * @param {Event} e
+   */
+  onClick(e) {
+    const target = event.target;
+    console.log('Clicked on ' + target.value);
+    console.log(e);
+
   }
 
 }
