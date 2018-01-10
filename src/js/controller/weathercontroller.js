@@ -171,7 +171,7 @@ class WeatherController {
     };
     return '&'
       + Object.keys(presets).reduce((acc, degKey) => {
-        return (degree > degKey) ? presets[degKey] : acc;
+        return (degree >= degKey) ? presets[degKey] : acc;
       }, '')
       + ';';
   }
