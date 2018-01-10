@@ -90,7 +90,7 @@ Developed as a part of
 
 ### Time Track
 
- * `TOTAL= 26h25`
+ * `TOTAL= 26h55`
  * `171222 00h10` - setup
  * `171222 00h20` - initial research
  * `171223 01h35` - app architecture design
@@ -102,6 +102,6 @@ Developed as a part of
  * `180103 01h40` - storage.put progress controller
  * `180103 03h35` - feature:search _(UI management took 2hrs of efforts)_
  * `180104 06h10` - feature:weather
- * `180110 02h00` - feature:history
+ * `180110 02h30` - feature:history
 
 [TOC :arrow_double_up: ](#table-of-contents)
