@@ -96,7 +96,7 @@ Developed as a part of
 
 ### Deployment
 
-**Deploy to github pages, `src/` only
+**Deploy to github pages, `src/` only**
 
 1. `git subtree split --prefix src -b gh-pages` - create a subtree
 2. `git push -f origin gh-pages:gh-pages` - push forcely
