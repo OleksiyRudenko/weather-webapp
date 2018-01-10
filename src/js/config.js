@@ -75,9 +75,8 @@ const appConfig = {
         },
         {
           storeName: 'cityhistory',
-          storeOptions: {keyPath: 'id'},
-          fields: ['id', 'name', 'nameUC', 'lastQueried', 'queryCount'], // city name, city name uppercase
-          index: [['nameUC'], ['lastQueried'], ['queryCount']],
+          storeOptions: {keyPath: 'name'},
+          fields: ['name', 'lastQueried'], // city name, last queried
         },
       ],
       // [1]: upgrade to v.2
