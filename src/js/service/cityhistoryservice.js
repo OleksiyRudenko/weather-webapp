@@ -11,6 +11,21 @@ class CityHistoryService {
     this._storageService = storageService;
     this._storeName = 'cityhistory';
     console.log('Instantiated CityHistoryService');
+    this.updateStorage();
+  }
+
+  /**
+   * Update storage if required
+   */
+  updateStorage() {
+    this._storageService.storeCount(this._storeName).then(count => {
+      if (!count) {
+        this._storageService.put(this._storeName, this._appConfig.historyInitialSet).then(()=>{
+          console.log('History initialized.');
+        });
+      }
+      console.log('CityListService.updateStorage(cities).count==' + count);
+    });
   }
 
   /**

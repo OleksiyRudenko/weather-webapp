@@ -52,6 +52,12 @@ const appConfig = {
   historyView: {
     container: 'history-container',
   },
+  historyInitialSet: [
+    { name: 'Kyiv,UA',   lastQueried: + new Date(), },
+    { name: 'London,UK', lastQueried: + new Date(), },
+    { name: 'Odessa,UA', lastQueried: + new Date(), },
+    { name: 'Odessa,US', lastQueried: + new Date(), },
+  ],
   cityList: 'assets/city.list.json',
   storage: {
     dbName: 'weatherapp-rdnk',
