@@ -16,9 +16,10 @@ const Services = {
   StorageService: storageService,
 };
 
+const urlController = new UrlController(appConfig);
 const weatherController = new WeatherController(appConfig, Services.SettingsService, Services.WeatherService);
 const searchHistoryController = new SearchHistoryController(appConfig, Services.CityHistoryService);
-const cityInputController = new CityInputController(appConfig, Services, weatherController, searchHistoryController);
+const cityInputController = new CityInputController(appConfig, Services, weatherController, searchHistoryController, urlController);
 
 const Controllers = {
   UnitSwitchController: new UnitSwitchController(appConfig, cityInputController, Services.SettingsService),
@@ -26,8 +27,13 @@ const Controllers = {
   ProgressController: progressController,
   WeatherController: weatherController,
   SearchHistoryController: searchHistoryController,
+  UrlController: urlController,
 };
 
 Controllers.SearchHistoryController.bindCityInputController(Controllers.CityInputController);
+urlController.bindCityInputController(cityInputController);
+// urlController.getCityName();
+
+urlController.makeInitialSearch();
 
 console.log('App ready');

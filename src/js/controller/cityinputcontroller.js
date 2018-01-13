@@ -8,13 +8,14 @@ class CityInputController {
    * @param {WeatherController} weatherController - weather controller
    * @param {SearchHistoryController} searchHistoryController
    */
-  constructor(appConfig, services, weatherController, searchHistoryController) {
+  constructor(appConfig, services, weatherController, searchHistoryController, urlController) {
     const config = appConfig.search;
     const elementConfigKey = ['gps', 'favNo', 'favYes', 'favDropDown', 'textInput', 'searchAction'];
 
     this._services = services;
     this._weatherController = weatherController;
     this._searchHistoryController = searchHistoryController;
+    this._urlController = urlController;
 
     // class settings
     this._settings = {
@@ -83,6 +84,8 @@ class CityInputController {
         this._services.CityHistoryService.addEntry({
           name: value,
         });
+        // update url
+        this._urlController.updateUrl(encodeURIComponent(value));
 
         // manage favourites
       }
