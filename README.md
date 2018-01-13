@@ -106,7 +106,7 @@ Developed as a part of
 
 ### Time Track
 
- * `TOTAL= 27h05`
+ * `TOTAL= 27h25`
  * `171222 00h10` - setup
  * `171222 00h20` - initial research
  * `171223 01h35` - app architecture design
@@ -116,7 +116,7 @@ Developed as a part of
  * `171224 05h00` - city list feature
  * `180102 00h45` - research on `webpack`
  * `180103 01h40` - storage.put progress controller
- * `180103 03h35` - feature:search _(UI management took 2hrs of efforts)_
+ * `180103 03h55` - feature:search _(UI management took 2hrs of efforts)_
  * `180104 06h10` - feature:weather
  * `180110 02h40` - feature:history
 
