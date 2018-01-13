@@ -9,9 +9,14 @@ class SearchHistoryController {
   constructor(appConfig, cityHistoryService) {
     this._config = appConfig.historyView;
     this._cityHistoryService = cityHistoryService;
+    this._cityInputController = null;
     this._elContainer = document.getElementById(this._config.container);
     this._isActive = false;
     attachOnClickEvent(this._elContainer, this.onClick, this);
+  }
+
+  bindCityInputController(cityInputController) {
+    this._cityInputController = cityInputController;
   }
 
   /**
@@ -42,17 +47,20 @@ class SearchHistoryController {
    */
   onClick(e) {
     const target = e.target;
-    console.log('Clicked on ' + target.textContent);
+    const cityName = e.target.textContent;
+    console.log('Clicked on ' + cityName);
     console.log(e);
-    // Update user text input
-    this._actionTargets.textInputElement.value = target.textContent;
+    /* // Update user text input
+    this._actionTargets.textInputElement.value = target.textContent; */
 
     // Hide list
     this._isActive = false;
     this._elContainer.classList.remove('city-container-visible');
 
-    // invoke search
-    this._actionTargets.actionSearchElement.click();
+    /* // invoke search
+    this._actionTargets.actionSearchElement.click(); */
+
+    this._cityInputController.setValue(cityName);
 
   }
 

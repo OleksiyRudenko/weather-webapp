@@ -90,6 +90,35 @@ class CityInputController {
   }
 
   /**
+   * Set user input value, position caret, invoke search|history
+   * @param {string} value
+   * @param {number|null|-1} caretPosition; -1 => value.length
+   * @param {boolean} doSearch
+   */
+  setValue(value, caretPosition=null, doSearch=true) {
+    console.log('cityInput: "' + value + '"(' + value.length + '), caret:' + caretPosition + '; doSearch:' + doSearch);
+    if (value.length) {
+      this._elControls.textInput.value = value;
+      if (value.length >= this._settings.minChar) {
+        this._elControls.searchAction.classList.remove('btn-inactive');
+        if (doSearch) {
+          this._elControls.textInput.blur();
+          this._elControls.searchAction.click();
+        } else if (caretPosition !== null) {
+          if (caretPosition === -1) caretPosition = value.length;
+          setCaretPosition(this._elControls.textInput, caretPosition);
+        }
+      } else {
+        this._elControls.searchAction.classList.add('btn-inactive');
+      }
+    } else {
+      this._elControls.textInput.value = '';
+      this._elControls.searchAction.classList.add('btn-inactive');
+      this._searchHistoryController.show();
+    }
+  }
+
+  /**
    * Validates user input, activates and deactivates search button
    * @param {object} e - keydown event
    */
