@@ -29,6 +29,9 @@ const appConfig = {
       totalUnit: 'progress-total-unit',
     }
   },
+  unitSwitch: {
+    container: 'unit-switch',
+  },
   search: {
     container: 'search-bar',
     gps: 'gps',

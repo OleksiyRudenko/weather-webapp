@@ -20,7 +20,7 @@ const weatherController = new WeatherController(appConfig, Services.SettingsServ
 const searchHistoryController = new SearchHistoryController(appConfig, Services.CityHistoryService);
 
 const Controllers = {
-  UnitSwitchController: new UnitSwitchController(Services.SettingsService, 'unit-switch'),
+  UnitSwitchController: new UnitSwitchController(appConfig, Services.SettingsService),
   CityInputController: new CityInputController(appConfig, Services, weatherController, searchHistoryController),
   ProgressController: progressController,
   WeatherController: weatherController,
