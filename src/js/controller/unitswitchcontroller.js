@@ -45,5 +45,7 @@ class UnitSwitchController {
     for (let el of unitElementsList) {
       el.classList.toggle('active');
     }
+    this._cityInputController.actionSearch();
+    this._cityInputController.focus();
   }
 }

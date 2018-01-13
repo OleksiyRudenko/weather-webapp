@@ -42,9 +42,9 @@ class CityInputController {
 
   /**
    * Search button click handler
-   * @param {object} e - click event
+   * @param {object} event - click event
    */
-  actionSearch(e) {
+  actionSearch(event) {
     const apiQueryClass = ['current', 'forecast5'];
     if (this._elControls.textInput.value.length < this._settings.minChar) return;
     // predict user input content type if [\d.,\w] only then geo coords
@@ -87,6 +87,15 @@ class CityInputController {
         // manage favourites
       }
     });
+  }
+
+  /**
+   * Focus user input
+   */
+  focus() {
+    this._elControls.textInput.focus();
+    if (!this._elControls.textInput.value.length)
+      this._searchHistoryController.show();
   }
 
   /**
