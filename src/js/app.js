@@ -18,10 +18,11 @@ const Services = {
 
 const weatherController = new WeatherController(appConfig, Services.SettingsService, Services.WeatherService);
 const searchHistoryController = new SearchHistoryController(appConfig, Services.CityHistoryService);
+const cityInputController = new CityInputController(appConfig, Services, weatherController, searchHistoryController);
 
 const Controllers = {
-  UnitSwitchController: new UnitSwitchController(appConfig, Services.SettingsService),
-  CityInputController: new CityInputController(appConfig, Services, weatherController, searchHistoryController),
+  UnitSwitchController: new UnitSwitchController(appConfig, cityInputController, Services.SettingsService),
+  CityInputController: cityInputController,
   ProgressController: progressController,
   WeatherController: weatherController,
   SearchHistoryController: searchHistoryController,

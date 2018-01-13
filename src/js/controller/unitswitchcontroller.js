@@ -4,10 +4,12 @@ class UnitSwitchController {
    * Create unit switch controller.
    * @constructor
    * @param {object} appConfig - city list service
-   * @param {object} settingsService - settings service
+   * @param {CityInputController} cityInputController
+   * @param {SettingsService} settingsService - settings service
    */
-  constructor(appConfig, settingsService) {
+  constructor(appConfig, cityInputController, settingsService) {
     this._config = appConfig.unitSwitch;
+    this._cityInputController = cityInputController;
     this._settingsService = settingsService;
     this._unitSwitchEl = document.getElementById(this._config.container);
     attachOnClickEvent(this._unitSwitchEl, this.onClick, this);
