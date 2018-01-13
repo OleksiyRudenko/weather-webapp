@@ -106,7 +106,7 @@ Developed as a part of
 
 ### Time Track
 
- * `TOTAL= 27h45`
+ * `TOTAL= 28h25`
  * `171222 00h10` - setup
  * `171222 00h20` - initial research
  * `171223 01h35` - app architecture design
@@ -119,5 +119,6 @@ Developed as a part of
  * `180103 03h55` - feature:search _(UI management took 2hrs of efforts)_
  * `180104 06h10` - feature:weather
  * `180110 02h40` - feature:history
+ * `180113 00h40` - feature:url: query and browser history 
 
 [TOC :arrow_double_up: ](#table-of-contents)
