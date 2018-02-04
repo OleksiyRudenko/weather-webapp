@@ -1,3 +1,4 @@
+import {AppController} from './controller/appcontroller'
 /* import SettingsService from './SettingsService';
 import FavCityService from './FavCityService';
 import CityHistoryService from './CityHistoryService';
@@ -35,5 +36,7 @@ urlController.bindCityInputController(cityInputController);
 // urlController.getCityName();
 
 urlController.makeInitialSearch();
+
+const app = new AppController(appConfig);
 
 console.log('App ready');
