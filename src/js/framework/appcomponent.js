@@ -1,6 +1,3 @@
-import AppServiceComponent from "./appservicecomponent";
-import AppControllerComponent from "./appcontrollercomponent";
-
 /**
  * Class representing application component with default properties.
  * Extended by AppServiceComponent class and AppControllerComponent class.
