@@ -4,12 +4,23 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [App Specifications](#app-specifications)
-  - [User Stories and Required Features](#user-stories-and-required-features)
+- [User Stories and Required Features](#user-stories-and-required-features)
+  - [User Stories and Notes on Required Features](#user-stories-and-notes-on-required-features)
+  - [Key Features](#key-features)
+- [App Components](#app-components)
+  - [`AppController`](#appcontroller)
+  - [`UI Controllers`](#ui-controllers)
+  - [`Services`](#services)
+  - [`helpers`](#helpers)
+  - [`External Data Providers`](#external-data-providers)
+  - [`Native Services`](#native-services)
+- [View Design](#view-design)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## User Stories and Required Features
+
+### User Stories and Notes on Required Features
 
 As a user, I would like...
 
@@ -31,5 +42,96 @@ As a user, I would like...
 | [NTH] get historical weather data from last searches (no older than 3 days) when data provider is unreachable | have outdated info rather than no data | browser's storage |
 | [NTH] when data source is not available see in history list only those entries where weather data is max 3 days old | avoid browsing cities where no cached data available | |
 
-[TOC :arrow_double_up: ](#table-of-contents)
+[_TOC_ :arrow_double_up: ](#table-of-contents)
 
+### Key Features
+
+
+[_TOC_ :arrow_double_up: ](#table-of-contents)
+
+## App Components
+
+App components are:
+ * `AppController` - app bootstrapper
+ * `Native Services` - browser native data stores
+   (`LocalStorage`, `IndexedDB`) available via `Services`
+ * `helpers` - helper functions and 3rd party libraries
+ * `Services` - app data stores
+ * `UI Controllers` - app user interaction and feedback
+ * `External Data Providers` - external data sources
+   available via `Services`
+
+[_TOC_ :arrow_double_up: ](#table-of-contents)
+
+### `AppController`
+
+ * owns global `app config`
+ * creates required `Services`
+ * supplies `Services` with settings and dependecies
+   (from among other `Services`)
+ * creates required `UI Controllers`
+ * supplies `UI Controllers` with settings and dependencies
+   (from among `Services` and other `UI Controllers`)
+
+[_TOC_ :arrow_double_up: ](#table-of-contents)
+
+### `UI Controllers`
+
+An `UI Controller`
+ * controls UI elements
+ * receives User activities
+ * inquires a `Service` for data
+ * can be called by a `Service` or another `Controller`
+ * stores data via `Service`
+ * serves data to UI elements
+
+App UI Controllers:
+ * `UnitSwitchController`
+ * `CityInputController`
+ * `SearchHistoryController`
+ * `FavouriteCityController`
+ * `UrlController`
+ * `WeatherController`
+ * `ProgressController`
+
+[_TOC_ :arrow_double_up: ](#table-of-contents)
+
+### `Services`
+
+ * `StorageService` employs `idb` lib to cache data
+ * `WeatherService`
+ * `SettingsService`
+ * `CityListService`
+ * `CityHistoryService`
+ * `FavCityService`
+ * `WeatherIconService`
+
+[_TOC_ :arrow_double_up: ](#table-of-contents)
+
+### `helpers`
+
+ * a set of custom global functions
+ * [`idb`](https://github.com/jakearchibald/idb) - a layer
+   to communicate with browser's `IndexedDB`; used by `StorageService`
+
+[_TOC_ :arrow_double_up: ](#table-of-contents)
+
+### `External Data Providers`
+
+ * Weather data source: [Open Weather Map](https://openweathermap.org/api);
+   addressed to by `WeatherService`
+
+### `Native Services`
+
+ * Browser's `IndexedDB` used to cache app data by `StorageService`
+   via `idb`
+
+[_TOC_ :arrow_double_up: ](#table-of-contents)
+
+## View Design
+
+Inspirations
+ * [darksky](https://darksky.net/forecast/50.4501,30.5241/us12/en)
+ * [Yahoo Weather](https://www.yahoo.com/news/weather)
+
+[_TOC_ :arrow_double_up: ](#table-of-contents)
