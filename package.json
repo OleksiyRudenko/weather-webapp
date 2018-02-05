@@ -1,0 +1,9 @@
+{
+  "name": "weather-webapp",
+  "version": "1.0.0",
+  "description": "Weather Web App",
+  "main": "./src/index.html",
+  "repository": "https://github.com/OleksiyRudenko/weather-webapp.git",
+  "author": "Oleksiy Rudenko <oleksiy.rudenko@gmail.com>",
+  "license": "MIT"
+}
