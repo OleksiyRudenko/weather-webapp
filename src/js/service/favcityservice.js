@@ -1,5 +1,5 @@
 /** Class representing favourite cities service. */
-class FavCityService {
+export default class FavCityService {
   /**
    * Create favourite cities service.
    * @constructor
@@ -11,3 +11,5 @@ class FavCityService {
     this._storageService = storageService;
   }
 }
+
+export { FavCityService };

@@ -9,10 +9,10 @@
  * @param {EventCallback} eventHandler - The callback that handles the response
  * @param {object} scope - scope to bind the callback to
  */
-function attachOnClickEvent(htmlElement, eventHandler, scope) {
+export const attachOnClickEvent = (htmlElement, eventHandler, scope) => {
   htmlElement.onclick = eventHandler.bind(scope);
   htmlElement.ontouchstart = eventHandler.bind(scope);
-}
+};
 
 /**
  *
@@ -20,7 +20,7 @@ function attachOnClickEvent(htmlElement, eventHandler, scope) {
  * @param {string[]=} properties - An optional list of properties to include into resulting set
  * @returns {object} - A set of keyval pairs <key: HtmlElement>
  */
-function elementIdsToHtmlElements(idSet, properties) {
+export const elementIdsToHtmlElements = (idSet, properties) => {
   if (!properties) {
     properties = Object.keys(idSet);
   }
@@ -28,7 +28,7 @@ function elementIdsToHtmlElements(idSet, properties) {
     accumulator[key] = document.getElementById(idSet[key]);
     return accumulator;
   },{});
-}
+};
 
 /**
  * Builds associative object where keys refer to HTML Elements.
@@ -103,7 +103,7 @@ function getCaretPosition(htmlElement) {
  * @param {Element} htmlElement - Input text HTML element
  * @param {number} caretPos - Position to place caret at
  */
-function setCaretPosition(htmlElement, caretPos) {
+export const setCaretPosition = (htmlElement, caretPos) => {
   if(htmlElement) {
     if(htmlElement.createTextRange) {
       const range = htmlElement.createTextRange();
@@ -119,4 +119,4 @@ function setCaretPosition(htmlElement, caretPos) {
         htmlElement.focus();
     }
   }
-}
+};

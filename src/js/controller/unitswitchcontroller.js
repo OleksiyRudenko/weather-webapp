@@ -1,5 +1,7 @@
+import * as helper from './../helper';
+
 /** Class representing unit switch controller. */
-class UnitSwitchController {
+export default class UnitSwitchController {
   /**
    * Create unit switch controller.
    * @constructor
@@ -12,7 +14,7 @@ class UnitSwitchController {
     this._cityInputController = cityInputController;
     this._settingsService = settingsService;
     this._unitSwitchEl = document.getElementById(this._config.container);
-    attachOnClickEvent(this._unitSwitchEl, this.onClick, this);
+    helper.attachOnClickEvent(this._unitSwitchEl, this.onClick, this);
     this.render();
   }
 
@@ -49,3 +51,5 @@ class UnitSwitchController {
     this._cityInputController.focus();
   }
 }
+
+export { UnitSwitchController };

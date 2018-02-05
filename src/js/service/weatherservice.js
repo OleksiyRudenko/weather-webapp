@@ -1,5 +1,5 @@
 /** Class representing weather service. */
-class WeatherService {
+export default class WeatherService {
   /**
    * Create weather service.
    * @constructor
@@ -75,3 +75,5 @@ class WeatherService {
     return this._config.iconUrl + iconId + this._config.iconExt;
   }
 }
+
+export { WeatherService };

@@ -1,5 +1,5 @@
 /** Class representing city browse history service. */
-class CityHistoryService {
+export default class CityHistoryService {
   /**
    * Create city browse history service.
    * @constructor
@@ -55,3 +55,5 @@ class CityHistoryService {
     });
   }
 }
+
+export { CityHistoryService };

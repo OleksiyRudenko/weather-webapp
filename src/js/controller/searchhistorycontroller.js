@@ -1,5 +1,7 @@
+import * as helper from './../helper';
+
 /** Class representing search history service. */
-class SearchHistoryController {
+export default class SearchHistoryController {
   /**
    * Create city browse history controller.
    * @constructor
@@ -12,7 +14,7 @@ class SearchHistoryController {
     this._cityInputController = null;
     this._elContainer = document.getElementById(this._config.container);
     this._isActive = false;
-    attachOnClickEvent(this._elContainer, this.onClick, this);
+    helper.attachOnClickEvent(this._elContainer, this.onClick, this);
   }
 
   bindCityInputController(cityInputController) {
@@ -68,3 +70,5 @@ class SearchHistoryController {
   } */
 
 }
+
+export { SearchHistoryController };

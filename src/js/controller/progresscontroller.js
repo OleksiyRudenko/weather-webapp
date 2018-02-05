@@ -1,5 +1,6 @@
+import * as helper from './../helper';
 /** Class representing progress feedback controller. */
-class ProgressController {
+export default class ProgressController {
   /**
    * Create progress feedback controller.
    * @constructor
@@ -9,7 +10,7 @@ class ProgressController {
     const config = appConfig.notification.progress;
     const elementConfigKey = ['action', 'count', 'countUnit', 'ofConjunction', 'total', 'totalUnit'];
     this._elContainer = document.getElementById(config.container);
-    this._elMessage =  elementIdsToHtmlElements(config, elementConfigKey);
+    this._elMessage =  helper.elementIdsToHtmlElements(config, elementConfigKey);
     this._count = 0;
     this._total = 0;
   }
@@ -61,3 +62,5 @@ class ProgressController {
     }, delay);
   }
 }
+
+export { ProgressController };

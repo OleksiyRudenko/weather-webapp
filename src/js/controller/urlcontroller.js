@@ -42,3 +42,5 @@ class UrlController {
     }
   }
 }
+
+export { UrlController };

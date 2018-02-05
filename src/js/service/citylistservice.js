@@ -1,5 +1,5 @@
 /** Class representing city list service. */
-class CityListService {
+export default class CityListService {
   /**
    * Create city list service.
    * @constructor
@@ -54,3 +54,5 @@ class CityListService {
       });
   }
 }
+
+export { CityListService };

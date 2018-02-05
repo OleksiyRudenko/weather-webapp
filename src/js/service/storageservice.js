@@ -1,7 +1,8 @@
+import * as idb from './../lib/idb-2.0.4/idb';
 /** Class representing storage service.
  * Uses https://github.com/jakearchibald/idb -- https://www.npmjs.com/package/idb
  */
-class StorageService {
+export default class StorageService {
   /**
    * Create storage service.
    * @constructor
@@ -119,3 +120,5 @@ class StorageService {
   }
 
 }
+
+export { StorageService };

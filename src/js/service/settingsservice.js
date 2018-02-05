@@ -1,5 +1,5 @@
 /** Class representing user settings service. */
-class SettingsService {
+export default class SettingsService {
   /**
    * Create settings service.
    * @constructor
@@ -60,3 +60,5 @@ class SettingsService {
     });
   }
 }
+
+export { SettingsService };

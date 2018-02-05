@@ -1,5 +1,6 @@
+import * as helper from './../helper';
 /** Class representing weather view controller. */
-class WeatherController {
+export default class WeatherController {
   /**
    * Create weather controller.
    * @constructor
@@ -13,7 +14,7 @@ class WeatherController {
     this._settingsService = settingsService;
     this._weatherService = weatherService;
 
-    this._element = elementIdsToHtmlElements(config);
+    this._element = helper.elementIdsToHtmlElements(config);
     this._elWeatherToday = null;
 
     console.log(this._element);
@@ -202,3 +203,5 @@ class WeatherController {
     });
   }
 }
+
+export { WeatherController };

@@ -1,5 +1,6 @@
+import * as helper from './../helper';
 /** Class representing city input controller. */
-class CityInputController {
+export default class CityInputController {
   /**
    * Create city input controller.
    * @constructor
@@ -7,6 +8,7 @@ class CityInputController {
    * @param {object} services - app services register
    * @param {WeatherController} weatherController - weather controller
    * @param {SearchHistoryController} searchHistoryController
+   * @param {UrlController} urlController
    */
   constructor(appConfig, services, weatherController, searchHistoryController, urlController) {
     const config = appConfig.search;
@@ -24,7 +26,7 @@ class CityInputController {
 
     // html elements
     this._elContainer = document.getElementById(config.container);
-    this._elControls =  elementIdsToHtmlElements(config, elementConfigKey);
+    this._elControls =  helper.elementIdsToHtmlElements(config, elementConfigKey);
 
     // chores
     this.attachClickHandlers();
@@ -34,7 +36,7 @@ class CityInputController {
    * Attach click handlers to HTML elements
    */
   attachClickHandlers() {
-    attachOnClickEvent(this._elControls.searchAction, this.actionSearch, this);
+    helper.attachOnClickEvent(this._elControls.searchAction, this.actionSearch, this);
     this._elControls.textInput.onkeydown = this.onUserCharInput.bind(this);
     this._elControls.textInput.onkeyup = this.onUserCharInput.bind(this); // onkeydown/keypress caused missing last key pressed
     this._elControls.textInput.onfocus = this.onUserInputFocus.bind(this);
@@ -118,7 +120,7 @@ class CityInputController {
           this._elControls.searchAction.click();
         } else if (caretPosition !== null) {
           if (caretPosition === -1) caretPosition = value.length;
-          setCaretPosition(this._elControls.textInput, caretPosition);
+          helper.setCaretPosition(this._elControls.textInput, caretPosition);
         }
       } else {
         this._elControls.searchAction.classList.add('btn-inactive');
@@ -233,3 +235,5 @@ class CityInputController {
 
   } */
 }
+
+export { CityInputController };
