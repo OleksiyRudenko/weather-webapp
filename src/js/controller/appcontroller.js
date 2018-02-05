@@ -1,4 +1,4 @@
-import { AppUiControllerComponent } from './../framework/appuicontrollercomponent';
+import { AppUiControllerComponent } from './../framework/appuicontrollercomponent.js';
 
 /**
  * Class representing main app controller.
@@ -38,3 +38,5 @@ export default class AppController extends AppUiControllerComponent {
     });
   }
 }
+
+export { AppController };

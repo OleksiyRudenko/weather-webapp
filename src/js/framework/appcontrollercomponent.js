@@ -1,4 +1,4 @@
-import { AppComponent } from './appcomponent';
+import { AppComponent } from './appcomponent.js';
 
 /**
  * Class representing application controller component.
@@ -12,3 +12,5 @@ export default class AppControllerComponent extends AppComponent {
     super();
   }
 }
+
+export { AppControllerComponent };

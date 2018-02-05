@@ -1,4 +1,4 @@
-import { AppControllerComponent } from './appcontrollercomponent';
+import { AppControllerComponent } from './appcontrollercomponent.js';
 
 /**
  * Class representing application UI controller component.
@@ -22,3 +22,5 @@ export default class AppUiControllerComponent extends AppControllerComponent {
     this.dependecies.uiElements = uiElements;
   }
 }
+
+export { AppUiControllerComponent };

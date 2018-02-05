@@ -1,4 +1,4 @@
-import {AppController} from './controller/appcontroller'
+import { AppController } from './controller/appcontroller.js';
 /* import SettingsService from './SettingsService';
 import FavCityService from './FavCityService';
 import CityHistoryService from './CityHistoryService';
