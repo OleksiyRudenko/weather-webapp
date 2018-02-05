@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html --no-minify --public-url ./"
+    "build-dev": "parcel build ./src/index.html --no-minify --public-url ./",
+    "build": "parcel build ./src/index.html --public-url ./"
   }
 }
