@@ -1,4 +1,4 @@
-import { AppUiControllerComponent } from './framework/appuicontrollercomponent';
+import { AppUiControllerComponent } from './../framework/appuicontrollercomponent';
 
 /**
  * Class representing main app controller.
