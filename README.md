@@ -103,9 +103,12 @@ Developed as a part of
 
 **Deploy to github pages, `src/` only**
 
-1. `git subtree split --prefix src -b gh-pages` - create a subtree
-2. `git push -f origin gh-pages:gh-pages` - push forcely
-3. `git branch -D gh-pages` - remove local branch
+NB! The below is not applicable anymore since `src/` contains
+code to compile and `dist/` is not under version control.
+
+1. ~~`git subtree split --prefix src -b gh-pages` - create a subtree~~
+2. ~~`git push -f origin gh-pages:gh-pages` - push forcely~~
+3. ~~`git branch -D gh-pages` - remove local branch~~
 
 [TOC :arrow_double_up: ](#table-of-contents)
 
