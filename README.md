@@ -14,6 +14,7 @@ Developed as a part of
 - [Features](#features)
 - [App Architecture](#app-architecture)
 - [Known Issues](#known-issues)
+- [Resources](#resources)
 - [Deployment](#deployment)
 - [Time Track](#time-track)
 
@@ -93,6 +94,10 @@ Developed as a part of
  - [ ] Units switch doesn't update current data
 
 [TOC :arrow_double_up: ](#table-of-contents)
+
+### Resources
+
+ * [Autocomplete API](https://serbian.wunderground.com/weather/api/d/docs?d=autocomplete-api)
 
 ### Deployment
 
