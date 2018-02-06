@@ -36,3 +36,18 @@ const explore = images.Explore;
 import * as icons from '../icons';
 `<img src={icons.Search} alt="" />`
 ```
+
+## PostCSS plug-ins
+
+**Plug-ins**
+ * `cssnano` - adjustable minificator
+ * `postcss-assets` - image handling
+ * `postcss-cssnext` - future features today
+ * [`rucksack-css`](https://www.rucksackcss.org/) - easening
+ * [style linting](https://www.sitepoint.com/improving-the-quality-of-your-css-with-postcss/)
+ * `css-mqpacker` - css inliner
+ * `autoprefixer`
+
+**Collections**
+ * [sitepoint](https://www.sitepoint.com/7-postcss-plugins-to-ease-you-into-postcss/)
+ * [habra](https://habrahabr.ru/post/265449/)
