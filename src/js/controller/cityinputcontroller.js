@@ -143,7 +143,7 @@ export default class CityInputController {
     const key = e.key;
     const code = e.code;
     const eventType = e.type; // keyup, keydown
-    let caretPosition = getCaretPosition(target);
+    let caretPosition = helper.getCaretPosition(target);
     // console.log(e);
 
     // DEBUG: console.log('>"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
@@ -154,12 +154,12 @@ export default class CityInputController {
 
     // skip initial spaces and every second space
     /*if (['Space', 'Backspace', 'Delete'].includes(key)) {
-      target.value = sanitizeWhitespaces(target.value);
+      target.value = helper.sanitizeWhitespaces(target.value);
     } */
 
-    target.value = sanitizeWhitespaces(target.value);
+    target.value = helper.sanitizeWhitespaces(target.value);
 
-    caretPosition = getCaretPosition(target);
+    caretPosition = helper.getCaretPosition(target);
     // DEBUG: console.log('<"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
 
     if (target.value.length >= this._settings.minChar) {
@@ -193,7 +193,7 @@ export default class CityInputController {
    */
   onUserInputBlur(e) {
     const target = this._elControls.textInput;
-    target.value = sanitizeWhitespaces(target.value, true);
+    target.value = helper.sanitizeWhitespaces(target.value, true);
     console.log('Blurring out');
     setTimeout(this._searchHistoryController.hide.bind(this._searchHistoryController), 200);
   }

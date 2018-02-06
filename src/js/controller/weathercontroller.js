@@ -39,7 +39,7 @@ export default class WeatherController {
 
       // create references to today weather HTML elements if not yet
       if (!this._elWeatherToday) {
-        this._elWeatherToday = objectKeysToHtmlElements(data, idPrefix);
+        this._elWeatherToday = helper.objectKeysToHtmlElements(data, idPrefix);
       }
 
       // console.log(this._elWeatherToday);

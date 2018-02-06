@@ -37,7 +37,7 @@ export const elementIdsToHtmlElements = (idSet, properties) => {
  * @param {string[]=} keys - An optional list of properties to include into resulting set
  * @returns {object} - A set of keyval pairs <key: HtmlElement>
  */
-function objectKeysToHtmlElements(srcObject, idPrefix='', keys=null) {
+export const objectKeysToHtmlElements = (srcObject, idPrefix='', keys=null) => {
   if (!keys) {
     keys = Object.keys(srcObject);
   }
@@ -47,7 +47,7 @@ function objectKeysToHtmlElements(srcObject, idPrefix='', keys=null) {
     if (elRef) accumulator[key] = elRef;
     return accumulator;
   },{});
-}
+};
 
 /**
  * Removes leading, trailing and double whitespaces
@@ -55,14 +55,14 @@ function objectKeysToHtmlElements(srcObject, idPrefix='', keys=null) {
  * @param {boolean=} [trimTails] - Will trim trailing whitespaces if true
  * @returns {string} - Sanitized string
  */
-function sanitizeWhitespaces(str, trimTails) {
+export const sanitizeWhitespaces = (str, trimTails) => {
   // DEBUG: console.log('>' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
   str = str.replace(/\s\s+/g,' ');
   str = str.replace(/^\s/,'');
   if (trimTails) str = str.replace(/\s$/,'');
   // DEBUG: console.log('<' + str.length + ':"' + str.replace(/\s/g,'*') + '"');
   return str;
-}
+};
 
 /**
  * Detect caret position
@@ -70,7 +70,7 @@ function sanitizeWhitespaces(str, trimTails) {
  * @param {Element} htmlElement - Input text HTML element
  * @returns {number} - caret position
  */
-function getCaretPosition(htmlElement) {
+export const getCaretPosition = (htmlElement) => {
   // Initialize
   let iCaretPos = 0;
 
@@ -95,7 +95,7 @@ function getCaretPosition(htmlElement) {
 
   // Return results
   return iCaretPos;
-}
+};
 
 /**
  * Sets caret position
