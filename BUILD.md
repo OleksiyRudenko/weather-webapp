@@ -37,6 +37,12 @@ import * as icons from '../icons';
 `<img src={icons.Search} alt="" />`
 ```
 
+## ParcelJS bits
+
+ * `"prebuild": "shx rm -rf dist/*",` to
+   [clean-up `dist`](https://golb.hplar.ch/p/Bundling-web-applications-with-Parcel)
+ * [babelization](https://golb.hplar.ch/p/Bundling-web-applications-with-Parcel)
+
 ## PostCSS plug-ins
 
 **Plug-ins**
