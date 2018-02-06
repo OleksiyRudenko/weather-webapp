@@ -41,6 +41,7 @@ import * as icons from '../icons';
 
  * `"prebuild": "shx rm -rf dist/*",` to
    [clean-up `dist`](https://golb.hplar.ch/p/Bundling-web-applications-with-Parcel)
+   **NB! Clean up task completed with `node.prebuild.js` script**
  * [babelization](https://golb.hplar.ch/p/Bundling-web-applications-with-Parcel)
  * minification:
    [Use babel-minify instead of the old Uglify JS [171205]](https://github.com/parcel-bundler/parcel/issues/15) /
