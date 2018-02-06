@@ -1,4 +1,4 @@
-import citylist from './../assets/city.list.json';
+// import citylist from './../assets/city.list.json';
 /**
  * App configuration
  * @type {Object}
@@ -66,7 +66,7 @@ export const appConfig = {
     { name: 'Odessa,UA', lastQueried: + new Date(), },
     { name: 'Odessa,US', lastQueried: + new Date(), },
   ],
-  cityList: citylist, // 'assets/city.list.json',
+  cityList: 'assets/city.list.json', // 'assets/city.list.json', | citylist from import
   storage: {
     dbName: 'weatherapp-rdnk',
     dbVersion: 1,
