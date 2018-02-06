@@ -1,5 +1,5 @@
 {
-  "name": "weather-webapp",
+  "name": "index",
   "version": "1.0.0",
   "description": "Weather Web App",
   "main": "./src/index.html",
