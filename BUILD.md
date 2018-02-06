@@ -42,6 +42,9 @@ import * as icons from '../icons';
  * `"prebuild": "shx rm -rf dist/*",` to
    [clean-up `dist`](https://golb.hplar.ch/p/Bundling-web-applications-with-Parcel)
  * [babelization](https://golb.hplar.ch/p/Bundling-web-applications-with-Parcel)
+ * minification:
+   [Use babel-minify instead of the old Uglify JS [171205]](https://github.com/parcel-bundler/parcel/issues/15) /
+   [uglify-es](https://www.npmjs.com/package/uglify-es) // [babel-minify](https://github.com/babel/minify)
 
 ## PostCSS plug-ins
 
