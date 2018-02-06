@@ -46,6 +46,11 @@ import * as icons from '../icons';
  * minification:
    [Use babel-minify instead of the old Uglify JS [171205]](https://github.com/parcel-bundler/parcel/issues/15) /
    [uglify-es](https://www.npmjs.com/package/uglify-es) // [babel-minify](https://github.com/babel/minify)
+ * d824e24 resolved 'Uncaught ReferenceError: require is not defined'
+   (partially, CityListService still raises the error).
+   Error didn't cause app malfunctioning, just annoyed a lot.
+   Solution was to remove from `index.html` inclusion of modules
+   already imported from under `app.js`.
 
 ## PostCSS plug-ins
 
