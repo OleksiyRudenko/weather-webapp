@@ -51,3 +51,8 @@ import * as icons from '../icons';
 **Collections**
  * [sitepoint](https://www.sitepoint.com/7-postcss-plugins-to-ease-you-into-postcss/)
  * [habra](https://habrahabr.ru/post/265449/)
+
+## CDNization
+
+ * [cdnizer](https://github.com/OverZealous/cdnizer)
+ * [fallback to local copy](https://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx)
