@@ -19,5 +19,8 @@
     "build-dev": "parcel build ./src/index.html --no-minify --public-url ./",
     "prebuild": "node node.prebuild.js",
     "build": "parcel build ./src/index.html --public-url ./"
+  },
+  "dependencies": {
+    "idb": "^2.0.4"
   }
 }
