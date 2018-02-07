@@ -1,4 +1,4 @@
-import * as helper from './../helper';
+import * as helper from './../helper.js';
 
 /** Class representing unit switch controller. */
 export default class UnitSwitchController {
@@ -51,5 +51,3 @@ export default class UnitSwitchController {
     this._cityInputController.focus();
   }
 }
-
-export { UnitSwitchController };

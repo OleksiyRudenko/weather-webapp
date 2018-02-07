@@ -46,5 +46,3 @@ export default class AppComponent {
     this.config = config;
   }
 }
-
-export { AppComponent };

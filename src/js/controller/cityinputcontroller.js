@@ -1,4 +1,4 @@
-import * as helper from './../helper';
+import * as helper from './../helper.js';
 /** Class representing city input controller. */
 export default class CityInputController {
   /**
@@ -235,5 +235,3 @@ export default class CityInputController {
 
   } */
 }
-
-export { CityInputController };

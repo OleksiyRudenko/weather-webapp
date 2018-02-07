@@ -1,4 +1,6 @@
-import * as idb from './../lib/idb-2.0.4/idb';
+/*  */
+import * as idbModule from './../lib/idb-2.0.4/idb.js';
+console.log(idb);
 /** Class representing storage service.
  * Uses https://github.com/jakearchibald/idb -- https://www.npmjs.com/package/idb
  */
@@ -120,5 +122,3 @@ export default class StorageService {
   }
 
 }
-
-export { StorageService };

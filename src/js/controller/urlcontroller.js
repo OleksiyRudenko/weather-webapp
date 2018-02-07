@@ -1,5 +1,5 @@
 /** Class representing url controller. */
-class UrlController {
+export default class UrlController {
   /**
    * Create url controller.
    * @constructor
@@ -42,5 +42,3 @@ class UrlController {
     }
   }
 }
-
-export { UrlController };

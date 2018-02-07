@@ -75,5 +75,3 @@ export default class WeatherService {
     return this._config.iconUrl + iconId + this._config.iconExt;
   }
 }
-
-export { WeatherService };

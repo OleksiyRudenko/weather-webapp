@@ -11,5 +11,3 @@ export default class FavCityService {
     this._storageService = storageService;
   }
 }
-
-export { FavCityService };

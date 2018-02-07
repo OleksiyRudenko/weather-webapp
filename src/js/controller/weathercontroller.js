@@ -1,4 +1,4 @@
-import * as helper from './../helper';
+import * as helper from './../helper.js';
 /** Class representing weather view controller. */
 export default class WeatherController {
   /**
@@ -203,5 +203,3 @@ export default class WeatherController {
     });
   }
 }
-
-export { WeatherController };

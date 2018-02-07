@@ -1,4 +1,4 @@
-import * as helper from './../helper';
+import * as helper from './../helper.js';
 /** Class representing progress feedback controller. */
 export default class ProgressController {
   /**
@@ -62,5 +62,3 @@ export default class ProgressController {
     }, delay);
   }
 }
-
-export { ProgressController };

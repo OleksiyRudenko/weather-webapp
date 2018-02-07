@@ -1,4 +1,4 @@
-import * as helper from './../helper';
+import * as helper from './../helper.js';
 
 /** Class representing search history service. */
 export default class SearchHistoryController {
@@ -70,5 +70,3 @@ export default class SearchHistoryController {
   } */
 
 }
-
-export { SearchHistoryController };

@@ -55,5 +55,3 @@ export default class CityHistoryService {
     });
   }
 }
-
-export { CityHistoryService };
