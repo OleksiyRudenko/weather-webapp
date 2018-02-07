@@ -11,14 +11,14 @@ export default class AppUiControllerComponent extends AppControllerComponent {
    */
   constructor() {
     super();
-    this.dependencies.uiElements = {};
+    this.uiElements = {};
   }
 
   getUiElements() {
-    return this.dependecies.uiElements;
+    return this.uiElements;
   }
 
   setUiElements(uiElements) {
-    this.dependecies.uiElements = uiElements;
+    this.uiElements = uiElements;
   }
 }
