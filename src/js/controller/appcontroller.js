@@ -25,7 +25,6 @@ export default class AppController extends AppUiControllerComponent {
       Services: {},
     });
     this.setUiElements({
-      UiElements: {},
     });
   }
 
