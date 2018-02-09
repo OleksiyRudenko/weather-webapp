@@ -1,12 +1,16 @@
+import AppServiceComponent from "../framework/appservicecomponent.js";
 /** Class representing weather service. */
-export default class WeatherService {
+export default class WeatherService extends AppServiceComponent {
   /**
    * Create weather service.
    * @constructor
-   * @param {object} appConfig - application config
    */
-  constructor(appConfig, storageService) {
-    this._config = appConfig.api;
+  constructor() {
+    super();
+    this.config = {
+      api: 'api',
+    };
+    this.debugThisClassName('constructor');
   }
 
   /**
@@ -17,13 +21,13 @@ export default class WeatherService {
    * @returns {Promise<Response>}
    */
   apiRequest(queryClass, endPoint, queryData) {
-    let query = this._config.apiUrl + this._config.apiEndpoint[queryClass][endPoint].path + '?';
+    let query = this.config.api.apiUrl + this.config.api.apiEndpoint[queryClass][endPoint].path + '?';
     // add query data
     const paramSet = Object.keys(queryData).map(param => param + '=' + queryData[param]);
     query += paramSet.join('&');
 
     // add api key
-    query += '&' + this._config.apiParamName + '=' + this._config.apiKey;
+    query += '&' + this.config.api.apiParamName + '=' + this.config.api.apiKey;
 
     console.log('Weather service "' + query + '" from:');
     console.log(queryData);
@@ -57,8 +61,7 @@ export default class WeatherService {
         throw response.status;
       })
       .then(blob => {
-        const objUrl = URL.createObjectURL(blob);
-        return objUrl;
+        return URL.createObjectURL(blob);
       })
       .catch(error => {
         console.error(error);
@@ -72,6 +75,6 @@ export default class WeatherService {
    * @returns {string} url
    */
   apiIconUrl(iconId) {
-    return this._config.iconUrl + iconId + this._config.iconExt;
+    return this.config.api.iconUrl + iconId + this.config.api.iconExt;
   }
 }

@@ -1,36 +1,44 @@
-import * as helper from './../helper.js';
+import AppUiControllerComponent from "../framework/appuicontrollercomponent.js";
+import CityHistoryService from "../service/cityhistoryservice.js";
+import CityInputController from "./cityinputcontroller.js";
 
 /** Class representing search history service. */
-export default class SearchHistoryController {
+export default class SearchHistoryController extends AppUiControllerComponent {
   /**
    * Create city browse history controller.
    * @constructor
-   * @param {object} appConfig - application config
-   * @param {object} cityHistoryService - city history service
    */
-  constructor(appConfig, cityHistoryService) {
-    this._config = appConfig.historyView;
-    this._cityHistoryService = cityHistoryService;
-    this._cityInputController = null;
-    this._elContainer = document.getElementById(this._config.container);
+  constructor() {
+    super();
+    this.config = {};
+    this.dependencies = {
+      Services: {
+        CityHistoryService: 'CityHistoryService',
+      },
+      UiControllers: {
+        CityInputController: 'CityInputController',
+      },
+    };
     this._isActive = false;
-    helper.attachOnClickEvent(this._elContainer, this.onClick, this);
+    this.debugThisClassName('constructor');
   }
 
-  bindCityInputController(cityInputController) {
-    this._cityInputController = cityInputController;
+  run() {
+    super.run();
+    this.debugThisClassName('run');
+    this.attachOnClickHandler(this.uiElements.container, this.onClick);
   }
 
   /**
    * Shows search history list
    */
   show() {
-    this._cityHistoryService.getItems().then(list => {
+    this.dependencies.Services.CityHistoryService.getItems().then(list => {
       // show history
-      this._elContainer.innerHTML = list.map((value, index) =>
+      this.uiElements.container.innerHTML = list.map((value, index) =>
         '<div id="city-list-element-' + index + '" class="city-list-element">' + value + '</div>'
       ).join('');
-      this._elContainer.classList.add('city-container-visible');
+      this.uiElements.container.classList.add('city-container-visible');
       this._isActive = true;
     });
   }
@@ -40,7 +48,7 @@ export default class SearchHistoryController {
    */
   hide() {
     this._isActive = false;
-    this._elContainer.classList.remove('city-container-visible');
+    this.uiElements.container.classList.remove('city-container-visible');
   }
 
   /**
@@ -55,9 +63,9 @@ export default class SearchHistoryController {
 
     // Hide list
     this._isActive = false;
-    this._elContainer.classList.remove('city-container-visible');
+    this.uiElements.container.classList.remove('city-container-visible');
 
-    this._cityInputController.setValue(cityName);
+    this.dependencies.UiControllers.CityInputController.setValue(cityName);
   }
 
   /**

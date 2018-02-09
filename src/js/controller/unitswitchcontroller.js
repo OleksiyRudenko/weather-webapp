@@ -18,12 +18,15 @@ export default class UnitSwitchController extends AppUiControllerComponent {
         CityInputController: 'CityInputController',
       }
     };
+    this.debugThisClassName('constructor');
   }
 
   /**
    * Runs main job
    */
   run() {
+    super.run();
+    this.debugThisClassName('run');
     this.attachOnClickHandler(this.uiElements.container, this.onClick);
     this.render();
   }
@@ -32,8 +35,8 @@ export default class UnitSwitchController extends AppUiControllerComponent {
    * Render UI
    */
   render() {
-    this.dependencies.SettingsService.settingsPromise.then( value => {
-      const unit = this.dependencies.SettingsService.units;
+    this.dependencies.Services.SettingsService.settingsPromise.then( value => {
+      const unit = this.dependencies.Services.SettingsService.units;
       const unitElementsList = this.uiElements.container.children;
       let unit0 = unitElementsList[0], unit1 = unitElementsList[1];
       if (unit === 'imperial') {
@@ -49,12 +52,12 @@ export default class UnitSwitchController extends AppUiControllerComponent {
    * @param {object} e - click event
    */
   onClick(e) {
-    this.dependencies.SettingsService.switchUnits();
+    this.dependencies.Services.SettingsService.switchUnits();
     const unitElementsList = this.uiElements.container.children;
     for (let el of unitElementsList) {
       el.classList.toggle('active');
     }
-    this.dependencies.CityInputController.actionSearch();
-    this.dependencies.CityInputController.focus();
+    this.dependencies.UiControllers.CityInputController.actionSearch();
+    this.dependencies.UiControllers.CityInputController.focus();
   }
 }

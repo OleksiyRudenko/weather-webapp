@@ -1,13 +1,12 @@
+import AppServiceComponent from "../framework/appservicecomponent.js";
 /** Class representing favourite cities service. */
-export default class FavCityService {
+export default class FavCityService extends AppServiceComponent {
   /**
    * Create favourite cities service.
    * @constructor
-   * @param {object} appConfig - application config
-   * @param {object} storageService - storage service
    */
-  constructor(appConfig, storageService) {
-    this._appConfig = appConfig;
-    this._storageService = storageService;
+  constructor() {
+    super();
+    this.debugThisClassName('constructor');
   }
 }

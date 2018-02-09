@@ -1,23 +1,24 @@
 import * as helper from './../helper.js';
+import AppUiControllerComponent from "../framework/appuicontrollercomponent.js";
+import SettingsService from "../service/settingsservice.js";
+import WeatherService from "../service/weatherservice.js";
 /** Class representing weather view controller. */
-export default class WeatherController {
+export default class WeatherController extends AppUiControllerComponent {
   /**
    * Create weather controller.
    * @constructor
-   * @param {object} appConfig - city list service
-   * @param {SettingsService} settingsService - settings service
-   * @param {WeatherService} weatherService - weather service
    */
-  constructor(appConfig, settingsService, weatherService) {
-    const config = appConfig.weatherView;
-
-    this._settingsService = settingsService;
-    this._weatherService = weatherService;
-
-    this._element = helper.elementIdsToHtmlElements(config);
+  constructor() {
+    super();
+    this.config = {};
+    this.dependencies = {
+      Services: {
+        SettingsService: 'SettingsService',
+        WeatherService: 'WeatherService',
+      }
+    };
     this._elWeatherToday = null;
-
-    console.log(this._element);
+    this.debugThisClassName('constructor');
   }
 
   /**
@@ -35,7 +36,7 @@ export default class WeatherController {
       // console.log(data);
       data = this.extractWeatherDataCurrent(data);
       // enrich data
-      data.windSpeedUnits = this._settingsService.windSpeedUnits;
+      data.windSpeedUnits = this.dependencies.Services.SettingsService.windSpeedUnits;
 
       // create references to today weather HTML elements if not yet
       if (!this._elWeatherToday) {
@@ -59,7 +60,7 @@ export default class WeatherController {
       return updateCityName ? data.geocity + ',' + data.geocountry : null;
     }).catch(error => {
       this.exposeElement('today', 'Error');
-      this._element.todayError.innerText = 'No weather data for given location or inexistent location (error code: '+ error + ')';
+      this.uiElements.todayError.innerText = 'No weather data for given location or inexistent location (error code: '+ error + ')';
       throw error;
     });
   }
@@ -69,7 +70,7 @@ export default class WeatherController {
    * @param {Object} src - API fetch data
    */
   extractWeatherDataCurrent(src) {
-    // console.log('<img src="' + this._weatherService.apiIconUrl(src.weather[0].icon) + '" />');
+    // console.log('<img src="' + this.dependencies.Services.WeatherService.apiIconUrl(src.weather[0].icon) + '" />');
     console.log('Wind azimuth: ' + src.wind.deg);
     return {
       dt: src.dt,
@@ -79,7 +80,7 @@ export default class WeatherController {
       geolon: src.coord.lon,
       descr: src.weather[0].main,
       descrDetails: src.weather[0].description,
-      descrIcon: '<img src="' + this._weatherService.apiIconUrl(src.weather[0].icon) + '" />',
+      descrIcon: '<img src="' + this.dependencies.Services.WeatherService.apiIconUrl(src.weather[0].icon) + '" />',
       temp: Math.round(src.main.temp),
       pressure: Math.round(src.main.pressure),
       humidity: src.main.humidity,
@@ -95,7 +96,7 @@ export default class WeatherController {
    */
   renderForecast(weatherData) {
     this.exposeElement('forecast', 'Spinner');
-    this._element.forecastMain.innerHTML = '';
+    this.uiElements.forecastMain.innerHTML = '';
     weatherData.then(data => {
       data = this.extractWeatherDataForecast(data);
       const forecastItems = data.weatherSchedule.map(item => `<div class="wf-item">
@@ -107,13 +108,13 @@ export default class WeatherController {
         </div>`
       );
 
-      this._element.forecastMain.innerHTML = forecastItems.join('');
+      this.uiElements.forecastMain.innerHTML = forecastItems.join('');
       this.exposeElement('forecast', 'Main');
 
-      // this._element.forecastDebug.innerHTML = 'Forecast: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
+      // this.uiElements.forecastDebug.innerHTML = 'Forecast: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
     }).catch(error => {
       this.exposeElement('forecast', 'Error');
-      this._element.forecastError.innerText = 'No forecast data for given location or inexistent location (error code: '+ error + ')';
+      this.uiElements.forecastError.innerText = 'No forecast data for given location or inexistent location (error code: '+ error + ')';
     });
   }
 
@@ -142,7 +143,7 @@ export default class WeatherController {
       dtHours: item.dt_txt.substring(11,13),
       descr: item.weather[0].main,
       descrDetails: item.weather[0].description,
-      descrIcon: '<img src="' + this._weatherService.apiIconUrl(item.weather[0].icon) + '" />',
+      descrIcon: '<img src="' + this.dependencies.Services.WeatherService.apiIconUrl(item.weather[0].icon) + '" />',
       temp: Math.round(item.main.temp),
       pressure: Math.round(item.main.pressure),
       humidity: item.main.humidity,
@@ -189,9 +190,9 @@ export default class WeatherController {
     const elNames = ['Main', 'Debug', 'Error', 'Spinner'];
     exposedElementName = exposedElementName.charAt(0).toUpperCase() + exposedElementName.slice(1);
     // console.log('====== Exposing ' + set + exposedElementName);
-    // console.log(this._element);
+    // console.log(this.uiElement);
     elNames.forEach(elname => {
-      const el = this._element[set + elname];
+      const el = this.uiElements[set + elname];
       if (elname === exposedElementName) {
         // console.log('Exposing ' + set + elname);
         el.classList.add('weather-visible');

@@ -1,16 +1,31 @@
+import AppServiceComponent from "../framework/appservicecomponent.js";
+import StorageService from "./storageservice.js";
 /** Class representing city browse history service. */
-export default class CityHistoryService {
+export default class CityHistoryService extends AppServiceComponent {
   /**
    * Create city browse history service.
    * @constructor
-   * @param {object} appConfig - application config
-   * @param {object} storageService - storage service
    */
-  constructor(appConfig, storageService) {
-    this._appConfig = appConfig;
-    this._storageService = storageService;
+  constructor() {
+    super();
+    this.config = {
+      historyInitialSet: 'historyInitialSet',
+    };
+    this.dependencies = {
+      Services: {
+        StorageService: 'StorageService',
+      }
+    };
     this._storeName = 'cityhistory';
-    console.log('Instantiated CityHistoryService');
+    this.debugThisClassName('constructor');
+  }
+
+  /**
+   * Run, Forrest, run!
+   */
+  run() {
+    super.run();
+    this.debugThisClassName('run');
     this.updateStorage();
   }
 
@@ -18,9 +33,9 @@ export default class CityHistoryService {
    * Update storage if required
    */
   updateStorage() {
-    this._storageService.storeCount(this._storeName).then(count => {
+    this.dependencies.Services.StorageService.storeCount(this._storeName).then(count => {
       if (!count) {
-        this._storageService.put(this._storeName, this._appConfig.historyInitialSet).then(()=>{
+        this.dependencies.Services.StorageService.put(this._storeName, this.config.historyInitialSet).then(()=>{
           console.log('History initialized.');
         });
       }
@@ -36,7 +51,7 @@ export default class CityHistoryService {
     // update item content
     item.lastQueried = + new Date();
     // store item
-    this._storageService.put(this._storeName,item).then(() => {
+    this.dependencies.Services.StorageService.put(this._storeName,item).then(() => {
       console.log('Search item added. {' + item.name + ', ' + item.lastQueried + '}');
     });
   }
@@ -47,7 +62,7 @@ export default class CityHistoryService {
    * @returns {Promise} Ordered list of citynames
    */
   getItems(limit=20) {
-    return this._storageService.getAll(this._storeName).then(items => {
+    return this.dependencies.Services.StorageService.getAll(this._storeName).then(items => {
       items.sort((a,b) => b.lastQueried - a.lastQueried);
       items = items.slice(0,limit).map(item => item.name);
       items.sort();

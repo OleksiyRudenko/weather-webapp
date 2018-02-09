@@ -58,5 +58,6 @@ export default class AppComponent {
    * Runs component main job (abstract method, to be overloaded)
    */
   run() {
+    this.debugThisClassName('RUN');
   }
 }

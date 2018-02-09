@@ -1,19 +1,27 @@
-import * as idb from '../../../node_modules/idb/lib/node.js'; // causes non-critical error when built
+import * as idb from '../../../node_modules/idb/lib/node.js';
+import AppServiceComponent from "../framework/appservicecomponent.js";
+import ProgressController from "../controller/progresscontroller.js"; // causes non-critical error when built
 
 /** Class representing storage service.
  * Uses https://github.com/jakearchibald/idb -- https://www.npmjs.com/package/idb
  */
-export default class StorageService {
+export default class StorageService extends AppServiceComponent {
   /**
    * Create storage service.
    * @constructor
-   * @param {object} appConfig - application config
-   * @param {object} progressController - progress message controller
    */
-  constructor(appConfig, progressController) {
-    this._appConfig = appConfig;
-    this._progressController = progressController;
-    this._dbPromise = this.dbOpen(this._appConfig.storage.dbVersion);
+  constructor() {
+    super();
+    this.config = {
+      storage: 'storage',
+    };
+    this.dependencies = {
+      UiControllers: {
+        ProgressController: 'ProgressController',
+      },
+    };
+    this.debugThisClassName('constructor');
+    this._dbPromise = this.dbOpen(this.config.storage.dbVersion);
     this.logSummary();
   }
 
@@ -23,8 +31,8 @@ export default class StorageService {
    * @returns {Promise<Cache>|IDBOpenDBRequest}
    */
   dbOpen(dbVersion) {
-    return idb.open(this._appConfig.storage.dbName, dbVersion, upgradeDb => {
-      const storeVersionedList = this._appConfig.storage.store; // store list
+    return idb.open(this.config.storage.dbName, dbVersion, upgradeDb => {
+      const storeVersionedList = this.config.storage.store; // store list
       for (let i=0; i <= upgradeDb.oldVersion; i++) {
         storeVersionedList[i].forEach(storeEntry => {
           let store = upgradeDb.createObjectStore(storeEntry.storeName, storeEntry.storeOptions);
@@ -55,7 +63,7 @@ export default class StorageService {
    * Logs database summary
    */
   logSummary() {
-    const storeList = [].concat.apply([], this._appConfig.storage.store).map(e => e.storeName);
+    const storeList = [].concat.apply([], this.config.storage.store).map(e => e.storeName);
     storeList.forEach(storeName => {
       this.storeCount(storeName).then(v => {
         console.log(storeName + '.length == ' + v);
@@ -78,24 +86,24 @@ export default class StorageService {
     const recordSetLength = recordSet.length;
     const showProgress = (recordSetLength > 20);
     let increment = (recordSetLength <= 100) ? 10 : (recordSetLength <= 1000) ? 20 : 100;
-    if (showProgress) this._progressController.show('Adding records to ' + storeName, '', recordSetLength);
+    if (showProgress) this.dependencies.UiControllers.ProgressController.show('Adding records to ' + storeName, '', recordSetLength);
     return this._dbPromise.then(db => {
       const tx = db.transaction(storeName, 'readwrite');
       const store = tx.objectStore(storeName);
       return Promise.all(recordSet.map((item, index) => {
           if (!(index%increment)) {
-            this._progressController.addCount(increment);
+            this.dependencies.UiControllers.ProgressController.addCount(increment);
             console.log('Adding another ' + increment);
           }
           return store.put(item);
         }) // map
       ).catch(e => {
-        this._progressController.hide(100);
+        this.dependencies.UiControllers.ProgressController.hide(100);
         tx.abort();
         console.log(e);
       }).then(() => {
-        this._progressController.setCount(recordSetLength);
-        this._progressController.hide(2500);
+        this.dependencies.UiControllers.ProgressController.setCount(recordSetLength);
+        this.dependencies.UiControllers.ProgressController.hide(2500);
         console.log('Added ' + recordSet.length + ' items to ' + storeName);
       });
     });

@@ -1,34 +1,40 @@
 import * as helper from './../helper.js';
+import AppUiControllerComponent from "../framework/appuicontrollercomponent.js";
+import SearchHistoryController from "./searchhistorycontroller.js";
+import UrlController from "./urlcontroller.js";
 /** Class representing city input controller. */
-export default class CityInputController {
+export default class CityInputController extends AppUiControllerComponent {
   /**
    * Create city input controller.
    * @constructor
-   * @param {object} appConfig - city list service
-   * @param {object} services - app services register
-   * @param {WeatherController} weatherController - weather controller
-   * @param {SearchHistoryController} searchHistoryController
-   * @param {UrlController} urlController
    */
-  constructor(appConfig, services, weatherController, searchHistoryController, urlController) {
-    const config = appConfig.search;
-    const elementConfigKey = ['gps', 'favNo', 'favYes', 'favDropDown', 'textInput', 'searchAction'];
-
-    this._services = services;
-    this._weatherController = weatherController;
-    this._searchHistoryController = searchHistoryController;
-    this._urlController = urlController;
+  constructor() {
+    super();
+    this.config = {};
+    this.dependencies = {
+      Services: {
+        CityHistoryService: 'CityHistoryService',
+        SettingsService: 'SettingsService',
+        WeatherService: 'WeatherService',
+      },
+      UiControllers: {
+        WeatherController: 'WeatherController',
+        SearchHistoryController: 'SearchHistoryController',
+        UrlController: 'UrlController',
+      }
+    };
 
     // class settings
     this._settings = {
       minChar: 3,
     };
 
-    // html elements
-    this._elContainer = document.getElementById(config.container);
-    this._elControls =  helper.elementIdsToHtmlElements(config, elementConfigKey);
+    this.debugThisClassName('constructor');
+  }
 
-    // chores
+  run() {
+    super.run();
+    this.debugThisClassName('run');
     this.attachClickHandlers();
   }
 
@@ -36,11 +42,11 @@ export default class CityInputController {
    * Attach click handlers to HTML elements
    */
   attachClickHandlers() {
-    helper.attachOnClickEvent(this._elControls.searchAction, this.actionSearch, this);
-    this._elControls.textInput.onkeydown = this.onUserCharInput.bind(this);
-    this._elControls.textInput.onkeyup = this.onUserCharInput.bind(this); // onkeydown/keypress caused missing last key pressed
-    this._elControls.textInput.onfocus = this.onUserInputFocus.bind(this);
-    this._elControls.textInput.onblur = this.onUserInputBlur.bind(this);
+    this.attachOnClickHandler(this.uiElements.searchAction, this.actionSearch);
+    this.uiElements.textInput.onkeydown = this.onUserCharInput.bind(this);
+    this.uiElements.textInput.onkeyup = this.onUserCharInput.bind(this); // onkeydown/keypress caused missing last key pressed
+    this.uiElements.textInput.onfocus = this.onUserInputFocus.bind(this);
+    this.uiElements.textInput.onblur = this.onUserInputBlur.bind(this);
   }
 
   /**
@@ -49,9 +55,9 @@ export default class CityInputController {
    */
   actionSearch(event) {
     const apiQueryClass = ['current', 'forecast5'];
-    if (this._elControls.textInput.value.length < this._settings.minChar) return;
+    if (this.uiElements.textInput.value.length < this._settings.minChar) return;
     // predict user input content type if [\d.,\w] only then geo coords
-    const userInput = this._elControls.textInput.value;
+    const userInput = this.uiElements.textInput.value;
     const userInputType = /^[\-\d\s,.]+$/.test(userInput) ? 'latlon' : 'cityname';
     console.log('Search by ' + userInputType);
     let queryData = {};
@@ -71,23 +77,23 @@ export default class CityInputController {
         break;
     }
     // add units explicitly
-    queryData.units = this._services.SettingsService.units;
+    queryData.units = this.dependencies.Services.SettingsService.units;
     // render forecast
     const cityNameUpdate = this.renderForecasts(
-      this._services.WeatherService.apiRequest(apiQueryClass[0], userInputType, queryData),
-      this._services.WeatherService.apiRequest(apiQueryClass[1], userInputType, queryData),
+      this.dependencies.Services.WeatherService.apiRequest(apiQueryClass[0], userInputType, queryData),
+      this.dependencies.Services.WeatherService.apiRequest(apiQueryClass[1], userInputType, queryData),
       (userInputType === 'cityname') ? true : false
     );
     cityNameUpdate.then(value => {
       if (value) {
         // update user input field
-        this._elControls.textInput.value = value;
+        this.uiElements.textInput.value = value;
         // update search history
-        this._services.CityHistoryService.addEntry({
+        this.dependencies.Services.CityHistoryService.addEntry({
           name: value,
         });
         // update url
-        this._urlController.updateUrl(encodeURIComponent(value));
+        this.dependencies.UiControllers.UrlController.updateUrl(encodeURIComponent(value));
 
         // manage favourites
       }
@@ -98,9 +104,9 @@ export default class CityInputController {
    * Focus user input
    */
   focus() {
-    this._elControls.textInput.focus();
-    if (!this._elControls.textInput.value.length)
-      this._searchHistoryController.show();
+    this.uiElements.textInput.focus();
+    if (!this.uiElements.textInput.value.length)
+      this.dependencies.UiControllers.SearchHistoryController.show();
   }
 
   /**
@@ -112,23 +118,23 @@ export default class CityInputController {
   setValue(value, caretPosition=null, doSearch=true) {
     console.log('cityInput: "' + value + '"(' + value.length + '), caret:' + caretPosition + '; doSearch:' + doSearch);
     if (value.length) {
-      this._elControls.textInput.value = value;
+      this.uiElements.textInput.value = value;
       if (value.length >= this._settings.minChar) {
-        this._elControls.searchAction.classList.remove('btn-inactive');
+        this.uiElements.searchAction.classList.remove('btn-inactive');
         if (doSearch) {
-          this._elControls.textInput.blur();
-          this._elControls.searchAction.click();
+          this.uiElements.textInput.blur();
+          this.uiElements.searchAction.click();
         } else if (caretPosition !== null) {
           if (caretPosition === -1) caretPosition = value.length;
-          helper.setCaretPosition(this._elControls.textInput, caretPosition);
+          helper.setCaretPosition(this.uiElements.textInput, caretPosition);
         }
       } else {
-        this._elControls.searchAction.classList.add('btn-inactive');
+        this.uiElements.searchAction.classList.add('btn-inactive');
       }
     } else {
-      this._elControls.textInput.value = '';
-      this._elControls.searchAction.classList.add('btn-inactive');
-      this._searchHistoryController.show();
+      this.uiElements.textInput.value = '';
+      this.uiElements.searchAction.classList.add('btn-inactive');
+      this.dependencies.UiControllers.SearchHistoryController.show();
     }
   }
 
@@ -137,7 +143,7 @@ export default class CityInputController {
    * @param {object} e - keydown event
    */
   onUserCharInput(e) {
-    const target = this._elControls.textInput;
+    const target = this.uiElements.textInput;
     // see https://stackoverflow.com/questions/2353550/how-to-capture-a-backspace-on-the-onkeydown-event for keys/codes details
     const keyCode = e.keyCode;
     const key = e.key;
@@ -163,27 +169,27 @@ export default class CityInputController {
     // DEBUG: console.log('<"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
 
     if (target.value.length >= this._settings.minChar) {
-      this._elControls.searchAction.classList.remove('btn-inactive');
+      this.uiElements.searchAction.classList.remove('btn-inactive');
       if (eventType === 'keyup' && key === 'Enter') {
-        this._elControls.textInput.blur();
-        this._elControls.searchAction.click();
+        this.uiElements.textInput.blur();
+        this.uiElements.searchAction.click();
       }
     } else {
-      this._elControls.searchAction.classList.add('btn-inactive');
+      this.uiElements.searchAction.classList.add('btn-inactive');
     }
     console.log(eventType + '>' + key + ':' + code + ':' + keyCode);
     if (eventType === 'keyup' && target.value.length === 0 && key !== 'Escape') {
       this.onUserInputFocus({
-        target: this._elControls.textInput,
+        target: this.uiElements.textInput,
       });
     } else {
       // hide history
-      this._searchHistoryController.hide();
+      this.dependencies.UiControllers.SearchHistoryController.hide();
     }
     // hide history on escape key
     if (eventType === 'keyup' && key === 'Escape') {
       console.log('HIDE');
-      this._searchHistoryController.hide();
+      this.dependencies.UiControllers.SearchHistoryController.hide();
     }
   }
 
@@ -192,10 +198,11 @@ export default class CityInputController {
    * @param {object} e - keydown event
    */
   onUserInputBlur(e) {
-    const target = this._elControls.textInput;
+    const target = this.uiElements.textInput;
     target.value = helper.sanitizeWhitespaces(target.value, true);
     console.log('Blurring out');
-    setTimeout(this._searchHistoryController.hide.bind(this._searchHistoryController), 200);
+    setTimeout(this.dependencies.UiControllers.SearchHistoryController
+      .hide.bind(this.dependencies.UiControllers.SearchHistoryController), 200);
   }
 
   /**
@@ -205,7 +212,7 @@ export default class CityInputController {
   onUserInputFocus(e) {
     console.log(e);
     if (e.target.value.length === 0)
-      this._searchHistoryController.show();
+      this.dependencies.UiControllers.SearchHistoryController.show();
   }
 
   /**
@@ -216,8 +223,8 @@ export default class CityInputController {
    * returns {Promise|null} - updated city name if required
    */
   renderForecasts(current, forecast, updateCityName) {
-    this._weatherController.renderForecast(forecast);
-    const result = this._weatherController.renderToday(current, updateCityName);
+    this.dependencies.UiControllers.WeatherController.renderForecast(forecast);
+    const result = this.dependencies.UiControllers.WeatherController.renderToday(current, updateCityName);
     console.log(result);
     return result;
   }
@@ -229,8 +236,8 @@ export default class CityInputController {
   /* TODO: remove this method
   getTargets() {
     return {
-      textInputElement: this._elControls.textInput,
-      actionSearchElement: this._elControls.searchAction,
+      textInputElement: this.uiElements.textInput,
+      actionSearchElement: this.uiElements.searchAction,
     };
 
   } */

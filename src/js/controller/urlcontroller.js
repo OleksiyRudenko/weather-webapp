@@ -6,21 +6,13 @@ export default class UrlController extends AppControllerComponent {
    * Create url controller.
    * @constructor
    */
-  constructor(appConfig) {
+  constructor() {
     super();
     this.config = {
       baseUrl: 'baseUrl',
     };
-    this._appConfig = appConfig;
-    this._cityInputController = null;
-  }
-
-  /**
-   * Binds city input controller
-   * @param {CityInputController} cityInputController
-   */
-  bindCityInputController(cityInputController) {
-    this._cityInputController = cityInputController;
+    this.dependencies = {};
+    this.debugThisClassName('constructor');
   }
 
   /**
@@ -43,6 +35,8 @@ export default class UrlController extends AppControllerComponent {
   }
 
   run() {
+    super.run();
+    this.debugThisClassName('run');
     const cityName = this.getCityName();
     if (this.dependencies.CityInputController && cityName) {
       this.dependencies.CityInputController.setValue(cityName);

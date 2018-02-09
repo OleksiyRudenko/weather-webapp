@@ -1,18 +1,17 @@
-import * as helper from './../helper.js';
+import AppUiControllerComponent from "../framework/appuicontrollercomponent.js";
 /** Class representing progress feedback controller. */
-export default class ProgressController {
+export default class ProgressController extends AppUiControllerComponent {
   /**
    * Create progress feedback controller.
    * @constructor
-   * @param {object} appConfig - application config
    */
-  constructor(appConfig) {
-    const config = appConfig.notification.progress;
-    const elementConfigKey = ['action', 'count', 'countUnit', 'ofConjunction', 'total', 'totalUnit'];
-    this._elContainer = document.getElementById(config.container);
-    this._elMessage =  helper.elementIdsToHtmlElements(config, elementConfigKey);
+  constructor() {
+    super();
+    this.config = {};
+    this.dependencies = {};
     this._count = 0;
     this._total = 0;
+    this.debugThisClassName('constructor');
   }
 
   /**
@@ -22,15 +21,15 @@ export default class ProgressController {
    * @param {number} total - max value; if ==0 then not shown
    */
   show(action, unit, total) {
-    action && (this._elMessage.action.innerText=action + ': ');
+    action && (this.uiElements.action.innerText=action + ': ');
     this._count = 0;
-    this._elMessage.count.innerText = '0';
-    this._elMessage.countUnit.innerText = unit;
+    this.uiElements.count.innerText = '0';
+    this.uiElements.countUnit.innerText = unit;
     this._total = total;
-    total && (this._elMessage.ofConjunction.innerText=' of ')
-    && (this._elMessage.total.innerText=total)
-    && (this._elMessage.totalUnit.innerText=unit);
-    this._elContainer.classList.add('display-block');
+    total && (this.uiElements.ofConjunction.innerText=' of ')
+    && (this.uiElements.total.innerText=total)
+    && (this.uiElements.totalUnit.innerText=unit);
+    this.uiElements.container.classList.add('display-block');
   }
 
   /**
@@ -40,7 +39,7 @@ export default class ProgressController {
   addCount(increment) {
     this._count += increment;
     if (this._total && this._count > this._total) this._count = this._total;
-    this._elMessage.count.innerText = this._count;
+    this.uiElements.count.innerText = this._count;
   }
 
   /**
@@ -49,7 +48,7 @@ export default class ProgressController {
    */
   setCount(count) {
     this._count = (count < 0 || count > this._total) ? this._total : count;
-    this._elMessage.count.innerText = this._count;
+    this.uiElements.count.innerText = this._count;
   }
 
   /**
@@ -58,7 +57,7 @@ export default class ProgressController {
    */
   hide(delay) {
     setTimeout(() => {
-      this._elContainer.classList.remove('display-block');
+      this.uiElements.container.classList.remove('display-block');
     }, delay);
   }
 }

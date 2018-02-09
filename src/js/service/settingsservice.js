@@ -1,15 +1,19 @@
+import AppServiceComponent from "../framework/appservicecomponent.js";
+import StorageService from "./storageservice.js";
 /** Class representing user settings service. */
-export default class SettingsService {
+export default class SettingsService extends AppServiceComponent {
   /**
    * Create settings service.
    * @constructor
-   * @param {object} appConfig - application config
-   * @param {object} storageService - storage service
    */
-  constructor(appConfig, storageService) {
+  constructor() {
+    super();
+    this.dependencies = {
+      Services: {
+        StorageService: 'StorageService',
+      },
+    };
     this._storeName = 'settings';
-    this._appConfig = appConfig;
-    this._storageService = storageService;
     this._settings = {
       Units: 'metric',
     };
@@ -19,6 +23,12 @@ export default class SettingsService {
         imperial: 'mph',
       }
     };
+    this.debugThisClassName('constructor');
+  }
+
+  run() {
+    super.run();
+    this.debugThisClassName('run');
     this.settingsPromise = this.loadSettings();
   }
 
@@ -40,7 +50,7 @@ export default class SettingsService {
       option: 'Units',
       value: this._settings.Units,
     };
-    this._storageService.put(this._storeName,data).then(() => {
+    this.dependencies.Services.StorageService.put(this._storeName,data).then(() => {
       console.log('Settings store updated');
     });
   }
@@ -49,12 +59,12 @@ export default class SettingsService {
    * Load settings from store
    */
   loadSettings() {
-    this._storageService.storeCount(this._storeName).then(count => {
+    this.dependencies.Services.StorageService.storeCount(this._storeName).then(count => {
       if (!count) {
         this.updateStorage();
       }
     });
-    return this._storageService.getAll(this._storeName).then(items => {
+    return this.dependencies.Services.StorageService.getAll(this._storeName).then(items => {
       items.forEach(e => this._settings[e.option]=e.value);
       return new Promise((resolve, reject) => resolve(this._settings));
     });

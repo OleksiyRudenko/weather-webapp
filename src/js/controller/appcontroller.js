@@ -2,7 +2,17 @@ import AppControllerComponent from './../framework/appcontrollercomponent.js';
 import {traverseObjectAndChange} from "../helper.js";
 import UnitSwitchController from "./unitswitchcontroller";
 import {Services, Controllers} from "./../app.js"; // temporary migrational
-import UrlController from "./urlcontroller";
+import UrlController from "./urlcontroller.js";
+import ProgressController from "./progresscontroller.js";
+import CityInputController from "./cityinputcontroller.js";
+import SearchHistoryController from "./searchhistorycontroller.js";
+import WeatherController from "./weathercontroller.js";
+import CityHistoryService from "../service/cityhistoryservice.js";
+import CityListService from "../service/citylistservice.js";
+import FavCityService from "../service/favcityservice.js";
+import SettingsService from "../service/settingsservice.js";
+import StorageService from "../service/storageservice.js";
+import WeatherService from "../service/weatherservice.js";
 
 /**
  * Class representing main app controller.
@@ -28,12 +38,23 @@ export default class AppController extends AppControllerComponent {
    */
   createComponents() {
     this.setDependencies({
-      Services: {},
+      Services: {
+        CityHistoryService: new CityHistoryService(),
+        CityListService: new CityListService(),
+        FavCityService: new FavCityService(),
+        SettingsService: new SettingsService(),
+        StorageService: new StorageService(),
+        WeatherService: new WeatherService(),
+      },
       Controllers: {
         UrlController: new UrlController(),
       },
       UiControllers: {
         UnitSwitchController: new UnitSwitchController(),
+        ProgressController: new ProgressController(),
+        CityInputController: new CityInputController(),
+        SearchHistoryController: new SearchHistoryController(),
+        WeatherController: new WeatherController(),
       },
     });
   }
@@ -42,13 +63,12 @@ export default class AppController extends AppControllerComponent {
    * Interbinds components as dependencies
    */
   bindDependencies() {
-    // TODO: take component.dependencies => traverse(replace with with reference from AppController.dependencies)
-    this.dependencies.UiControllers.UnitSwitchController.setDependencies({
-      SettingsService: Services.SettingsService,            // temporary -- external reference
-      CityInputController: Controllers.CityInputController, // temporary -- external reference
-    });
-    this.dependencies.Controllers.UrlController.setDependencies({
-      CityInputController: Controllers.CityInputController, // temporary -- external reference
+    // flatten the tree
+    let dependenciesList = Object.assign({},
+      this.dependencies.Services, this.dependencies.Controllers, this.dependencies.UiControllers);
+    // bind
+    traverseObjectAndChange(this.dependencies, component => {
+      component.dependencies = traverseObjectAndChange(component.dependencies, entry => dependenciesList[entry]);
     });
   }
 

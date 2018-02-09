@@ -1,17 +1,29 @@
+import AppServiceComponent from "../framework/appservicecomponent.js";
+import StorageService from "./storageservice.js";
 /** Class representing city list service. */
-export default class CityListService {
+export default class CityListService extends AppServiceComponent {
   /**
    * Create city list service.
    * @constructor
-   * @param {object} appConfig - application config
-   * @param {object} storageService - storage service
    */
-  constructor(appConfig, storageService) {
+  constructor() {
+    super();
+    this.config = {
+      baseUrl: 'baseUrl',
+      cityList: 'cityList',
+    };
+    this.dependencies = {
+      Services: {
+        StorageService: 'StorageService',
+      },
+    };
     this._storeName = 'cities';
-    this._appConfig = appConfig;
-    this._storageService = storageService;
-    // this._cityList = []; // id: , name: 'cityname, country'
+    this.debugThisClassName('constructor');
+  }
 
+  run() {
+    super.run();
+    this.debugThisClassName('run');
     this.updateStorage();
   }
 
@@ -19,12 +31,12 @@ export default class CityListService {
    * Update idb storage if required
    */
   updateStorage() {
-    this._storageService.storeCount(this._storeName).then(count => {
+    this.dependencies.Services.StorageService.storeCount(this._storeName).then(count => {
       if (!count) {
         this.loadSource().then(cityList => {
           console.log(cityList.length + ' entries in the city list.');
           cityList = cityList.slice(0, 1234);
-          this._storageService.put(this._storeName, cityList).then(()=>{
+          this.dependencies.Services.StorageService.put(this._storeName, cityList).then(()=>{
             console.log('idb.cities updated.');
           });
         });
@@ -37,7 +49,7 @@ export default class CityListService {
    * Import data (cities list) from external resource and customize it as appropriate
    */
   loadSource() {
-    return fetch(this._appConfig.baseUrl + this._appConfig.cityList, {method: 'get'})
+    return fetch(this.config.baseUrl + this.config.cityList, {method: 'get'})
       .then(response => {
         if (response.ok)
          return response.json();
