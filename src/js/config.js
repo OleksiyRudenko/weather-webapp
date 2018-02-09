@@ -107,7 +107,7 @@ export const appConfig = {
 
   // next iteration
   uiElements: {
-    unitSwitchController: {
+    UnitSwitchController: {
       container: 'unit-switch',
     },
   },
