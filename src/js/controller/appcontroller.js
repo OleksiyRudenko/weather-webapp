@@ -47,6 +47,9 @@ export default class AppController extends AppControllerComponent {
       SettingsService: Services.SettingsService,            // temporary -- external reference
       CityInputController: Controllers.CityInputController, // temporary -- external reference
     });
+    this.dependencies.Controllers.UrlController.setDependencies({
+      CityInputController: Controllers.CityInputController, // temporary -- external reference
+    });
   }
 
   /**
