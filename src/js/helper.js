@@ -153,11 +153,11 @@ export const setCaretPosition = (htmlElement, caretPos) => {
  * @param {callback} callback(primitiveValue, key)
  * @returns {Object} amended source
  */
-export const traverseObject = (source, callback) => {
+export const traverseObjectAndChange = (source, callback) => {
   const dest = {};
   Object.keys(source).forEach((key, idx) => {
     if (isPlainObject(source[key])) {
-      dest[key] = traverseObject(source[key],callback);
+      dest[key] = traverseObjectAndChange(source[key],callback);
     } else {
       dest[key] = callback(source[key], key);
     }
