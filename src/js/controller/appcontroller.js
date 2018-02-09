@@ -2,6 +2,7 @@ import AppControllerComponent from './../framework/appcontrollercomponent.js';
 import {traverseObjectAndChange} from "../helper.js";
 import UnitSwitchController from "./unitswitchcontroller";
 import {Services, Controllers} from "./../app.js"; // temporary migrational
+import UrlController from "./urlcontroller";
 
 /**
  * Class representing main app controller.
@@ -27,7 +28,9 @@ export default class AppController extends AppControllerComponent {
   createComponents() {
     this.setDependencies({
       Services: {},
-      Controllers: {},
+      Controllers: {
+        UrlController: new UrlController(),
+      },
       UiControllers: {
         UnitSwitchController: new UnitSwitchController(),
       },
