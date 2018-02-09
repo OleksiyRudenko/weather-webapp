@@ -145,3 +145,23 @@ export const setCaretPosition = (htmlElement, caretPos) => {
     }
   }
 };
+
+/**
+ * Takes an object, traverses it, applies a callback to each non-plain-object value.
+ * Nested plain objects also get traversed.
+ * @param {Object} source
+ * @param {callback} callback(primitiveValue, key)
+ * @returns {Object} amended source
+ */
+export const traverseObject = (source, callback) => {
+  const dest = {};
+  Object.keys(source).forEach((key, idx) => {
+    console.log(source[key]);
+    if (isPlainObject(source[key])) {
+      dest[key] = traverseObject(source[key],callback);
+    } else {
+      dest[key] = callback(source[key], key);
+    }
+  });
+  return dest;
+};
