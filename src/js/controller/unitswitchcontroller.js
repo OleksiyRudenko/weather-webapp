@@ -9,6 +9,7 @@ export default class UnitSwitchController extends AppUiControllerComponent {
    */
   constructor() {
     super();
+    this.config = {};
     this.dependencies = {
       Services: {
         SettingsService: 'SettingsService',
