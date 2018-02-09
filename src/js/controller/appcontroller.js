@@ -1,10 +1,11 @@
-import AppUiControllerComponent from './../framework/appuicontrollercomponent.js';
+import AppControllerComponent from './../framework/appcontrollercomponent.js';
+import {traverseObject} from "../helper.js";
 
 /**
  * Class representing main app controller.
  * Bootstraps application using global app config
  */
-export default class AppController extends AppUiControllerComponent {
+export default class AppController extends AppControllerComponent {
   /**
    * AppController constructor
    * @param {Object} config - global config for components
@@ -12,8 +13,8 @@ export default class AppController extends AppUiControllerComponent {
   constructor(config) {
     super();
     this.setConfig(config);
-    this.createComponents();
     this.findUiElements();
+    this.createComponents();
   }
 
   /**
@@ -24,17 +25,13 @@ export default class AppController extends AppUiControllerComponent {
       Controllers: {},
       Services: {},
     });
-    this.setUiElements({
-    });
   }
 
   /**
-   * Finds required UI elements
+   * Finds required UI elements and updates config accordingly
    */
   findUiElements() {
-    this.setUiElements({
-      UiElements: {},
-    });
+    this.config.uiElements = traverseObject(this.config.uiElements, value => document.getElementById(value));
   }
 }
 
