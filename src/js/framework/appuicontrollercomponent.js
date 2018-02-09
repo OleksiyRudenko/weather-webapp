@@ -21,4 +21,14 @@ export default class AppUiControllerComponent extends AppControllerComponent {
   setUiElements(uiElements) {
     this.uiElements = uiElements;
   }
+
+  /**
+   * Attaches touch and mouse click handler to an element
+   * @param {HTMLElement} htmlElement
+   * @param {callback} eventHandler
+   */
+  attachOnClickHandler(htmlElement, eventHandler) {
+    htmlElement.onclick = eventHandler.bind(this);
+    htmlElement.ontouchstart = eventHandler.bind(this);
+  }
 }
