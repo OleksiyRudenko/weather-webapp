@@ -22,7 +22,7 @@ import StorageService from './StorageService'; */
 const progressController = new ProgressController(appConfig);
 const storageService = new StorageService(appConfig, progressController);
 
-const Services = {
+export const Services = {
   SettingsService: new SettingsService(appConfig, storageService),
   CityListService: new CityListService(appConfig, storageService),
   FavCityService: new FavCityService(appConfig, storageService),
@@ -36,8 +36,7 @@ const weatherController = new WeatherController(appConfig, Services.SettingsServ
 const searchHistoryController = new SearchHistoryController(appConfig, Services.CityHistoryService);
 const cityInputController = new CityInputController(appConfig, Services, weatherController, searchHistoryController, urlController);
 
-const Controllers = {
-  UnitSwitchController: new UnitSwitchController(appConfig, cityInputController, Services.SettingsService),
+export const Controllers = {
   CityInputController: cityInputController,
   ProgressController: progressController,
   WeatherController: weatherController,
@@ -45,12 +44,13 @@ const Controllers = {
   UrlController: urlController,
 };
 
+const app = new AppController(appConfig);
+
 Controllers.SearchHistoryController.bindCityInputController(Controllers.CityInputController);
 urlController.bindCityInputController(cityInputController);
 // urlController.getCityName();
 
 urlController.makeInitialSearch();
 
-const app = new AppController(appConfig);
-
+app.run();
 console.log('App ready');
