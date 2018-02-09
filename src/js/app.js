@@ -9,15 +9,7 @@ import ProgressController from "./controller/progresscontroller.js";
 import SearchHistoryController from "./controller/searchhistorycontroller.js";
 import WeatherController from "./controller/weathercontroller.js";
 import CityInputController from "./controller/cityinputcontroller.js";
-import UnitSwitchController from "./controller/unitswitchcontroller.js";
 import AppController from "./controller/appcontroller.js";
-import UrlController from "./controller/urlcontroller.js";
-
-/* import SettingsService from './SettingsService';
-import FavCityService from './FavCityService';
-import CityHistoryService from './CityHistoryService';
-import WeatherService from './WeatherService';
-import StorageService from './StorageService'; */
 
 const progressController = new ProgressController(appConfig);
 const storageService = new StorageService(appConfig, progressController);
@@ -31,26 +23,20 @@ export const Services = {
   StorageService: storageService,
 };
 
-const urlController = new UrlController(appConfig);
 const weatherController = new WeatherController(appConfig, Services.SettingsService, Services.WeatherService);
 const searchHistoryController = new SearchHistoryController(appConfig, Services.CityHistoryService);
-const cityInputController = new CityInputController(appConfig, Services, weatherController, searchHistoryController, urlController);
 
 export const Controllers = {
-  CityInputController: cityInputController,
   ProgressController: progressController,
   WeatherController: weatherController,
   SearchHistoryController: searchHistoryController,
-  UrlController: urlController,
 };
 
 const app = new AppController(appConfig);
 
+const cityInputController = new CityInputController(appConfig, Services, weatherController, searchHistoryController, app.dependencies.Controllers.UrlController);
+Controllers.CityInputController = cityInputController;
 Controllers.SearchHistoryController.bindCityInputController(Controllers.CityInputController);
-urlController.bindCityInputController(cityInputController);
-// urlController.getCityName();
-
-urlController.makeInitialSearch();
 
 app.run();
 console.log('App ready');

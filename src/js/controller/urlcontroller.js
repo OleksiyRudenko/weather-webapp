@@ -1,10 +1,16 @@
+import AppControllerComponent from './../framework/appcontrollercomponent.js';
+
 /** Class representing url controller. */
-export default class UrlController {
+export default class UrlController extends AppControllerComponent {
   /**
    * Create url controller.
    * @constructor
    */
   constructor(appConfig) {
+    super();
+    this.config = {
+      baseUrl: 'baseUrl',
+    };
     this._appConfig = appConfig;
     this._cityInputController = null;
   }
@@ -22,7 +28,8 @@ export default class UrlController {
    * @param {string} cityName
    */
   updateUrl(cityName) {
-    history.pushState({}, document.title, this._appConfig.baseUrl + '?q=' + cityName );
+    // TODO: CityInputController calls this method too early
+    history.pushState({}, document.title, this.config.baseUrl + '?q=' + cityName );
   }
 
   /**
@@ -35,10 +42,10 @@ export default class UrlController {
     return cityName;
   }
 
-  makeInitialSearch() {
+  run() {
     const cityName = this.getCityName();
-    if (this._cityInputController && cityName) {
-      this._cityInputController.setValue(cityName);
+    if (this.dependencies.CityInputController && cityName) {
+      this.dependencies.CityInputController.setValue(cityName);
     }
   }
 }
