@@ -106,6 +106,10 @@ export const appConfig = {
   }, // storage
 
   // next iteration
-
+  uiElements: {
+    unitSwitchController: {
+      container: 'unit-switch',
+    },
+  },
 
 };

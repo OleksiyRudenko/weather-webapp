@@ -156,7 +156,6 @@ export const setCaretPosition = (htmlElement, caretPos) => {
 export const traverseObject = (source, callback) => {
   const dest = {};
   Object.keys(source).forEach((key, idx) => {
-    console.log(source[key]);
     if (isPlainObject(source[key])) {
       dest[key] = traverseObject(source[key],callback);
     } else {
