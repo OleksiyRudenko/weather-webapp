@@ -45,4 +45,12 @@ export default class AppComponent {
   setConfig(config) {
     this.config = config;
   }
+
+  /**
+   * Logs class name adding a comment
+   * @param comment
+   */
+  debugThisClassName(comment) {
+    console.log(this.__proto__.constructor.name + '::' + comment);
+  }
 }
