@@ -150,7 +150,7 @@ export const setCaretPosition = (htmlElement, caretPos) => {
  * Takes an object, traverses it, applies a callback to each non-plain-object value.
  * Nested plain objects also get traversed.
  * @param {Object} source
- * @param {callback} callback(primitiveValue, key)
+ * @param {Function} callback(primitiveValue, key)
  * @returns {Object} amended source
  */
 export const traverseObjectAndChange = (source, callback) => {
