@@ -53,4 +53,10 @@ export default class AppComponent {
   debugThisClassName(comment) {
     console.log(this.__proto__.constructor.name + '::' + comment);
   }
+
+  /**
+   * Runs component main job (abstract method, to be overloaded)
+   */
+  run() {
+  }
 }
