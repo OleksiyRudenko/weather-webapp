@@ -76,4 +76,38 @@ export default class WeatherService extends AppServiceComponent {
   apiIconUrl(iconId) {
     return this.config.api.iconUrl + iconId + this.config.api.iconExt;
   }
+
+  /**
+   * Verbalizes iconId code
+   * @param {string} iconId
+   * returns {Object} { tod: day|night, conditions: ... }
+   */
+  decomposeIconId(iconId) {
+    return {
+      tod: iconId.substring(2) === 'd' ? 'day' : 'night',
+      conditions: iconId.substring(0,1),
+    };
+  }
+
+  /**
+   * Verbalizes 2-digit conditions code
+   * @param {string} conditionsCode
+   * @returns {string}
+   * http://erikflowers.github.io/weather-icons/
+   * http://www.alessioatzeni.com/meteocons/
+   */
+  verbalizeConditionsCode(conditionsCode) {
+    switch (conditionsCode) {
+      case '01': return 'clearSky';
+      case '02': return 'fewClouds';
+      case '03': return 'scatteredClouds';
+      case '04': return 'brokenClouds';
+      case '09': return 'showerRain';
+      case '10': return 'rain';
+      case '11': return 'thunderstorm';
+      case '13': return 'snow';
+      case '50': return 'mist';
+
+    }
+  }
 }
