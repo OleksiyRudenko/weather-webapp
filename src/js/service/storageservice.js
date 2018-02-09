@@ -20,7 +20,6 @@ export default class StorageService extends AppServiceComponent {
         ProgressController: 'ProgressController',
       },
     };
-    this.debugThisClassName('constructor');
     this._dbPromise = this.dbOpen(this.config.storage.dbVersion);
     this.logSummary();
   }

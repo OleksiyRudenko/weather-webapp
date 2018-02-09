@@ -12,6 +12,7 @@ export default class AppComponent {
       Services: {},
     };
     this.config = {};
+    // this.debugThisClassName('constructor');
   }
 
   /**
@@ -58,6 +59,6 @@ export default class AppComponent {
    * Runs component main job (abstract method, to be overloaded)
    */
   run() {
-    this.debugThisClassName('RUN');
+    // this.debugThisClassName('RUN');
   }
 }

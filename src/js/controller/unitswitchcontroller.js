@@ -18,7 +18,6 @@ export default class UnitSwitchController extends AppUiControllerComponent {
         CityInputController: 'CityInputController',
       }
     };
-    this.debugThisClassName('constructor');
   }
 
   /**
@@ -26,7 +25,7 @@ export default class UnitSwitchController extends AppUiControllerComponent {
    */
   run() {
     super.run();
-    this.debugThisClassName('run');
+    // this.debugThisClassName('run');
     this.attachOnClickHandler(this.uiElements.container, this.onClick);
     this.render();
   }

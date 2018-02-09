@@ -12,7 +12,6 @@ export default class UrlController extends AppControllerComponent {
       baseUrl: 'baseUrl',
     };
     this.dependencies = {};
-    this.debugThisClassName('constructor');
   }
 
   /**
@@ -36,7 +35,7 @@ export default class UrlController extends AppControllerComponent {
 
   run() {
     super.run();
-    this.debugThisClassName('run');
+    // this.debugThisClassName('run');
     const cityName = this.getCityName();
     if (this.dependencies.CityInputController && cityName) {
       this.dependencies.CityInputController.setValue(cityName);

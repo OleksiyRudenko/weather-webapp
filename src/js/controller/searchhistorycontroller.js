@@ -20,12 +20,11 @@ export default class SearchHistoryController extends AppUiControllerComponent {
       },
     };
     this._isActive = false;
-    this.debugThisClassName('constructor');
   }
 
   run() {
     super.run();
-    this.debugThisClassName('run');
+    // this.debugThisClassName('run');
     this.attachOnClickHandler(this.uiElements.container, this.onClick);
   }
 

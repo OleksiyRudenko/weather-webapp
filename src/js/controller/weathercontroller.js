@@ -18,7 +18,6 @@ export default class WeatherController extends AppUiControllerComponent {
       }
     };
     this._elWeatherToday = null;
-    this.debugThisClassName('constructor');
   }
 
   /**
@@ -46,6 +45,8 @@ export default class WeatherController extends AppUiControllerComponent {
       // console.log(this._elWeatherToday);
 
       // put data across HTML elements
+      this.debugThisClassName('renderToday');
+      console.log(data);
       Object.keys(data).forEach(key => {
         if (key in this._elWeatherToday) {
           this._elWeatherToday[key].innerHTML = data[key];
@@ -99,6 +100,8 @@ export default class WeatherController extends AppUiControllerComponent {
     this.uiElements.forecastMain.innerHTML = '';
     weatherData.then(data => {
       data = this.extractWeatherDataForecast(data);
+      this.debugThisClassName('renderForecast');
+      console.log(data);
       const forecastItems = data.weatherSchedule.map(item => `<div class="wf-item">
         <div class="wf-icon">${item.descrIcon}</div>
         <div class="wf-descr">${item.descr}</div>
@@ -173,7 +176,7 @@ export default class WeatherController extends AppUiControllerComponent {
       292: 'nwarr',
       337: 'uarr',
     };
-    console.log('Degree: ' + degree);
+    // console.log('Degree: ' + degree);
     return '&'
       + Object.keys(presets).reduce((acc, degKey) => {
         return (degree >= degKey) ? presets[degKey] : acc;

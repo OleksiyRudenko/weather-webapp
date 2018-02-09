@@ -7,6 +7,5 @@ export default class FavCityService extends AppServiceComponent {
    */
   constructor() {
     super();
-    this.debugThisClassName('constructor');
   }
 }

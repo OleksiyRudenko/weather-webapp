@@ -18,12 +18,11 @@ export default class CityListService extends AppServiceComponent {
       },
     };
     this._storeName = 'cities';
-    this.debugThisClassName('constructor');
   }
 
   run() {
     super.run();
-    this.debugThisClassName('run');
+    // this.debugThisClassName('run');
     this.updateStorage();
   }
 

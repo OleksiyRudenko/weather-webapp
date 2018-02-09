@@ -23,12 +23,11 @@ export default class SettingsService extends AppServiceComponent {
         imperial: 'mph',
       }
     };
-    this.debugThisClassName('constructor');
   }
 
   run() {
     super.run();
-    this.debugThisClassName('run');
+    // this.debugThisClassName('run');
     this.settingsPromise = this.loadSettings();
   }
 

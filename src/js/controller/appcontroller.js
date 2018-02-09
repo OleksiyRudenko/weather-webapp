@@ -1,7 +1,6 @@
 import AppControllerComponent from './../framework/appcontrollercomponent.js';
 import {traverseObjectAndChange} from "../helper.js";
-import UnitSwitchController from "./unitswitchcontroller";
-import {Services, Controllers} from "./../app.js"; // temporary migrational
+import UnitSwitchController from "./unitswitchcontroller.js";
 import UrlController from "./urlcontroller.js";
 import ProgressController from "./progresscontroller.js";
 import CityInputController from "./cityinputcontroller.js";
@@ -76,8 +75,6 @@ export default class AppController extends AppControllerComponent {
    * Feeds each UI Controller required elements
    */
   feedUiElementsToUiControllers() {
-    this.debugThisClassName('feedUiElementsToUiControllers');
-    console.log(this.dependencies);
     Object.keys(this.dependencies.UiControllers).forEach((uiControllerName, idx) => {
       this.dependencies.UiControllers[uiControllerName].setUiElements(this.config.uiElements[uiControllerName]);
     });

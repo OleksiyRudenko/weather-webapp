@@ -11,7 +11,6 @@ export default class ProgressController extends AppUiControllerComponent {
     this.dependencies = {};
     this._count = 0;
     this._total = 0;
-    this.debugThisClassName('constructor');
   }
 
   /**

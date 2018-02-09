@@ -10,7 +10,6 @@ export default class WeatherService extends AppServiceComponent {
     this.config = {
       api: 'api',
     };
-    this.debugThisClassName('constructor');
   }
 
   /**

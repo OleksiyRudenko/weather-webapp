@@ -28,13 +28,11 @@ export default class CityInputController extends AppUiControllerComponent {
     this._settings = {
       minChar: 3,
     };
-
-    this.debugThisClassName('constructor');
   }
 
   run() {
     super.run();
-    this.debugThisClassName('run');
+    // this.debugThisClassName('run');
     this.attachClickHandlers();
   }
 

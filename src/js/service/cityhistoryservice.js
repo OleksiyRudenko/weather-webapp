@@ -17,7 +17,6 @@ export default class CityHistoryService extends AppServiceComponent {
       }
     };
     this._storeName = 'cityhistory';
-    this.debugThisClassName('constructor');
   }
 
   /**
@@ -25,7 +24,7 @@ export default class CityHistoryService extends AppServiceComponent {
    */
   run() {
     super.run();
-    this.debugThisClassName('run');
+    // this.debugThisClassName('run');
     this.updateStorage();
   }
 
