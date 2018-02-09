@@ -17,6 +17,7 @@ export default class AppController extends AppControllerComponent {
     super();
     this.setConfig(config);
     this.createComponents();
+    this.feedConfigToComponents();
     this.findUiElements();
     this.feedUiElementsToUiControllers();
     this.bindDependencies();
@@ -56,6 +57,15 @@ export default class AppController extends AppControllerComponent {
     console.log(this.dependencies);
     Object.keys(this.dependencies.UiControllers).forEach((uiControllerName, idx) => {
       this.dependencies.UiControllers[uiControllerName].setUiElements(this.config.uiElements[uiControllerName]);
+    });
+  }
+
+  /**
+   * Feeds fromm config.config entries required by each component
+   */
+  feedConfigToComponents() {
+    traverseObjectAndChange(this.dependencies, component => {
+      component.config = traverseObjectAndChange(component.config, entry => this.config.config[entry]);
     });
   }
 
