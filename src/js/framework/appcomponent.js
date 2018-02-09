@@ -27,7 +27,7 @@ export default class AppComponent {
    * @param dependencies
    */
   setDependencies(dependencies) {
-    this.dependecies = dependencies;
+    this.dependencies = dependencies;
   }
 
   /**
