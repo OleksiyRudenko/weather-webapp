@@ -1,6 +1,4 @@
 import * as idb from '../../../node_modules/idb/lib/node.js'; // causes non-critical error when built
-console.log('IDB>>>>>>>>>>>>>>>>>3');
-console.log(idb);
 
 /** Class representing storage service.
  * Uses https://github.com/jakearchibald/idb -- https://www.npmjs.com/package/idb
