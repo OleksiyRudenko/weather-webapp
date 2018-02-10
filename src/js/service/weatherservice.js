@@ -38,6 +38,19 @@ export default class WeatherService extends AppServiceComponent {
         throw response.status;
       })
       .then(data => {
+        // verbalize icon
+        this.debugThisClassName('apiRequest ' + queryClass);
+        switch (queryClass) {
+          case 'current':
+            data.weather[0].verbose = this.decomposeIconId(data.weather[0].icon);
+            break;
+          case 'forecast5':
+            data.list.forEach((entry, idx) => {
+              data.list[idx].weather[0].verbose = this.decomposeIconId(data.list[idx].weather[0].icon);
+            });
+            break;
+        }
+        console.log(data);
         return data;
       })
       .catch(error => {
@@ -85,7 +98,7 @@ export default class WeatherService extends AppServiceComponent {
   decomposeIconId(iconId) {
     return {
       tod: iconId.substring(2) === 'd' ? 'day' : 'night',
-      conditions: iconId.substring(0,1),
+      conditions: this.verbalizeConditionsCode(iconId.substring(0,1)),
     };
   }
 
@@ -98,16 +111,16 @@ export default class WeatherService extends AppServiceComponent {
    */
   verbalizeConditionsCode(conditionsCode) {
     switch (conditionsCode) {
-      case '01': return 'clearSky';
-      case '02': return 'fewClouds';
-      case '03': return 'scatteredClouds';
-      case '04': return 'brokenClouds';
-      case '09': return 'showerRain';
+      case '1': return 'clearSky';
+      case '2': return 'fewClouds';
+      case '3': return 'scatteredClouds';
+      case '4': return 'brokenClouds';
+      case '9': return 'showerRain';
       case '10': return 'rain';
       case '11': return 'thunderstorm';
       case '13': return 'snow';
       case '50': return 'mist';
-
+      default: return 'unknown';
     }
   }
 }
