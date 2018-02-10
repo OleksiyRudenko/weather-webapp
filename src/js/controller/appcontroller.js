@@ -12,6 +12,7 @@ import FavCityService from "../service/favcityservice.js";
 import SettingsService from "../service/settingsservice.js";
 import StorageService from "../service/storageservice.js";
 import WeatherService from "../service/weatherservice.js";
+import MoodController from "./moodcontroller.js";
 
 /**
  * Class representing main app controller.
@@ -54,6 +55,7 @@ export default class AppController extends AppControllerComponent {
         CityInputController: new CityInputController(),
         SearchHistoryController: new SearchHistoryController(),
         WeatherController: new WeatherController(),
+        MoodController: new MoodController(),
       },
     });
   }
