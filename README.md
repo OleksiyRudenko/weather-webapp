@@ -52,7 +52,7 @@ Developed as a part of
 
 ### Installing and building the project
 
-Refer to [building the project](./BULD.md) for more details.
+Refer to [building the project](./BUILD.md) for more details.
 
 [_-- TOC --_](#table-of-contents)
 
