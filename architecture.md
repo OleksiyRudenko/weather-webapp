@@ -11,6 +11,7 @@
 - [Specialized App Components](#specialized-app-components)
   - [Services](#services)
   - [UI Controllers](#ui-controllers)
+  - [Functional Controllers](#functional-controllers)
 - [Former architecture docs](#former-architecture-docs)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -67,9 +68,30 @@ and methods specific to Controllers managing View elements.
 
 ### Services
 
+ * `CityHistoryService` - gets item to store, returns list of searched cities
+ * `CityListService` - supplies city names for autocomplete
+ * `FavCityService` - gets item to store, returns list of favourite cities
+ * `SettingsService` - gets and returns app settings (e.g. Units) per browser
+ * `StorageService` - interface to browser's `IndexedDB`
+ * `WeatherService` - serves requests for weather forecasts;
+   fetches results from foreign data provider over API
+
 [_-- TOC --_](#table-of-contents)
 
 ### UI Controllers
+
+ * `CityInputController` - manages user input, launches search
+ * `MoodController` - updates mood media based on weather conditions
+ * `ProgressController` - updates progress on data load
+ * `SearchHistoryController` - manages search history view
+ * `UnitSwitchController` - manages units switch
+ * `WeatherController` - displays weather
+
+[_-- TOC --_](#table-of-contents)
+
+### Functional Controllers
+
+ * `UrlController` - manages URL requests and browser history
 
 [_-- TOC --_](#table-of-contents)
 
