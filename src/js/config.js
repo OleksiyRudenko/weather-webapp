@@ -136,10 +136,10 @@ export const appConfig = {
             winter: moodImagery.wSCdW1, // subst
           },
           night: {
-            autumn: moodImagery.wRnS1, // subst
-            spring: moodImagery.wRnS1, // subst
-            summer: moodImagery.wRnS1, // subst
-            winter: moodImagery.wRnS1, // subst
+            autumn: moodImagery.wBCnS1, // subst
+            spring: moodImagery.wBCnS1, // subst
+            summer: moodImagery.wBCnS1, // subst
+            winter: moodImagery.wBCnS1, // subst
           },
         },
         scatteredClouds: {
