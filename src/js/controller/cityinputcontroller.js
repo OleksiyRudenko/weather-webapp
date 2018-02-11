@@ -198,7 +198,7 @@ export default class CityInputController extends AppUiControllerComponent {
   onUserInputBlur(e) {
     const target = this.uiElements.textInput;
     target.value = helper.sanitizeWhitespaces(target.value, true);
-    console.log('Blurring out');
+    // console.log('Blurring out');
     setTimeout(this.dependencies.UiControllers.SearchHistoryController
       .hide.bind(this.dependencies.UiControllers.SearchHistoryController), 200);
   }
@@ -208,7 +208,7 @@ export default class CityInputController extends AppUiControllerComponent {
    * @param {Event} e
    */
   onUserInputFocus(e) {
-    console.log(e);
+    // console.log(e);
     if (e.target.value.length === 0)
       this.dependencies.UiControllers.SearchHistoryController.show();
   }
