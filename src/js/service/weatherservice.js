@@ -28,8 +28,9 @@ export default class WeatherService extends AppServiceComponent {
     // add api key
     query += '&' + this.config.api.apiParamName + '=' + this.config.api.apiKey;
 
-    console.log('Weather service "' + query + '" from:');
-    console.log(queryData);
+    /* this.debugThisClassName('apiRequest');
+    console.log(query);
+    console.log(queryData); */
 
     return fetch(query, {method: 'get'})
       .then(response => {
@@ -97,8 +98,8 @@ export default class WeatherService extends AppServiceComponent {
    */
   decomposeIconId(iconId) {
     return {
-      tod: iconId.substring(2) === 'd' ? 'day' : 'night',
-      conditions: this.verbalizeConditionsCode(iconId.substring(0,1)),
+      tod: iconId.substr(2) === 'd' ? 'day' : 'night',
+      conditions: this.verbalizeConditionsCode(iconId.substr(0,2)),
     };
   }
 
@@ -111,13 +112,13 @@ export default class WeatherService extends AppServiceComponent {
    */
   verbalizeConditionsCode(conditionsCode) {
     switch (conditionsCode) {
-      case '1': return 'clearSky';
-      case '2': return 'fewClouds';
-      case '3': return 'scatteredClouds';
-      case '4': return 'brokenClouds';
-      case '9': return 'showerRain';
+      case '01': return 'clearSky';
+      case '02': return 'fewClouds';
+      case '03': return 'scatteredClouds';
+      case '04': return 'brokenClouds';
+      case '09': return 'showerRain';
       case '10': return 'rain';
-      case '11': return 'thunderstorm';
+      case '11': return 'thunderStorm';
       case '13': return 'snow';
       case '50': return 'mist';
       default: return 'unknown';
