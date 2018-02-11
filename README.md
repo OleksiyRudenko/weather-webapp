@@ -80,7 +80,7 @@ Developed as a part of
    - cached record: datetime, city, units, forecast depth
  * `External Data Provider` - [Open Weather Map](https://openweathermap.org/api)
 
-[TOC :arrow_double_up: ](#table-of-contents)
+[_-- TOC --_](#table-of-contents)
 
 ### Known Issues
 
@@ -94,7 +94,7 @@ Developed as a part of
  - [ ] Search errors are technical in style
  - [ ] Units switch doesn't update current data
 
-[TOC :arrow_double_up: ](#table-of-contents)
+[_-- TOC --_](#table-of-contents)
 
 ### Installing and building the project
 
@@ -117,7 +117,7 @@ using [push-dir](https://www.npmjs.com/package/push-dir)
 
  * [Autocomplete API](https://serbian.wunderground.com/weather/api/d/docs?d=autocomplete-api)
 
-[TOC :arrow_double_up: ](#table-of-contents)
+[_-- TOC --_](#table-of-contents)
 
 ### Time Track
 
@@ -136,4 +136,4 @@ using [push-dir](https://www.npmjs.com/package/push-dir)
  * `180110 02h40` - feature:history
  * `180113 00h40` - feature:url: query and browser history 
 
-[TOC :arrow_double_up: ](#table-of-contents)
+[_-- TOC --_](#table-of-contents)
