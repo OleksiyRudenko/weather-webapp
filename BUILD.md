@@ -12,12 +12,23 @@ Install `parcelJS` globally:
 `yarn start` or `npm start` to serve app at http://localhost:1234
 
 `yarn build` or `npm build` to build app at `./dist`
+(use `build-dev` to build unminified code)
 
 ## Known Issues
 
 **Issue**: `UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): SyntaxError: 'super' keyword unexpected here`
 
-**Solution**: Upgrade `nodeJS` and `npm`
+_Solution_: Upgrade `nodeJS` and `npm`
+
+**Issue**: On `start` a `.json` from `./assets` is not served.
+
+_Explanation_: This asset is out of server scope and copied
+only to `./dist`. The reason behind: when imported as other
+resources it gets bundled, which is not desired behavior as
+we need it only once and do not want loading these 30Mb every
+time app gets launched.
+
+_Solution_: TBD
 
 ## Notes and Learnings
 
