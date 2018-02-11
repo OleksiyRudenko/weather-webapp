@@ -11,6 +11,7 @@
 - [Specialized App Components](#specialized-app-components)
   - [Services](#services)
   - [UI Controllers](#ui-controllers)
+- [Former architecture docs](#former-architecture-docs)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -69,5 +70,54 @@ and methods specific to Controllers managing View elements.
 [_-- TOC --_](#table-of-contents)
 
 ### UI Controllers
+
+[_-- TOC --_](#table-of-contents)
+
+## Former architecture docs
+
+![Weather App Architecture diagram](weather-app-architecture.png)
+
+**Diagram legend**
+
+ * Green box - browser feature
+ * Blue box - App Controller
+ * Magenta box - App Service
+ * Grey box - Incomplete App Controller / Service
+ * Yellow box - external service
+
+> NB! Architecture description below doesn't reflect latest updates.
+
+ * `View` - represented with HTML and CSS
+ * `AppController` - main app controller
+   - bootstraps the app
+   - supplies `View` with variable data
+   - reports errors via `View`
+     - offline, cached data supplied
+     - offline, no data available
+   - reacts on user actions
+     - choose city
+     - add favourite city
+     - change units
+   - inquires `WeatherService` using user input and settings
+   - dismisses inquiry result when new inquiry arrives from user
+ * `SettingsService` - keeps user settings
+ * `FavCityService` - keeps user's favourite cities list
+ * `CityHistoryService` - keeps search history (list of cities)
+   - cities are ranked by:
+     - date (latest on top)
+     - number of queries
+   - supplies last 20 cities max
+   - stores 100 cities max
+   - removes cities ranked 20+ searched earlier than a month ago
+     for the last time
+ * `WeatherService` - supplies weather data
+   - inquires `External Data Provider` over API
+   - caches weather data employing `StorageService`
+   - once a day purges cached data older than 3 days
+   - when app is online and idle updates data for favourite cities
+   - only caches external inquiry when new inquiry from
+     `AppController` arrives
+   - cached record: datetime, city, units, forecast depth
+ * `External Data Provider` - [Open Weather Map](https://openweathermap.org/api)
 
 [_-- TOC --_](#table-of-contents)
