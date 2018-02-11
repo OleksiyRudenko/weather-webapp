@@ -1,6 +1,20 @@
 # Building the Project
 
-## Installation
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Install and build](#install-and-build)
+- [Known Issues](#known-issues)
+- [Notes and Learnings](#notes-and-learnings)
+  - [Import Images](#import-images)
+- [ParcelJS bits](#parceljs-bits)
+- [PostCSS plug-ins](#postcss-plug-ins)
+- [CDNization](#cdnization)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Install and build
 
 Have `nodeJS` and `npm` installed.
 
@@ -13,6 +27,8 @@ Install `parcelJS` globally:
 
 `yarn build` or `npm build` to build app at `./dist`
 (use `build-dev` to build unminified code)
+
+[_-- TOC --_](#table-of-contents)
 
 ## Known Issues
 
@@ -29,6 +45,8 @@ we need it only once and do not want loading these 30Mb every
 time app gets launched.
 
 _Solution_: TBD
+
+[_-- TOC --_](#table-of-contents)
 
 ## Notes and Learnings
 
@@ -48,6 +66,8 @@ import * as icons from '../icons';
 `<img src={icons.Search} alt="" />`
 ```
 
+[_-- TOC --_](#table-of-contents)
+
 ## ParcelJS bits
 
  * `"prebuild": "shx rm -rf dist/*",` to
@@ -62,6 +82,8 @@ import * as icons from '../icons';
    Error didn't cause app malfunctioning, just annoyed a lot.
    Solution was to remove from `index.html` inclusion of modules
    already imported from under `app.js`.
+
+[_-- TOC --_](#table-of-contents)
 
 ## PostCSS plug-ins
 
@@ -78,7 +100,11 @@ import * as icons from '../icons';
  * [sitepoint](https://www.sitepoint.com/7-postcss-plugins-to-ease-you-into-postcss/)
  * [habra](https://habrahabr.ru/post/265449/)
 
+[_-- TOC --_](#table-of-contents)
+
 ## CDNization
 
  * [cdnizer](https://github.com/OverZealous/cdnizer)
  * [fallback to local copy](https://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx)
+
+[_-- TOC --_](#table-of-contents)
