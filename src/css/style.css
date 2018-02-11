@@ -4,7 +4,9 @@ html {
 }
 
 body {
-    background-color: #aaa;
+    background-color: rgba(170,170,170,0.5); /* #aaa; */
+    background-repeat: no-repeat;
+    background-size: cover;
     align-content: center;
     font-size: 100%;
     display: flex;
@@ -44,7 +46,7 @@ div.justified {
     flex-direction: column;
     width: 100%;
     max-width: 800px;
-    background-color: #eee;
+    background-color: rgba(238,238,238,0.5); /* #eee */
 }
 
 #app-container > div {
@@ -58,7 +60,7 @@ div.justified {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    background-color: #ccc;
+    background-color: rgba(204,204,204,0.5); /* #ccc */
 }
 
 .app-logo {
