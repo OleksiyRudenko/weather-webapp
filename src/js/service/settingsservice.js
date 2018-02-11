@@ -25,6 +25,11 @@ export default class SettingsService extends AppServiceComponent {
     };
   }
 
+  /* === Public methods === */
+
+  /**
+   * Component initial activities
+   */
   run() {
     super.run();
     // this.debugThisClassName('run');
@@ -36,10 +41,15 @@ export default class SettingsService extends AppServiceComponent {
   setMetric() { this._settings.Units = 'metric'; }
   get windSpeedUnits() { return this._units.windSpeed[this._settings.Units]; }
 
+  /**
+   * Switches between units
+   */
   switchUnits() {
     this._settings.Units = (this._settings.Units === 'metric') ? 'imperial' : 'metric';
     this.updateStorage();
   }
+
+  /* === Private methods : SECONDARY === */
 
   /**
    * Update settings in storage

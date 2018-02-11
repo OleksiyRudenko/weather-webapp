@@ -33,6 +33,30 @@ export default class AppController extends AppControllerComponent {
     this.bindDependencies();
   }
 
+  /* === Public methods === */
+
+  /**
+   * Launches components
+   */
+  run() {
+    super.run();
+    // launch Services
+    Object.keys(this.dependencies.Services).forEach((key, idx) => {
+      this.dependencies.Services[key].run();
+    });
+    // launch functional Controllers
+    // launch UI Controllers
+    Object.keys(this.dependencies.Controllers).forEach((key, idx) => {
+      this.dependencies.Controllers[key].run();
+    });
+    // launch UI Controllers
+    Object.keys(this.dependencies.UiControllers).forEach((key, idx) => {
+      this.dependencies.UiControllers[key].run();
+    });
+  }
+
+  /* === Private methods === */
+
   /**
    * Creates required app components
    */
@@ -61,16 +85,19 @@ export default class AppController extends AppControllerComponent {
   }
 
   /**
-   * Interbinds components as dependencies
+   * Feeds entries required by each component from config.config
    */
-  bindDependencies() {
-    // flatten the tree
-    let dependenciesList = Object.assign({},
-      this.dependencies.Services, this.dependencies.Controllers, this.dependencies.UiControllers);
-    // bind
+  feedConfigToComponents() {
     traverseObjectAndChange(this.dependencies, component => {
-      component.dependencies = traverseObjectAndChange(component.dependencies, entry => dependenciesList[entry]);
+      component.config = traverseObjectAndChange(component.config, entry => this.config.config[entry]);
     });
+  }
+
+  /**
+   * Finds required UI elements and updates config accordingly
+   */
+  findUiElements() {
+    this.config.uiElements = traverseObjectAndChange(this.config.uiElements, value => document.getElementById(value));
   }
 
   /**
@@ -83,38 +110,16 @@ export default class AppController extends AppControllerComponent {
   }
 
   /**
-   * Feeds fromm config.config entries required by each component
+   * Interbinds components as dependencies
    */
-  feedConfigToComponents() {
+  bindDependencies() {
+    // flatten the tree
+    let dependenciesList = Object.assign({},
+      this.dependencies.Services, this.dependencies.Controllers, this.dependencies.UiControllers);
+    // bind
     traverseObjectAndChange(this.dependencies, component => {
-      component.config = traverseObjectAndChange(component.config, entry => this.config.config[entry]);
+      component.dependencies = traverseObjectAndChange(component.dependencies, entry => dependenciesList[entry]);
     });
-  }
-
-  /**
-   * Launches components
-   */
-  run() {
-    // launch Services
-    Object.keys(this.dependencies.Services).forEach((key, idx) => {
-      this.dependencies.Services[key].run();
-    });
-    // launch functional Controllers
-    // launch UI Controllers
-    Object.keys(this.dependencies.Controllers).forEach((key, idx) => {
-      this.dependencies.Controllers[key].run();
-    });
-    // launch UI Controllers
-    Object.keys(this.dependencies.UiControllers).forEach((key, idx) => {
-      this.dependencies.UiControllers[key].run();
-    });
-  }
-
-  /**
-   * Finds required UI elements and updates config accordingly
-   */
-  findUiElements() {
-    this.config.uiElements = traverseObjectAndChange(this.config.uiElements, value => document.getElementById(value));
   }
 }
 

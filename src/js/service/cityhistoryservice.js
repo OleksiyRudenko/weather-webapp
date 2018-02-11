@@ -19,6 +19,8 @@ export default class CityHistoryService extends AppServiceComponent {
     this._storeName = 'cityhistory';
   }
 
+  /* === Public methods === */
+
   /**
    * Run, Forrest, run!
    */
@@ -26,20 +28,6 @@ export default class CityHistoryService extends AppServiceComponent {
     super.run();
     // this.debugThisClassName('run');
     this.updateStorage();
-  }
-
-  /**
-   * Update storage if required
-   */
-  updateStorage() {
-    this.dependencies.Services.StorageService.storeCount(this._storeName).then(count => {
-      if (!count) {
-        this.dependencies.Services.StorageService.put(this._storeName, this.config.historyInitialSet).then(()=>{
-          console.log('History initialized.');
-        });
-      }
-      console.log('CityListService.updateStorage(cities).count==' + count);
-    });
   }
 
   /**
@@ -66,6 +54,22 @@ export default class CityHistoryService extends AppServiceComponent {
       items = items.slice(0,limit).map(item => item.name);
       items.sort();
       return items;
+    });
+  }
+
+  /* === Private methods : SECONDARY === */
+
+  /**
+   * Update storage if required
+   */
+  updateStorage() {
+    this.dependencies.Services.StorageService.storeCount(this._storeName).then(count => {
+      if (!count) {
+        this.dependencies.Services.StorageService.put(this._storeName, this.config.historyInitialSet).then(()=>{
+          console.log('History initialized.');
+        });
+      }
+      console.log('CityListService.updateStorage(cities).count==' + count);
     });
   }
 }

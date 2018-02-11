@@ -14,6 +14,20 @@ export default class UrlController extends AppControllerComponent {
     this.dependencies = {};
   }
 
+  /* === Public methods === */
+
+  /**
+   * Component initial activities
+   */
+  run() {
+    super.run();
+    // this.debugThisClassName('run');
+    const cityName = this.getCityName();
+    if (this.dependencies.CityInputController && cityName) {
+      this.dependencies.CityInputController.setValue(cityName);
+    }
+  }
+
   /**
    * Updates URL
    * @param {string} cityName
@@ -22,6 +36,8 @@ export default class UrlController extends AppControllerComponent {
     // TODO: CityInputController calls this method too early
     history.pushState({}, document.title, this.config.baseUrl + '?q=' + cityName );
   }
+
+  /* === Private methods : SECONDARY === */
 
   /**
    * Extract city name from url
@@ -33,12 +49,4 @@ export default class UrlController extends AppControllerComponent {
     return cityName;
   }
 
-  run() {
-    super.run();
-    // this.debugThisClassName('run');
-    const cityName = this.getCityName();
-    if (this.dependencies.CityInputController && cityName) {
-      this.dependencies.CityInputController.setValue(cityName);
-    }
-  }
 }

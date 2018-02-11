@@ -20,14 +20,32 @@ export default class UnitSwitchController extends AppUiControllerComponent {
     };
   }
 
+  /* === Public methods === */
+
   /**
-   * Runs main job
+   * Component initial activities
    */
   run() {
     super.run();
     // this.debugThisClassName('run');
     this.attachOnClickHandler(this.uiElements.container, this.onClick);
     this.render();
+  }
+
+  /* === Private methods : MAIN JOBS === */
+
+  /**
+   * click handler
+   * @param {object} e - click event
+   */
+  onClick(e) {
+    this.dependencies.Services.SettingsService.switchUnits();
+    const unitElementsList = this.uiElements.container.children;
+    for (let el of unitElementsList) {
+      el.classList.toggle('active');
+    }
+    this.dependencies.UiControllers.CityInputController.actionSearch();
+    this.dependencies.UiControllers.CityInputController.focus();
   }
 
   /**
@@ -46,17 +64,6 @@ export default class UnitSwitchController extends AppUiControllerComponent {
     });
   }
 
-  /**
-   * click handler
-   * @param {object} e - click event
-   */
-  onClick(e) {
-    this.dependencies.Services.SettingsService.switchUnits();
-    const unitElementsList = this.uiElements.container.children;
-    for (let el of unitElementsList) {
-      el.classList.toggle('active');
-    }
-    this.dependencies.UiControllers.CityInputController.actionSearch();
-    this.dependencies.UiControllers.CityInputController.focus();
-  }
+  /* === Private methods : SECONDARY === */
+
 }

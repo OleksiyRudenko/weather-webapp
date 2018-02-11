@@ -5,14 +5,45 @@
 export default class AppComponent {
   /**
    * AppComponent constructor
+   * @constructor
    */
   constructor() {
-    this.dependencies = {
-      Controllers: {},
-      Services: {},
+    this.config = {
+      // configTopLevelKey: 'configTopLevelKey' <= global config.config{}
     };
-    this.config = {};
+    this.dependencies = { // ComponentName: 'ComponentName'
+      Services: {},
+      Controllers: {},
+      UiControllers: {},
+    };
     // this.debugThisClassName('constructor');
+  }
+
+  /* === Public methods === */
+
+  /**
+   * Component initial activities after boostrapping (abstract method, to be overloaded)
+   */
+  run() {
+    // this.debugThisClassName('RUN');
+  }
+
+  /* === Private methods : SECONDARY === */
+
+  /**
+   * Returns component config
+   * @returns {Object}
+   */
+  getConfig() {
+    return this.config;
+  }
+
+  /**
+   * Sets component config
+   * @param config
+   */
+  setConfig(config) {
+    this.config = config;
   }
 
   /**
@@ -32,33 +63,10 @@ export default class AppComponent {
   }
 
   /**
-   * Returns component config
-   * @returns {Object}
-   */
-  getConfig() {
-    return this.config;
-  }
-
-  /**
-   * Sets component config
-   * @param config
-   */
-  setConfig(config) {
-    this.config = config;
-  }
-
-  /**
    * Logs class name adding a comment
    * @param comment
    */
   debugThisClassName(comment) {
     console.log(this.__proto__.constructor.name + '::' + comment);
-  }
-
-  /**
-   * Runs component main job (abstract method, to be overloaded)
-   */
-  run() {
-    // this.debugThisClassName('RUN');
   }
 }

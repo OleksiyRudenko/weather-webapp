@@ -20,11 +20,18 @@ export default class CityListService extends AppServiceComponent {
     this._storeName = 'cities';
   }
 
+  /* === Public methods === */
+
+  /**
+   * Component initial activities
+   */
   run() {
     super.run();
     // this.debugThisClassName('run');
     this.updateStorage();
   }
+
+  /* === Private methods : SECONDARY === */
 
   /**
    * Update idb storage if required

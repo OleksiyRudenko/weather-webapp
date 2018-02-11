@@ -24,53 +24,7 @@ export default class StorageService extends AppServiceComponent {
     this.logSummary();
   }
 
-  /**
-   * Create IDB open promise that creates required stores as per dbVersion
-   * @param {number} dbVersion - current db version
-   * @returns {Promise<Cache>|IDBOpenDBRequest}
-   */
-  dbOpen(dbVersion) {
-    return idb.open(this.config.storage.dbName, dbVersion, upgradeDb => {
-      const storeVersionedList = this.config.storage.store; // store list
-      for (let i=0; i <= upgradeDb.oldVersion; i++) {
-        storeVersionedList[i].forEach(storeEntry => {
-          let store = upgradeDb.createObjectStore(storeEntry.storeName, storeEntry.storeOptions);
-          if (!!storeEntry.index) { // any indices? .index = [ indexSpec,... ]; indexSpec = [indexName, indexKeyName_optional]
-            storeEntry.index.forEach(index => {
-              store.createIndex(index[0], index[index.length-1]);
-            });
-          }
-        });
-      }
-    });
-  }
-
-  /**
-   * Returns number of objects in a store
-   * @param {string} storeName
-   * @returns {Promise<T>}
-   */
-  storeCount(storeName) {
-    return this._dbPromise.then(db => {
-      const tx = db.transaction(storeName, 'readonly');
-      const store = tx.objectStore(storeName);
-      return store.count();
-    }).catch(e => e);
-  }
-
-  /**
-   * Logs database summary
-   */
-  logSummary() {
-    const storeList = [].concat.apply([], this.config.storage.store).map(e => e.storeName);
-    storeList.forEach(storeName => {
-      this.storeCount(storeName).then(v => {
-        console.log(storeName + '.length == ' + v);
-      }).catch(e => {
-        console.log(e);
-      });
-    });
-  }
+  /* === Public methods === */
 
   /**
    * Insert/update store
@@ -127,4 +81,53 @@ export default class StorageService extends AppServiceComponent {
     });
   }
 
+  /* === Private methods : SECONDARY === */
+
+  /**
+   * Create IDB open promise that creates required stores as per dbVersion
+   * @param {number} dbVersion - current db version
+   * @returns {Promise<Cache>|IDBOpenDBRequest}
+   */
+  dbOpen(dbVersion) {
+    return idb.open(this.config.storage.dbName, dbVersion, upgradeDb => {
+      const storeVersionedList = this.config.storage.store; // store list
+      for (let i=0; i <= upgradeDb.oldVersion; i++) {
+        storeVersionedList[i].forEach(storeEntry => {
+          let store = upgradeDb.createObjectStore(storeEntry.storeName, storeEntry.storeOptions);
+          if (!!storeEntry.index) { // any indices? .index = [ indexSpec,... ]; indexSpec = [indexName, indexKeyName_optional]
+            storeEntry.index.forEach(index => {
+              store.createIndex(index[0], index[index.length-1]);
+            });
+          }
+        });
+      }
+    });
+  }
+
+  /**
+   * Returns number of objects in a store
+   * @param {string} storeName
+   * @returns {Promise<T>}
+   */
+  storeCount(storeName) {
+    return this._dbPromise.then(db => {
+      const tx = db.transaction(storeName, 'readonly');
+      const store = tx.objectStore(storeName);
+      return store.count();
+    }).catch(e => e);
+  }
+
+  /**
+   * Logs database summary
+   */
+  logSummary() {
+    const storeList = [].concat.apply([], this.config.storage.store).map(e => e.storeName);
+    storeList.forEach(storeName => {
+      this.storeCount(storeName).then(v => {
+        console.log(storeName + '.length == ' + v);
+      }).catch(e => {
+        console.log(e);
+      });
+    });
+  }
 }

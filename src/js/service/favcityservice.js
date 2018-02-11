@@ -8,4 +8,16 @@ export default class FavCityService extends AppServiceComponent {
   constructor() {
     super();
   }
+
+  /* === Public methods === */
+
+  /**
+   * Component initial activities
+   */
+  run() {
+    super.run();
+  }
+
+  /* === Private methods : SECONDARY === */
+
 }

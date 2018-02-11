@@ -1,9 +1,13 @@
 import AppUiControllerComponent from "../framework/appuicontrollercomponent.js";
 
 /**
- * Class that control app general media
+ * Class that controls app general media
  */
 export default class MoodController extends AppUiControllerComponent {
+  /**
+   * Create mood controller.
+   * @constructor
+   */
   constructor() {
     super();
     this.config = {
@@ -12,10 +16,23 @@ export default class MoodController extends AppUiControllerComponent {
     this.dependencies = {};
   }
 
+  /* === Public methods === */
+
+  /**
+   * Component initial activities
+   */
   run() {
     this.debugThisClassName('run');
   }
 
+  /* === Public methods === */
+
+  /**
+   *
+   * @param {Date} date
+   * @param {number} geolat
+   * @param {Object} verboseConditions { tod: day|night, conditions: clearSky|rain|... }
+   */
   renderMood(date, geolat, verboseConditions) {
     this.debugThisClassName('renderMood');
     console.log(this.uiElements);
@@ -27,11 +44,14 @@ export default class MoodController extends AppUiControllerComponent {
     this.uiElements.container.style.backgroundImage = "url('" + img + "')";
   }
 
-  getMoodImage(conditions, tod, season) {
-    if (conditions === 'unknown') conditions = 'clearSky';
-    return this.config.mood.imagery[conditions][tod][season];
-  }
+  /* === Private methods : SECONDARY === */
 
+  /**
+   * Gets season hemisphere- and longitude-wise
+   * @param {Date} date
+   * @param {number} geolat
+   * @returns {string} spring|summer|autumn|winter
+   */
   getSeason(date, geolat) {
     const month = date.getMonth() + 1;
     let season = month < 4 ? 'winter'
@@ -46,5 +66,17 @@ export default class MoodController extends AppUiControllerComponent {
     if (geolat > 65 || geolat < -60) season = 'winter';
     if (geolat <=30 && geolat >-30) season = 'summer';
     return season;
+  }
+
+  /**
+   *
+   * @param {string} conditions clearSky|rain|snow|...
+   * @param {string} tod time of day == day|night
+   * @param {string} season
+   * @returns {string} mood image url
+   */
+  getMoodImage(conditions, tod, season) {
+    if (conditions === 'unknown') conditions = 'clearSky';
+    return this.config.mood.imagery[conditions][tod][season];
   }
 }

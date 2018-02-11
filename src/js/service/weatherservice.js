@@ -12,6 +12,8 @@ export default class WeatherService extends AppServiceComponent {
     };
   }
 
+  /* === Public methods === */
+
   /**
    * Queries external api endpoint
    * @param {string} queryClass (current|forecast)
@@ -81,6 +83,8 @@ export default class WeatherService extends AppServiceComponent {
         throw error;
       });
   }
+
+  /* === Private methods : SECONDARY === */
 
   /**
    * Build url to reach icon

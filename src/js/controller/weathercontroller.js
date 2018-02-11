@@ -24,6 +24,8 @@ export default class WeatherController extends AppUiControllerComponent {
     this._elWeatherToday = null;
   }
 
+  /* === Public methods === */
+
   /**
    * Renders current weather data view
    * @param {Promise} weatherData
@@ -75,32 +77,6 @@ export default class WeatherController extends AppUiControllerComponent {
   }
 
   /**
-   * Extracts required data from API call response
-   * @param {Object} src - API fetch data
-   */
-  extractWeatherDataCurrent(src) {
-    // console.log('<img src="' + this.dependencies.Services.WeatherService.apiIconUrl(src.weather[0].icon) + '" />');
-    console.log('Wind azimuth: ' + src.wind.deg);
-    return {
-      dt: src.dt,
-      geocity: src.name,
-      geocountry: src.sys.country,
-      geolat: src.coord.lat,
-      geolon: src.coord.lon,
-      descr: src.weather[0].main,
-      descrDetails: src.weather[0].description,
-      descrIcon: '<img src="' + this.dependencies.Services.WeatherService.apiIconUrl(src.weather[0].icon) + '" />',
-      verbose: src.weather[0].verbose,
-      temp: Math.round(src.main.temp),
-      pressure: Math.round(src.main.pressure),
-      humidity: src.main.humidity,
-      windSpeed: Math.round(src.wind.speed),
-      windAzimuth: this.degree2arrow('deg' in src.wind ? Math.round(src.wind.deg) : null),
-      clouds: src.clouds.all,
-    };
-  }
-
-  /**
    * Renders weather forecast data view
    * @param {Promise} weatherData
    */
@@ -128,6 +104,34 @@ export default class WeatherController extends AppUiControllerComponent {
       this.exposeElement('forecast', 'Error');
       this.uiElements.forecastError.innerText = 'No forecast data for given location or inexistent location (error code: '+ error + ')';
     });
+  }
+
+  /* === Private methods : SECONDARY === */
+
+  /**
+   * Extracts required data from API call response
+   * @param {Object} src - API fetch data
+   */
+  extractWeatherDataCurrent(src) {
+    // console.log('<img src="' + this.dependencies.Services.WeatherService.apiIconUrl(src.weather[0].icon) + '" />');
+    console.log('Wind azimuth: ' + src.wind.deg);
+    return {
+      dt: src.dt,
+      geocity: src.name,
+      geocountry: src.sys.country,
+      geolat: src.coord.lat,
+      geolon: src.coord.lon,
+      descr: src.weather[0].main,
+      descrDetails: src.weather[0].description,
+      descrIcon: '<img src="' + this.dependencies.Services.WeatherService.apiIconUrl(src.weather[0].icon) + '" />',
+      verbose: src.weather[0].verbose,
+      temp: Math.round(src.main.temp),
+      pressure: Math.round(src.main.pressure),
+      humidity: src.main.humidity,
+      windSpeed: Math.round(src.wind.speed),
+      windAzimuth: this.degree2arrow('deg' in src.wind ? Math.round(src.wind.deg) : null),
+      clouds: src.clouds.all,
+    };
   }
 
   /**

@@ -30,11 +30,18 @@ export default class CityInputController extends AppUiControllerComponent {
     };
   }
 
+  /* === Public methods === */
+
+  /**
+   * Component initial activities
+   */
   run() {
     super.run();
     // this.debugThisClassName('run');
     this.attachClickHandlers();
   }
+
+  /* === Private methods : MAIN JOBS === */
 
   /**
    * Attach click handlers to HTML elements
@@ -97,6 +104,8 @@ export default class CityInputController extends AppUiControllerComponent {
       }
     });
   }
+
+  /* === Private methods : SECONDARY === */
 
   /**
    * Focus user input
@@ -226,17 +235,4 @@ export default class CityInputController extends AppUiControllerComponent {
     console.log(result);
     return result;
   }
-
-  /**
-   * Provides action targets
-   * @returns {Object} { textInputElement:, actionSearchElement: }
-   */
-  /* TODO: remove this method
-  getTargets() {
-    return {
-      textInputElement: this.uiElements.textInput,
-      actionSearchElement: this.uiElements.searchAction,
-    };
-
-  } */
 }

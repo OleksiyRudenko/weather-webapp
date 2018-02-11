@@ -13,6 +13,8 @@ export default class ProgressController extends AppUiControllerComponent {
     this._total = 0;
   }
 
+  /* === Public methods === */
+
   /**
    * Show container with initial message
    * @param {string} action
@@ -32,14 +34,16 @@ export default class ProgressController extends AppUiControllerComponent {
   }
 
   /**
-   * Increase counter
-   * @param {number} increment
+   * Hide container
+   * @param {number} delay ms
    */
-  addCount(increment) {
-    this._count += increment;
-    if (this._total && this._count > this._total) this._count = this._total;
-    this.uiElements.count.innerText = this._count;
+  hide(delay) {
+    setTimeout(() => {
+      this.uiElements.container.classList.remove('display-block');
+    }, delay);
   }
+
+  /* === Private methods : SECONDARY === */
 
   /**
    * Set counter
@@ -51,12 +55,12 @@ export default class ProgressController extends AppUiControllerComponent {
   }
 
   /**
-   * Hide container
-   * @param {number} delay ms
+   * Increase counter
+   * @param {number} increment
    */
-  hide(delay) {
-    setTimeout(() => {
-      this.uiElements.container.classList.remove('display-block');
-    }, delay);
+  addCount(increment) {
+    this._count += increment;
+    if (this._total && this._count > this._total) this._count = this._total;
+    this.uiElements.count.innerText = this._count;
   }
 }

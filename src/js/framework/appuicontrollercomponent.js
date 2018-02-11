@@ -8,16 +8,27 @@ import AppControllerComponent from './appcontrollercomponent.js';
 export default class AppUiControllerComponent extends AppControllerComponent {
   /**
    * AppUiControllerComponent constructor
+   * @constructor
    */
   constructor() {
     super();
-    this.uiElements = {};
+    this.uiElements = {}; // populated by AppController from global config.uiElements.<ComponentName> referring to HTMLElements
   }
 
+  /* === Private methods : SECONDARY === */
+
+  /**
+   * Returns references to HTMLElements
+   * @returns {object}
+   */
   getUiElements() {
     return this.uiElements;
   }
 
+  /**
+   * Sets references to HTMLElements
+   * @returns {object}
+   */
   setUiElements(uiElements) {
     this.uiElements = uiElements;
   }

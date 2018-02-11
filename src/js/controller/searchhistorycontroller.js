@@ -22,6 +22,11 @@ export default class SearchHistoryController extends AppUiControllerComponent {
     this._isActive = false;
   }
 
+  /* === Public methods === */
+
+  /**
+   * Component initial activities
+   */
   run() {
     super.run();
     // this.debugThisClassName('run');
@@ -50,6 +55,8 @@ export default class SearchHistoryController extends AppUiControllerComponent {
     this.uiElements.container.classList.remove('city-container-visible');
   }
 
+  /* === Private methods : MAIN JOBS === */
+
   /**
    * Handles item click
    * @param {Event} e
@@ -66,14 +73,4 @@ export default class SearchHistoryController extends AppUiControllerComponent {
 
     this.dependencies.UiControllers.CityInputController.setValue(cityName);
   }
-
-  /**
-   * Sets action targets
-   * @param {Object} targets { textInputElement:, actionSearchElement: }
-   */
-  /* TODO: remove this method
-  setTargets(targets) {
-    this._actionTargets = targets;
-  } */
-
 }

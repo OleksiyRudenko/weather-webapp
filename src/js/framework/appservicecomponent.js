@@ -7,6 +7,7 @@ import AppComponent from './appcomponent.js';
 export default class AppServiceComponent extends AppComponent {
   /**
    * AppServiceComponent constructor
+   * @constructor
    */
   constructor() {
     super();

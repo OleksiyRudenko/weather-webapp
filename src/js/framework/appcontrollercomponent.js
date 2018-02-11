@@ -7,6 +7,7 @@ import AppComponent from './appcomponent.js';
 export default class AppControllerComponent extends AppComponent {
   /**
    * AppControllerComponent constructor
+   * @constructor
    */
   constructor() {
     super();
