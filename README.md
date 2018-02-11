@@ -14,8 +14,9 @@ Developed as a part of
 - [Features](#features)
 - [App Architecture](#app-architecture)
 - [Known Issues](#known-issues)
-- [Resources](#resources)
+- [Installing and building the project](#installing-and-building-the-project)
 - [Deployment](#deployment)
+- [Resources](#resources)
 - [Time Track](#time-track)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -95,9 +96,11 @@ Developed as a part of
 
 [TOC :arrow_double_up: ](#table-of-contents)
 
-### Resources
+### Installing and building the project
 
- * [Autocomplete API](https://serbian.wunderground.com/weather/api/d/docs?d=autocomplete-api)
+Refer to [building the project](./BULD.md) for more details.
+
+[_-- TOC --_](#table-of-contents)
 
 ### Deployment
 
@@ -107,6 +110,12 @@ using [push-dir](https://www.npmjs.com/package/push-dir)
 `yarn global add push-dir` or `npm install --global push-dir` once
 
 `push-dir --dir=dist --branch=gh-pages --cleanup`
+
+[_-- TOC --_](#table-of-contents)
+
+### Resources
+
+ * [Autocomplete API](https://serbian.wunderground.com/weather/api/d/docs?d=autocomplete-api)
 
 [TOC :arrow_double_up: ](#table-of-contents)
 
