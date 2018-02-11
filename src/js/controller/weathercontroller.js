@@ -2,6 +2,7 @@ import * as helper from './../helper.js';
 import AppUiControllerComponent from "../framework/appuicontrollercomponent.js";
 import SettingsService from "../service/settingsservice.js";
 import WeatherService from "../service/weatherservice.js";
+import MoodController from "./moodcontroller";
 /** Class representing weather view controller. */
 export default class WeatherController extends AppUiControllerComponent {
   /**
@@ -15,7 +16,10 @@ export default class WeatherController extends AppUiControllerComponent {
       Services: {
         SettingsService: 'SettingsService',
         WeatherService: 'WeatherService',
-      }
+      },
+      UiControllers: {
+        MoodController: 'MoodController',
+      },
     };
     this._elWeatherToday = null;
   }
@@ -36,6 +40,7 @@ export default class WeatherController extends AppUiControllerComponent {
       data = this.extractWeatherDataCurrent(data);
       // enrich data
       data.windSpeedUnits = this.dependencies.Services.SettingsService.windSpeedUnits;
+      data.date = new Date(data.dt * 1000);
 
       // create references to today weather HTML elements if not yet
       if (!this._elWeatherToday) {
@@ -56,6 +61,9 @@ export default class WeatherController extends AppUiControllerComponent {
       this.exposeElement('today', 'Main');
 
       // document.getElementById('weather-today-debug').innerHTML = 'TODAY: <pre>' + JSON.stringify(data, null, 2) + '</pre>';
+
+      // update mood
+      this.dependencies.UiControllers.MoodController.renderMood(data.date, data.geolat, data.verbose);
 
       // update city name if required
       return updateCityName ? data.geocity + ',' + data.geocountry : null;
@@ -82,6 +90,7 @@ export default class WeatherController extends AppUiControllerComponent {
       descr: src.weather[0].main,
       descrDetails: src.weather[0].description,
       descrIcon: '<img src="' + this.dependencies.Services.WeatherService.apiIconUrl(src.weather[0].icon) + '" />',
+      verbose: src.weather[0].verbose,
       temp: Math.round(src.main.temp),
       pressure: Math.round(src.main.pressure),
       humidity: src.main.humidity,
@@ -147,6 +156,7 @@ export default class WeatherController extends AppUiControllerComponent {
       descr: item.weather[0].main,
       descrDetails: item.weather[0].description,
       descrIcon: '<img src="' + this.dependencies.Services.WeatherService.apiIconUrl(item.weather[0].icon) + '" />',
+      verbose: item.weather[0].verbose,
       temp: Math.round(item.main.temp),
       pressure: Math.round(item.main.pressure),
       humidity: item.main.humidity,
