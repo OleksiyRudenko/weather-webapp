@@ -23,6 +23,7 @@ export default class MoodController extends AppUiControllerComponent {
    */
   run() {
     this.debugThisClassName('run');
+    this.renderMood();
   }
 
   /* === Public methods === */
@@ -34,6 +35,9 @@ export default class MoodController extends AppUiControllerComponent {
    * @param {Object} verboseConditions { tod: day|night, conditions: clearSky|rain|... }
    */
   renderMood(date, geolat, verboseConditions) {
+    if (!date) date = new Date();
+    if (!geolat) geolat = 50;
+    if (!verboseConditions) verboseConditions = {tod: 0, conditions: 0};
     this.debugThisClassName('renderMood');
     console.log(this.uiElements);
     console.log(date);
@@ -76,6 +80,7 @@ export default class MoodController extends AppUiControllerComponent {
    * @returns {string} mood image url
    */
   getMoodImage(conditions, tod, season) {
+    if (!conditions) return this.config.mood.seasons[season];
     if (conditions === 'unknown') conditions = 'clearSky';
     return this.config.mood.imagery[conditions][tod][season];
   }

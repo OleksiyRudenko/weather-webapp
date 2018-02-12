@@ -24,6 +24,10 @@ import wSnW1 from "./w-snow-night-winter-1.jpg";
 import wTSdS1 from "./w-thunderstorm-day-summer-1.jpg";
 import wTSdW1 from "./w-thunderstorm-day-winter-1.jpg";
 import wTSnS1 from "./w-thunderstorm-night-summer-1.jpg";
+import sAT from "./season-autumn.jpg";
+import sSG from "./season-spring.jpg";
+import sSU from "./season-summer.jpg";
+import sWT from "./season-winter.jpeg";
 
 export const moodImagery  = {
   wBCdA1: wBCdA1,
@@ -52,4 +56,8 @@ export const moodImagery  = {
   wTSdS1: wTSdS1,
   wTSdW1: wTSdW1,
   wTSnS1: wTSnS1,
+  sAT: sAT,
+  sSG: sSG,
+  sSU: sSU,
+  sWT: sWT,
 };

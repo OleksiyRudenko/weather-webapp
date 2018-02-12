@@ -97,6 +97,12 @@ export const appConfig = {
       },
     },
     mood: {
+      seasons: {
+        spring: moodImagery.sSG,
+        summer: moodImagery.sSU,
+        autumn: moodImagery.sAT,
+        winter: moodImagery.sWT,
+      },
       imagery: {
         brokenClouds: {
           day: {
