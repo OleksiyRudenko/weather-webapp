@@ -63,7 +63,7 @@ using [push-dir](https://www.npmjs.com/package/push-dir)
 
 `yarn global add push-dir` or `npm install --global push-dir` once
 
-`push-dir --dir=dist --branch=gh-pages --cleanup`
+`push-dir --dir=dist --branch=gh-pages --cleanup --verbose`
 
 [_-- TOC --_](#table-of-contents)
 
