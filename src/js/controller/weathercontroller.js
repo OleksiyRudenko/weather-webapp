@@ -11,7 +11,9 @@ export default class WeatherController extends AppUiControllerComponent {
    */
   constructor() {
     super();
-    this.config = {};
+    this.config = {
+      icons: 'icons',
+    };
     this.dependencies = {
       Services: {
         SettingsService: 'SettingsService',
@@ -50,6 +52,9 @@ export default class WeatherController extends AppUiControllerComponent {
       }
 
       // console.log(this._elWeatherToday);
+      this.debugThisClassName('renderToday');
+      console.log(data);
+      data.descrIcon = '<i class="wi ' + this.getWeatherConditionsIcon(data.verbose.tod, data.verbose.conditions) + '"></i>';
 
       // put data across HTML elements
       this.debugThisClassName('renderToday');
@@ -87,13 +92,13 @@ export default class WeatherController extends AppUiControllerComponent {
       data = this.extractWeatherDataForecast(data);
       this.debugThisClassName('renderForecast');
       console.log(data);
-      const forecastItems = data.weatherSchedule.map(item => `<div class="wf-item">
-        <div class="wf-icon">${item.descrIcon}</div>
-        <div class="wf-descr">${item.descr}</div>
-        <div class="wf-temp">${item.temp}&deg;</div>
-        <div class="wf-time">${item.dtHours}:00</div>
-        <div class="wf-date">${item.dtDate}</div>
-        </div>`
+      const forecastItems = data.weatherSchedule.map(item => '<div class="wf-item">' +
+        '<div class="wf-icon"><i class="wi ' + this.getWeatherConditionsIcon(item.verbose.tod, item.verbose.conditions) + '"></i></div>' +
+        '<div class="wf-descr">' + item.descr + '</div>' +
+        '<div class="wf-temp">' + item.temp + '&deg;</div>' +
+        '<div class="wf-time">' + item.dtHours + ':00</div>' +
+        '<div class="wf-date">' + item.dtDate + '</div>' +
+        '</div>'
       );
 
       this.uiElements.forecastMain.innerHTML = forecastItems.join('');
@@ -219,5 +224,14 @@ export default class WeatherController extends AppUiControllerComponent {
         el.classList.remove('weather-visible');
       }
     });
+  }
+
+  getWeatherConditionsIcon(tod, verboseConditions) {
+    if (!tod)
+      tod = 'day';
+    if (verboseConditions === 'unknown' || Math.floor(Math.random() * 41) > 39) {
+      verboseConditions = 'alien';
+    }
+    return this.config.icons[tod][verboseConditions];
   }
 }
