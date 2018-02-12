@@ -55,6 +55,7 @@ export default class WeatherController extends AppUiControllerComponent {
       this.debugThisClassName('renderToday');
       console.log(data);
       data.descrIcon = '<i class="wi ' + this.getWeatherConditionsIcon(data.verbose.tod, data.verbose.conditions) + '"></i>';
+      data.pressure = Math.round(data.pressure / 1013.25 * 100) / 100;
 
       // put data across HTML elements
       this.debugThisClassName('renderToday');
