@@ -16,21 +16,12 @@
 </head>
 <body id="body">
     <div id="app-container">
-        <!-- div id="nav-bar">
-            <div class="app-logo"><i class="material-icons">cloud</i> WeatherApp</div>
-            <!-- div id="unit-switch" class="unit-switch" title="Switch units">
-                <div class="unit-switch-item"><p>&#8451;</p></div>
-                <div class="unit-switch-item"><p>&#8457;</p></div>
-            </div>
-        </div -->
         <div id="search-bar">
             <div class="row">
-                <button id="gps" class="btn-row" title="Detect my location"><i class="material-icons">gps_fixed</i></button>
-                <button id="favourite-no" class="favourite-no btn-row btn-inactive" title="Add to favourites"><i class="material-icons">star_border</i></button>
-                <button id="favourite-yes" class="favourite-yes btn-row display-none" title="Remove from favourites"><i class="material-icons">star</i></button>
-                <button id="favourite-dropdown" class="btn-row" title="Favourites list"><i class="material-icons">arrow_drop_down</i></button>
-                <input type="text" id="search-input" class="search btn-row" placeholder="E.g.: Kyiv, New York, 30.5 50.4, -74.0 40.7" />
-                <button id="search-action" class="btn-row btn-inactive" title="Get weather info"><i class="material-icons">search</i></button>
+                <!-- button id="gps" class="btn-row" title="Detect my location"><i class="material-icons">gps_fixed</i></button>
+                <button id="favourite-dropdown" class="btn-row" title="Favourites list"><i class="material-icons">arrow_drop_down</i></button -->
+                <input type="text" id="search-input" class="search" placeholder="E.g.: Kyiv, New York, 30.5 50.4, -74.0 40.7" />
+                <button id="search-action" class="btn-frameless btn-inactive btn-search" title="Get weather info"><i class="material-icons">search</i></button>
             </div>
             <div id="history-container" class="city-container"></div>
             <div id="auto-complete-container" class="city-container"></div>
@@ -56,39 +47,51 @@
             </div>
         </div>
         <div id="weather-container">
-            <div id="weather-today-main" class="weather">
-                <div class="wt-row wt-status-bar">
-                    <div class="weather-item">
-                        <div class="wt-header"><i class="wi wi-strong-wind"></i></div>
-                        <div class="wt-data" id="wt-windSpeed"></div>
-                        <div class="wt-data" id="wt-windSpeedUnits"></div>
-                        <div class="wt-windAzimuth" id="wt-windAzimuth"></div>
-                    </div>
-                    <div class="weather-item">
-                        <div class="wt-header"><i class="wi wi-humidity"></i></div>
-                        <div class="wt-data" id="wt-humidity"></div>%
-                    </div>
-                    <div class="weather-item">
-                        <div class="wt-header"><i class="wi wi-barometer"></i></div>
-                        <div class="wt-data" id="wt-pressure"></div> atm
+            <div id="weather-today-main" class="weather-today weather">
+                <div class="wt-row">
+                    <button id="favourite-no" class="favourite-no btn-frameless" title="Add to favourites"><i class="material-icons">star_border</i></button>
+                    <button id="favourite-yes" class="favourite-yes btn-frameless display-none" title="Remove from favourites"><i class="material-icons">star</i></button>
+                    <div class="wt-main-city">
+                        Kyiv
                     </div>
                 </div>
-                <div class="wt-row wt-main">
-                    <div class="wt-main-item wt-descrIcon" id="wt-descrIcon"></div>
-                    <div class="wt-main-item"><span class="wt-temp" id="wt-temp"></span>
-                        <div id="unit-switch" class="unit-switch" title="Switch units">
-                            <button class="btn-frameless btn-unit-switch">
-                                <i class="wi wi-celsius"></i>
-                            </button>
-                            <button class="btn-frameless btn-unit-switch">
-                                <i class="wi wi-fahrenheit"></i>
-                            </button>
+                <div class="wt-row">
+                    <div class="wt-column">
+                        <div class="weather-item">
+                            <div class="wt-header"><i class="wi wi-strong-wind wi-fw"></i></div>
+                            <div class="wt-data" id="wt-windSpeed"></div>
+                            <div class="wt-data" id="wt-windSpeedUnits"></div>
+                            <div class="wt-windAzimuth" id="wt-windAzimuth"></div>
+                        </div>
+                        <div class="weather-item">
+                            <div class="wt-header"><i class="wi wi-humidity wi-fw"></i></div>
+                            <div class="wt-data" id="wt-humidity"></div>
+                            <div class="wt-data">%</div>
+                        </div>
+                        <div class="weather-item">
+                            <div class="wt-header"><i class="wi wi-barometer wi-fw"></i></div>
+                            <div class="wt-data" id="wt-pressure"></div>
+                            <div class="wt-data">atm</div>
                         </div>
                     </div>
-                    <div class="wt-descr wt-main-item" id="wt-descr"></div>
-                </div>
-                <div class="wt-row wt-description">
-                    <div class="wt-descr" id="wt-descrDetails"></div>
+                    <div class="wt-row-nowrap">
+                        <div class="wt-main-item wt-descrIcon" id="wt-descrIcon"></div>
+                        <div class="wt-column">
+                            <div class="wt-row">
+                                <div class="wt-temp" id="wt-temp"></div>
+                                <div id="unit-switch" class="unit-switch" title="Switch units">
+                                    <button class="btn-frameless btn-unit-switch">
+                                        <i class="wi wi-celsius"></i>
+                                    </button>
+                                    <button class="btn-frameless btn-unit-switch">
+                                        <i class="wi wi-fahrenheit"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="wt-descr-main" id="wt-descr"></div>
+                            <div class="wt-descr" id="wt-descrDetails"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="weather-today-debug" class="weather"></div>
