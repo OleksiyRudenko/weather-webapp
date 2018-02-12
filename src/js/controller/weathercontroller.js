@@ -156,7 +156,7 @@ export default class WeatherController extends AppUiControllerComponent {
     let weatherList = src.list.filter(item => {
       const time = item.dt_txt.substring(11,13);
       // console.log('Time: ' + time);
-      return (time === '09' || time === '12' || time === '15' || time === '18');
+      return (time === '03' || time === '09' || time === '15' || time === '21');
 
     });
     weatherList.sort((a,b) => a.dt - b.dt);
