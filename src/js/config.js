@@ -151,7 +151,7 @@ export const appConfig = {
             autumn: moodImagery.wRdA1,
             spring: moodImagery.wRdSG1,
             summer: moodImagery.wRdS1,
-            winter: moodImagery.wRdA1, // subst
+            winter: moodImagery.wRdW1,
           },
           night: {
             autumn: moodImagery.wRnS1, // subst
@@ -193,7 +193,7 @@ export const appConfig = {
             autumn: moodImagery.wSRdS1, // subst
             spring: moodImagery.wSRdS1, // subst
             summer: moodImagery.wSRdS1,
-            winter: moodImagery.wRdA1, // subst
+            winter: moodImagery.wRdW1,
           },
           night: {
             autumn: moodImagery.wRnS1, // subst

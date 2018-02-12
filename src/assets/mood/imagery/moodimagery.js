@@ -14,6 +14,7 @@ import wMnW1 from "./w-mist-night-winter-1.jpg";
 import wRdA1 from "./w-rain-day-autumn-1.jpg";
 import wRdSG1 from "./w-rain-day-spring-1.jpg";
 import wRdS1 from "./w-rain-day-summer-1.jpg";
+import wRdW1 from "./w-rain-day-winter-1.jpg";
 import wRnS1 from "./w-rain-night-summer-1.jpg";
 import wSCdS1 from "./w-scatteredClouds-day-summer-1.jpg";
 import wSCdW1 from "./w-scatteredClouds-day-winter-1.jpg";
@@ -46,6 +47,7 @@ export const moodImagery  = {
   wRdA1: wRdA1,
   wRdSG1: wRdSG1,
   wRdS1: wRdS1,
+  wRdW1: wRdW1,
   wRnS1: wRnS1,
   wSCdS1: wSCdS1,
   wSCdW1: wSCdW1,
