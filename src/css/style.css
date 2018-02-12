@@ -107,15 +107,19 @@ button {
 }
 
 .btn-frameless {
-    border-width: 0px;
-    background: transparent;
+    border: 1px solid transparent;
+    background-color: rgba(255,255,255,0);
+    line-height: 1.2rem;
 }
 
 .btn-unit-switch {
     font-size: 350%;
+    display: none;
 }
 
-
+.unit-active {
+    display: inline-block;
+}
 
 .btn-row {
     border: 1px solid #84a5ff;

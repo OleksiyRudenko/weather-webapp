@@ -42,7 +42,7 @@ export default class UnitSwitchController extends AppUiControllerComponent {
     this.dependencies.Services.SettingsService.switchUnits();
     const unitElementsList = this.uiElements.container.children;
     for (let el of unitElementsList) {
-      el.classList.toggle('active');
+      el.classList.toggle('unit-active');
     }
     this.dependencies.UiControllers.CityInputController.actionSearch();
     this.dependencies.UiControllers.CityInputController.focus();
@@ -59,8 +59,8 @@ export default class UnitSwitchController extends AppUiControllerComponent {
       if (unit === 'imperial') {
         [unit1, unit0] = [unit0, unit1];
       }
-      unit0.classList.add('active');
-      unit1.classList.remove('active');
+      unit0.classList.add('unit-active');
+      unit1.classList.remove('unit-active');
     });
   }
 
