@@ -1,9 +1,15 @@
 :root {
-    --color-darkest: #333;
-    --color-dark: #666;
-    --color-neutral: #999;
-    --color-light: #bbb;
+    --color-darkest:  #333;
+    --color-dark:     #666;
+    --color-neutral:  #999;
+    --color-light:    #bbb;
     --color-lightest: #eee;
+
+    --color-darkest-xparent:  rgba(51, 51, 51, 0.8);
+    --color-dark-xparent:     rgba(102, 102, 102, 0.8);
+    --color-neutral-xparent:  rgba(153, 153, 153, 0.8);
+    --color-light-xparent:    rgba(187, 187, 187, 0.8);
+    --color-lightest-xparent: rgba(238, 238, 238, 0.8);
 }
 
 html {
@@ -344,27 +350,27 @@ input.search::placeholder {
 }
 
 .wf-darkest {
-    background-color: var(--color-darkest);
+    background-color: var(--color-darkest-xparent);
     color: var(--color-lightest);
 }
 
 .wf-dark {
-    background-color: var(--color-dark);
+    background-color: var(--color-dark-xparent);
     color: var(--color-lightest);
 }
 
 .wf-neutral {
-    background-color: var(--color-neutral);
+    background-color: var(--color-neutral-xparent);
     color: var(--color-darkest);
 }
 
 .wf-light {
-    background-color: var(--color-light);
+    background-color: var(--color-light-xparent);
     color: var(--color-darkest);
 }
 
 .wf-lightest {
-    background-color: var(--color-lightest);
+    background-color: var(--color-lightest-xparent);
     color: var(--color-darkest);
 }
 
