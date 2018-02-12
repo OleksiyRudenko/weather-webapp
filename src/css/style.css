@@ -1,3 +1,11 @@
+:root {
+    --color-darkest: #333;
+    --color-dark: #666;
+    --color-neutral: #999;
+    --color-light: #bbb;
+    --color-lightest: #eee;
+}
+
 html {
     padding: 0;
     margin: 0;
@@ -336,6 +344,31 @@ input.search::placeholder {
     border-radius: 5px;
     padding: 0.5em;
     margin: 0.2em;
+}
+
+.wf-darkest {
+    background-color: var(--color-darkest);
+    color: var(--color-lightest);
+}
+
+.wf-dark {
+    background-color: var(--color-dark);
+    color: var(--color-lightest);
+}
+
+.wf-neutral {
+    background-color: var(--color-neutral);
+    color: var(--color-darkest);
+}
+
+.wf-light {
+    background-color: var(--color-light);
+    color: var(--color-darkest);
+}
+
+.wf-lightest {
+    background-color: var(--color-lightest);
+    color: var(--color-darkest);
 }
 
 /* .wf-item:nth-child(1) {

@@ -93,13 +93,14 @@ export default class WeatherController extends AppUiControllerComponent {
       data = this.extractWeatherDataForecast(data);
       // this.debugThisClassName('renderForecast');
       // console.log(data);
-      const forecastItems = data.weatherSchedule.map(item => '<div class="wf-item">' +
-        '<div class="wf-icon"><i class="wi ' + this.getWeatherConditionsIcon(item.verbose.tod, item.verbose.conditions) + '"></i></div>' +
-        '<div class="wf-descr">' + item.descr + '</div>' +
-        '<div class="wf-temp">' + item.temp + '&deg;</div>' +
-        '<div class="wf-time">' + item.dtHours + ':00</div>' +
-        '<div class="wf-date">' + item.dtDate + '</div>' +
-        '</div>'
+      const forecastItems = data.weatherSchedule.map(item => '<div class="wf-item ' +
+          this.getShadeOfTheTime(item.dtHours) + '">' +
+          '<div class="wf-icon"><i class="wi ' + this.getWeatherConditionsIcon(item.verbose.tod, item.verbose.conditions) + '"></i></div>' +
+          '<div class="wf-descr">' + item.descr + '</div>' +
+          '<div class="wf-temp">' + item.temp + '&deg;</div>' +
+          '<div class="wf-time">' + item.dtHours + ':00</div>' +
+          '<div class="wf-date">' + item.dtDate + '</div>' +
+          '</div>'
       );
 
       this.uiElements.forecastMain.innerHTML = forecastItems.join('');
@@ -227,6 +228,12 @@ export default class WeatherController extends AppUiControllerComponent {
     });
   }
 
+  /**
+   * Picks weather icon based on time of the day and conditions
+   * @param {string} tod = day|night
+   * @param {string} verboseConditions = clearSky|rain|snow|...
+   * @returns {string}
+   */
   getWeatherConditionsIcon(tod, verboseConditions) {
     if (!tod)
       tod = 'day';
@@ -234,5 +241,22 @@ export default class WeatherController extends AppUiControllerComponent {
       verboseConditions = 'alien';
     }
     return this.config.icons[tod][verboseConditions];
+  }
+
+  /**
+   * Return shade of time of the day based on hours
+   * @param hours
+   * @returns {string}
+   */
+  getShadeOfTheTime(hours) {
+    return (hours < '01') ? 'wf-dark' :
+      (hours < '04') ? 'wf-darkest' :
+        (hours < '07') ? 'wf-dark' :
+          (hours < '10') ? 'wf-neutral' :
+            (hours < '13') ? 'wf-light' :
+              (hours < '16') ? 'wf-lightest' :
+                (hours < '19') ? 'wf-light' :
+                  (hours < '22') ? 'wf-neutral' :
+                    'wf-dark';
   }
 }
