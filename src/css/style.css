@@ -106,6 +106,17 @@ button {
     color: #333;
 }
 
+.btn-frameless {
+    border-width: 0px;
+    background: transparent;
+}
+
+.btn-unit-switch {
+    font-size: 350%;
+}
+
+
+
 .btn-row {
     border: 1px solid #84a5ff;
     background-color: #6495ed; /* cornflowerblue; */
