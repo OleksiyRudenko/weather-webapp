@@ -45,6 +45,8 @@ export default class WeatherController extends AppUiControllerComponent {
       // enrich data
       data.windSpeedUnits = this.dependencies.Services.SettingsService.windSpeedUnits;
       data.date = new Date(data.dt * 1000);
+      data.cityFull = data.geocity + ',' + data.geocountry;
+      data.geoFull = data.geolon + ',' + data.geolat;
 
       // create references to today weather HTML elements if not yet
       if (!this._elWeatherToday) {
@@ -52,8 +54,8 @@ export default class WeatherController extends AppUiControllerComponent {
       }
 
       // console.log(this._elWeatherToday);
-      // this.debugThisClassName('renderToday');
-      // console.log(data);
+      this.debugThisClassName('renderToday');
+      console.log(data);
       data.descrIcon = '<i class="wi ' + this.getWeatherConditionsIcon(data.verbose.tod, data.verbose.conditions) + '"></i>';
       data.pressure = Math.round(data.pressure / 1013.25 * 100) / 100;
 

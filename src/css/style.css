@@ -236,6 +236,11 @@ input.search::placeholder {
     font-size: 3rem;
 }
 
+.wt-main-geo {
+    font-size: 1.2rem;
+    color: var(--color-dark);
+}
+
 .wt-row {
     display: flex;
     flex-flow: row wrap;
@@ -303,6 +308,10 @@ input.search::placeholder {
 .wt-descr-main {
     justify-content: center;
     font-size: 2.4rem;
+}
+
+.wt-descr-extended {
+    color: var(--color-dark);
 }
 
 #weather-today-main {
