@@ -46,7 +46,7 @@ export default class StorageService extends AppServiceComponent {
       return Promise.all(recordSet.map((item, index) => {
           if (!(index%increment)) {
             this.dependencies.UiControllers.ProgressController.addCount(increment);
-            console.log('Adding another ' + increment);
+            // console.log('Adding another ' + increment);
           }
           return store.put(item);
         }) // map
@@ -57,7 +57,7 @@ export default class StorageService extends AppServiceComponent {
       }).then(() => {
         this.dependencies.UiControllers.ProgressController.setCount(recordSetLength);
         this.dependencies.UiControllers.ProgressController.hide(2500);
-        console.log('Added ' + recordSet.length + ' items to ' + storeName);
+        // console.log('Added ' + recordSet.length + ' items to ' + storeName);
       });
     });
   }
