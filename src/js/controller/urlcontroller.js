@@ -1,4 +1,5 @@
 import AppControllerComponent from './../framework/appcontrollercomponent.js';
+import CityInputController from "./cityinputcontroller.js";
 
 /** Class representing url controller. */
 export default class UrlController extends AppControllerComponent {
@@ -11,7 +12,9 @@ export default class UrlController extends AppControllerComponent {
     this.config = {
       baseUrl: 'baseUrl',
     };
-    this.dependencies = {};
+    this.dependencies = {
+      CityInputController: 'CityInputController',
+    };
   }
 
   /* === Public methods === */
@@ -23,8 +26,10 @@ export default class UrlController extends AppControllerComponent {
     super.run();
     // this.debugThisClassName('run');
     const cityName = this.getCityName();
+    window.addEventListener('popstate', this.onHistoryNavigation.bind(this), true);
     if (this.dependencies.CityInputController && cityName) {
-      this.dependencies.CityInputController.setValue(cityName);
+      this.dependencies.CityInputController.setValue(cityName, null, false);
+      this.dependencies.CityInputController.actionSearch();
     }
   }
 
@@ -32,12 +37,27 @@ export default class UrlController extends AppControllerComponent {
    * Updates URL
    * @param {string} cityName
    */
-  updateUrl(cityName) {
-    // TODO: CityInputController calls this method too early
-    history.pushState({}, document.title, this.config.baseUrl + '?q=' + cityName );
+  updateUrl(cityName, caller) {
+    this.debugThisClassName('updateUrl('+cityName+') from '+caller);
+    const targetUrl = this.config.baseUrl + '?q=' + cityName;
+    console.log(window.location + ' -- ' + targetUrl);
+    if (window.location !== targetUrl)
+      history.pushState({}, document.title + ': ' + cityName, targetUrl);
   }
 
   /* === Private methods : SECONDARY === */
+
+  onHistoryNavigation(e) {
+    // if (e.state) {
+      const cityName = this.getCityName();
+      this.debugThisClassName('onHistoryNavigation');
+      console.log(e.state);
+      if (this.dependencies.CityInputController && cityName) {
+        this.dependencies.CityInputController.setValue(cityName, null, false);
+        this.dependencies.CityInputController.actionSearch('no-url-update');
+      }
+    // }
+  }
 
   /**
    * Extract city name from url

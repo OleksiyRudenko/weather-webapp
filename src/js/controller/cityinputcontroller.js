@@ -60,12 +60,16 @@ export default class CityInputController extends AppUiControllerComponent {
    * @param {object} event - click event
    */
   actionSearch(event) {
+    if (typeof event === 'object') {
+      event.preventDefault();
+    }
+    // event.preventDefault();
     const apiQueryClass = ['current', 'forecast5'];
     if (this.uiElements.textInput.value.length < this._settings.minChar) return;
     // predict user input content type if [\d.,\w] only then geo coords
     const userInput = this.uiElements.textInput.value;
     const userInputType = /^[\-\d\s,.]+$/.test(userInput) ? 'latlon' : 'cityname';
-    console.log('Search by ' + userInputType);
+    // console.log('Search by ' + userInputType);
     let queryData = {};
     switch (userInputType) {
       case 'cityname':
@@ -99,7 +103,8 @@ export default class CityInputController extends AppUiControllerComponent {
           name: value,
         });
         // update url
-        this.dependencies.UiControllers.UrlController.updateUrl(encodeURIComponent(value));
+        if (event !== 'no-url-update')
+          this.dependencies.UiControllers.UrlController.updateUrl(encodeURIComponent(value), 'actionSearch');
 
         // manage favourites
       }
@@ -132,7 +137,7 @@ export default class CityInputController extends AppUiControllerComponent {
    * @param {boolean} doSearch
    */
   setValue(value, caretPosition=null, doSearch=true) {
-    console.log('cityInput: "' + value + '"(' + value.length + '), caret:' + caretPosition + '; doSearch:' + doSearch);
+    // console.log('cityInput: "' + value + '"(' + value.length + '), caret:' + caretPosition + '; doSearch:' + doSearch);
     if (value.length) {
       this.uiElements.textInput.value = value;
       if (value.length >= this._settings.minChar) {
@@ -193,7 +198,7 @@ export default class CityInputController extends AppUiControllerComponent {
     } else {
       this.uiElements.searchAction.classList.add('btn-inactive');
     }
-    console.log(eventType + '>' + key + ':' + code + ':' + keyCode);
+    // console.log(eventType + '>' + key + ':' + code + ':' + keyCode);
     if (eventType === 'keyup' && target.value.length === 0 && key !== 'Escape') {
       this.onUserInputFocus({
         target: this.uiElements.textInput,
@@ -204,7 +209,7 @@ export default class CityInputController extends AppUiControllerComponent {
     }
     // hide history on escape key
     if (eventType === 'keyup' && key === 'Escape') {
-      console.log('HIDE');
+      // console.log('HIDE');
       this.dependencies.UiControllers.SearchHistoryController.hide();
     }
   }
@@ -241,7 +246,7 @@ export default class CityInputController extends AppUiControllerComponent {
   renderForecasts(current, forecast, updateCityName) {
     this.dependencies.UiControllers.WeatherController.renderForecast(forecast);
     const result = this.dependencies.UiControllers.WeatherController.renderToday(current, updateCityName);
-    console.log(result);
+    // console.log(result);
     return result;
   }
 }
