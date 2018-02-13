@@ -22,6 +22,7 @@ body {
     background-color: rgba(170,170,204,0.5); /* #aaa; */
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center center;
     align-content: center;
     font-size: 100%;
     display: flex;
@@ -234,6 +235,7 @@ input.search::placeholder {
 .weather-today {
     display: flex;
     flex-flow: column;
+    flex-shrink: 0;
     align-items: center;
     background-color: rgba(238,238,238,0.5); /* #eee */
 }
@@ -251,6 +253,10 @@ input.search::placeholder {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
+}
+
+.wt-row-spread {
+    justify-content: space-between;
 }
 
 .wt-row-nowrap {
