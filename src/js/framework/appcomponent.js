@@ -23,6 +23,14 @@ export default class AppComponent {
 
   /**
    * Component initial activities after boostrapping (abstract method, to be overloaded)
+   * Root activities, e.g. creating database or pick initial data, before other components get activated
+   */
+  runRoot() {
+    // this.debugThisClassName('RUN-ROOT');
+  }
+
+  /**
+   * Component initial activities after boostrapping (abstract method, to be overloaded)
    */
   run() {
     // this.debugThisClassName('RUN');

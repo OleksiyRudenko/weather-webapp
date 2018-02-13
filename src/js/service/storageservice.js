@@ -20,11 +20,15 @@ export default class StorageService extends AppServiceComponent {
         ProgressController: 'ProgressController',
       },
     };
-    this._dbPromise = this.dbOpen(this.config.storage.dbVersion);
-    this.logSummary();
   }
 
   /* === Public methods === */
+
+  runRoot() {
+    super.runRoot();
+    this._dbPromise = this.dbOpen(this.config.storage.dbVersion);
+    this.logSummary();
+  }
 
   /**
    * Insert/update store

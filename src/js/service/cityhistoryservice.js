@@ -37,6 +37,7 @@ export default class CityHistoryService extends AppServiceComponent {
   addEntry(item) {
     // update item content
     item.lastQueried = + new Date();
+    item.nameUC = item.name.toUpperCase();
     // store item
     this.dependencies.Services.StorageService.put(this._storeName,item); /*.then(() => {
       console.log('Search item added. {' + item.name + ', ' + item.lastQueried + '}');

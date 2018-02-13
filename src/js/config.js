@@ -11,10 +11,10 @@ export const appConfig = {
       + window.location.pathname.split('/').slice(0,-1).join('/') + '/',
     cityList: 'assets/city.list.json', // 'assets/city.list.json', | citylist from import
     historyInitialSet: [
-      { name: 'Kyiv,UA',   lastQueried: + new Date(), },
-      { name: 'London,UK', lastQueried: + new Date(), },
-      { name: 'Odessa,UA', lastQueried: + new Date(), },
-      { name: 'Odessa,US', lastQueried: + new Date(), },
+      { name: 'Kyiv,UA',   nameUC: 'KYIV,UA',   lastQueried: + new Date(), },
+      { name: 'London,UK', nameUC: 'LONDON,UK', lastQueried: + new Date(), },
+      { name: 'Odessa,UA', nameUC: 'ODESSA,UA', lastQueried: + new Date(), },
+      { name: 'Odessa,US', nameUC: 'ODESSA,US', lastQueried: + new Date(), },
     ],
     api: {
       apiUrl : 'https://api.openweathermap.org/data/2.5/',
@@ -59,7 +59,8 @@ export const appConfig = {
           {
             storeName: 'cityhistory',
             storeOptions: {keyPath: 'name'},
-            fields: ['name', 'lastQueried'], // city name, last queried
+            fields: ['name', 'nameUC', 'lastQueried'], // city name, city name uppercase, last queried
+            index: [['nameUC']],
           },
         ],
         // [1]: upgrade to v.2

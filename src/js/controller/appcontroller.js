@@ -37,10 +37,31 @@ export default class AppController extends AppControllerComponent {
   /* === Public methods === */
 
   /**
+   * Launches root components
+   */
+  runRoot() {
+    super.runRoot();
+    // launch Services
+    Object.keys(this.dependencies.Services).forEach((key, idx) => {
+      this.dependencies.Services[key].runRoot();
+    });
+    // launch functional Controllers
+    // launch UI Controllers
+    Object.keys(this.dependencies.Controllers).forEach((key, idx) => {
+      this.dependencies.Controllers[key].runRoot();
+    });
+    // launch UI Controllers
+    Object.keys(this.dependencies.UiControllers).forEach((key, idx) => {
+      this.dependencies.UiControllers[key].runRoot();
+    });
+
+    this.run();
+  }
+
+  /**
    * Launches components
    */
   run() {
-    super.run();
     // launch Services
     Object.keys(this.dependencies.Services).forEach((key, idx) => {
       this.dependencies.Services[key].run();
