@@ -29,7 +29,7 @@ export default class FavCityController extends AppUiControllerComponent {
    */
   handleAddFavCity(e) {
     e.preventDefault();
-    this.dependencies.FavCityService.addEntry({
+    this.dependencies.Services.FavCityService.addEntry({
       name: this.uiElements.cityFullName.textContent,
     });
   }
@@ -40,7 +40,7 @@ export default class FavCityController extends AppUiControllerComponent {
    */
   handleRemoveFavCity(e) {
     e.preventDefault();
-    this.dependencies.FavCityService.deleteEntry(
+    this.dependencies.Services.FavCityService.deleteEntry(
       this.uiElements.cityFullName.textContent.toUpperCase()
     );
   }
