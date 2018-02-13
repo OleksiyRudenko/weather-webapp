@@ -126,7 +126,7 @@ export default class WeatherController extends AppUiControllerComponent {
    */
   extractWeatherDataCurrent(src) {
     // console.log('<img src="' + this.dependencies.Services.WeatherService.apiIconUrl(src.weather[0].icon) + '" />');
-    console.log('Wind azimuth: ' + src.wind.deg);
+    // console.log('Wind azimuth: ' + src.wind.deg);
     return {
       dt: src.dt,
       geocity: src.name,
