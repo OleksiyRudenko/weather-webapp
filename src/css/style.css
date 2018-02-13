@@ -117,6 +117,16 @@ button {
     line-height: 1.2rem;
 }
 
+.btn-round {
+    background-color: var(--color-neutral-xparent);
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+    border-radius: 1.5rem;
+    line-height: 3rem;
+    text-align: center;
+}
+
 .btn-unit-switch {
     font-size: 3.5rem;
     display: none;
@@ -124,13 +134,6 @@ button {
 
 .unit-active {
     display: inline-block;
-}
-
-.btn-row {
-    border: 1px solid #84a5ff;
-    background-color: #6495ed; /* cornflowerblue; */
-    border-radius: unset;
-    padding: 1vmin;
 }
 
 .btn-search {
