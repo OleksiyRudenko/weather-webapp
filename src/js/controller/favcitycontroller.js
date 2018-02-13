@@ -17,8 +17,8 @@ export default class FavCityController extends AppUiControllerComponent {
    * Launches component
    */
   run() {
-    this.uiElements.addFavCity.addEventHandler('click', this.handleAddFavCity.bind(this));
-    this.uiElements.removeFavCity.addEventHandler('click', this.handleRemoveFavCity.bind(this));
+    this.uiElements.addFavCity.addEventListener('click', this.handleAddFavCity.bind(this));
+    this.uiElements.removeFavCity.addEventListener('click', this.handleRemoveFavCity.bind(this));
   }
 
   /* === Private methods === */
@@ -29,7 +29,7 @@ export default class FavCityController extends AppUiControllerComponent {
    */
   handleAddFavCity(e) {
     e.preventDefault();
-    this.dependencies.FavCityService.addItem({
+    this.dependencies.FavCityService.addEntry({
       name: this.uiElements.cityFullName.textContent,
     });
   }
@@ -40,8 +40,8 @@ export default class FavCityController extends AppUiControllerComponent {
    */
   handleRemoveFavCity(e) {
     e.preventDefault();
-    this.dependencies.FavCityService.addItem({
-      name: this.uiElements.cityFullName.textContent,
-    });
+    this.dependencies.FavCityService.deleteEntry(
+      this.uiElements.cityFullName.textContent.toUpperCase()
+    );
   }
 }

@@ -52,8 +52,8 @@ export const appConfig = {
           },
           {
             storeName: 'favcity',
-            storeOptions: {keyPath: 'id'},
-            fields: ['id', 'name', 'nameUC'], // city name, city name uppercase
+            storeOptions: {keyPath: 'name'},
+            fields: ['name', 'nameUC'], // city name, city name uppercase
             index: [['nameUC']],
           },
           {

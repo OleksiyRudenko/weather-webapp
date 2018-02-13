@@ -1,4 +1,5 @@
 import AppServiceComponent from "../framework/appservicecomponent.js";
+import StorageService from "./storageservice.js";
 /** Class representing favourite cities service. */
 export default class FavCityService extends AppServiceComponent {
   /**
@@ -7,6 +8,11 @@ export default class FavCityService extends AppServiceComponent {
    */
   constructor() {
     super();
+    this.dependencies = {
+      Services: {
+        StorageService: 'StorageService',
+      },
+    };
     this._storeName = 'favcity';
   }
 
@@ -30,6 +36,14 @@ export default class FavCityService extends AppServiceComponent {
     item.nameUC = item.name.toUpperCase();
     // store item
     this.dependencies.Services.StorageService.put(this._storeName,item);
+  }
+
+  /**
+   * Remove favourite city item from the storage
+   * @param {string} cityNameFull
+   */
+  removeEntry(cityNameFull) {
+    this.dependencies.Services.StorageService.delete(this._storeName, cityNameFull);
   }
 
   /**

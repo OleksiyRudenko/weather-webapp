@@ -67,6 +67,19 @@ export default class StorageService extends AppServiceComponent {
   }
 
   /**
+   * Delete from store
+   * @param {string} storeName
+   * @param {string} keyValue - is either an object to store or array of objects to store
+   */
+  delete(storeName, keyValue) {
+    return this._dbPromise.then(db => {
+      const tx = db.transaction(storeName, 'readwrite');
+      const store = tx.objectStore(storeName);
+      return store.delete();
+    });
+  }
+
+  /**
    * Get all records from store or optionally from store index optionally filtering by index key field value
    * @param {string} storeName
    * @param {string} indexName
