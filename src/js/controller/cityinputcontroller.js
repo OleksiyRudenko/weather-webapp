@@ -52,6 +52,7 @@ export default class CityInputController extends AppUiControllerComponent {
     this.uiElements.textInput.onkeyup = this.onUserCharInput.bind(this); // onkeydown/keypress caused missing last key pressed
     this.uiElements.textInput.onfocus = this.onUserInputFocus.bind(this);
     this.uiElements.textInput.onblur = this.onUserInputBlur.bind(this);
+    this.uiElements.textInput.addEventListener('click', this.onUserInputClick.bind(this));
   }
 
   /**
@@ -112,8 +113,16 @@ export default class CityInputController extends AppUiControllerComponent {
    */
   focus() {
     this.uiElements.textInput.focus();
-    if (!this.uiElements.textInput.value.length)
+    if (!this.uiElements.textInput.value.length) {
       this.dependencies.UiControllers.SearchHistoryController.show();
+    }
+  }
+
+  /**
+   * Select all text
+   */
+  onUserInputClick() {
+    this.uiElements.textInput.select();
   }
 
   /**
