@@ -75,7 +75,7 @@ export default class StorageService extends AppServiceComponent {
     return this._dbPromise.then(db => {
       const tx = db.transaction(storeName, 'readwrite');
       const store = tx.objectStore(storeName);
-      return store.delete();
+      return store.delete(keyValue);
     });
   }
 
@@ -95,6 +95,25 @@ export default class StorageService extends AppServiceComponent {
         queryTarget = store.index(indexName);
       }
       return queryTarget.getAll(keyValue);
+    });
+  }
+
+  /**
+   * Get all records from store or optionally from store index optionally filtering by index key field value
+   * @param {string} storeName
+   * @param {string} indexName
+   * @param {string|number} keyValue
+   * @returns {Promise<T>}
+   */
+  get(storeName, indexName, keyValue) {
+    return this._dbPromise.then(db => {
+      const tx = db.transaction(storeName, 'readonly');
+      const store = tx.objectStore(storeName);
+      let queryTarget = store;
+      if (indexName) {
+        queryTarget = store.index(indexName);
+      }
+      return queryTarget.get(keyValue);
     });
   }
 

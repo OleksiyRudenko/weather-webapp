@@ -4,6 +4,7 @@ import SettingsService from "../service/settingsservice.js";
 import WeatherService from "../service/weatherservice.js";
 import MoodController from "./moodcontroller.js";
 import GuideController from "./guidecontroller.js";
+import FavCityController from "./favcitycontroller.js";
 /** Class representing weather view controller. */
 export default class WeatherController extends AppUiControllerComponent {
   /**
@@ -23,6 +24,7 @@ export default class WeatherController extends AppUiControllerComponent {
       UiControllers: {
         MoodController: 'MoodController',
         GuideController: 'GuideController',
+        FavCityController: 'FavCityController',
       },
     };
     this._elWeatherToday = null;
@@ -69,6 +71,8 @@ export default class WeatherController extends AppUiControllerComponent {
           this._elWeatherToday[key].innerHTML = data[key];
         }
       });
+
+      this.dependencies.UiControllers.FavCityController.checkCityIsFav(data.cityFull);
 
       this.exposeElement('today', 'Main');
 

@@ -21,6 +21,18 @@ export default class FavCityController extends AppUiControllerComponent {
     this.uiElements.removeFavCity.addEventListener('click', this.handleRemoveFavCity.bind(this));
   }
 
+  checkCityIsFav(cityFullName) {
+    this.dependencies.Services.FavCityService.getItem(cityFullName).then(result => {
+      if (result) {
+        this.uiElements.addFavCity.classList.add('display-none');
+        this.uiElements.removeFavCity.classList.remove('display-none');
+      } else {
+        this.uiElements.addFavCity.classList.remove('display-none');
+        this.uiElements.removeFavCity.classList.add('display-none');
+      }
+    });
+  }
+
   /* === Private methods === */
 
   /**
@@ -31,6 +43,8 @@ export default class FavCityController extends AppUiControllerComponent {
     e.preventDefault();
     this.dependencies.Services.FavCityService.addEntry({
       name: this.uiElements.cityFullName.textContent,
+    }).then(()=>{
+      this.checkCityIsFav(this.uiElements.cityFullName.textContent);
     });
   }
 
@@ -41,7 +55,9 @@ export default class FavCityController extends AppUiControllerComponent {
   handleRemoveFavCity(e) {
     e.preventDefault();
     this.dependencies.Services.FavCityService.deleteEntry(
-      this.uiElements.cityFullName.textContent.toUpperCase()
-    );
+      this.uiElements.cityFullName.textContent
+    ).then(()=>{
+      this.checkCityIsFav(this.uiElements.cityFullName.textContent);
+    });
   }
 }

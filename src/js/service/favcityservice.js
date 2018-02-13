@@ -35,19 +35,19 @@ export default class FavCityService extends AppServiceComponent {
     // update item content
     item.nameUC = item.name.toUpperCase();
     // store item
-    this.dependencies.Services.StorageService.put(this._storeName,item);
+    return this.dependencies.Services.StorageService.put(this._storeName,item);
   }
 
   /**
    * Remove favourite city item from the storage
    * @param {string} cityNameFull
    */
-  removeEntry(cityNameFull) {
-    this.dependencies.Services.StorageService.delete(this._storeName, cityNameFull);
+  deleteEntry(cityNameFull) {
+    return this.dependencies.Services.StorageService.delete(this._storeName, cityNameFull);
   }
 
   /**
-   * Get {limit} last favourite cities items
+   * Get {limit} favourite cities items
    * @param {number} limit=20 - Search limit
    * @returns {Promise} Ordered list of citynames
    */
@@ -58,5 +58,14 @@ export default class FavCityService extends AppServiceComponent {
       items.sort();
       return items;
     });
+  }
+
+  /**
+   * Get (find) favourite cities items
+   * @param {string} keyValue - Search value
+   * @returns {Promise} result if found
+   */
+  getItem(keyValue) {
+    return this.dependencies.Services.StorageService.get(this._storeName,'',keyValue);
   }
 }
