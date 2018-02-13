@@ -22,8 +22,8 @@ export default class GuideController extends AppUiControllerComponent {
    */
   run() {
     super.run();
-    this.debugThisClassName('run');
-    console.log(this.config);
+    // this.debugThisClassName('run');
+    // console.log(this.config);
 
     this.initializePlayList();
     // bind tips
@@ -43,7 +43,7 @@ export default class GuideController extends AppUiControllerComponent {
     const element = this.uiElements[elementName];
     if (element) {
       this.playedTips[elementName] = true;
-      console.log(this.playedTips);
+      // console.log(this.playedTips);
       window.setTimeout(() => {element._tippy.show()}, this.config.guide.exposureDuration);
       window.setTimeout(() => {element._tippy.hide()}, this.config.guide.exposureDuration * 2);
     }
@@ -56,8 +56,7 @@ export default class GuideController extends AppUiControllerComponent {
     const nextTipElementName = this.config.guide.playOrder.find(el => {
       return !this.playedTips[el];
     });
-    console.log(nextTipElementName);
-
+    // console.log(nextTipElementName);
     nextTipElementName && this.playTip(nextTipElementName);
   }
 
