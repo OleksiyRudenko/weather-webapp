@@ -2,7 +2,8 @@ import * as helper from './../helper.js';
 import AppUiControllerComponent from "../framework/appuicontrollercomponent.js";
 import SettingsService from "../service/settingsservice.js";
 import WeatherService from "../service/weatherservice.js";
-import MoodController from "./moodcontroller";
+import MoodController from "./moodcontroller.js";
+import GuideController from "./guidecontroller.js";
 /** Class representing weather view controller. */
 export default class WeatherController extends AppUiControllerComponent {
   /**
@@ -21,6 +22,7 @@ export default class WeatherController extends AppUiControllerComponent {
       },
       UiControllers: {
         MoodController: 'MoodController',
+        GuideController: 'GuideController',
       },
     };
     this._elWeatherToday = null;
@@ -74,6 +76,7 @@ export default class WeatherController extends AppUiControllerComponent {
 
       // update mood
       this.dependencies.UiControllers.MoodController.renderMood(data.date, data.geolat, data.verbose);
+      this.dependencies.UiControllers.GuideController.playNextTip();
 
       // update city name if required
       return updateCityName ? data.geocity + ',' + data.geocountry : null;

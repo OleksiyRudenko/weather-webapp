@@ -12,6 +12,7 @@
     -->
     <link href="//fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+    <script src="https://unpkg.com/tippy.js@2.2.0/dist/tippy.all.min.js"></script>
     <!-- script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise,fetch,String.prototype.padStart"></script -->
 </head>
 <body id="body">
@@ -20,7 +21,7 @@
             <div class="row">
                 <!-- button id="gps" class="btn-row" title="Detect my location"><i class="material-icons">gps_fixed</i></button>
                 <button id="favourite-dropdown" class="btn-row" title="Favourites list"><i class="material-icons">arrow_drop_down</i></button -->
-                <input type="text" id="search-input" class="search" placeholder="E.g.: Kyiv, New York, 30.5 50.4, -74.0 40.7" />
+                <input type="text" id="search-input" class="search" placeholder="E.g.: Kyiv, New York, 30.5 50.4, -74.0 40.7" title="Tap me and type!"/>
                 <button id="search-action" class="btn-frameless btn-inactive btn-search" title="Get weather info"><i class="material-icons">search</i></button>
             </div>
             <div id="history-container" class="city-container"></div>
@@ -49,7 +50,7 @@
         <div id="weather-container">
             <div id="weather-today-main" class="weather-today weather">
                 <div class="wt-row">
-                    <button id="favourite-no" class="favourite-no btn-frameless" title="Add to favourites"><i class="material-icons">star_border</i></button>
+                    <button id="favourite-no" class="favourite-no btn-frameless" title="Love me!"><i class="material-icons">star_border</i></button>
                     <button id="favourite-yes" class="favourite-yes btn-frameless display-none" title="Remove from favourites"><i class="material-icons">star</i></button>
                     <div class="wt-main-city" id="wt-cityFull"></div>
                     <div class="wt-main-geo" id="wt-geoFull"></div>
@@ -78,7 +79,7 @@
                         <div class="wt-column">
                             <div class="wt-row">
                                 <div class="wt-temp" id="wt-temp"></div>
-                                <div id="unit-switch" class="unit-switch" title="Switch units">
+                                <div id="unit-switch" class="unit-switch" title="Switch me!">
                                     <button class="btn-frameless btn-unit-switch">
                                         <i class="wi wi-celsius"></i>
                                     </button>

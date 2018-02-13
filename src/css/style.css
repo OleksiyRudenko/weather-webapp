@@ -411,6 +411,25 @@ input.search::placeholder {
 }
 
 /* ======= helpers ====== */
+
+/* tooltip theme
+   https://atomiks.github.io/tippyjs/#creating-themes
+*/
+
+.tippy-tooltip.outstanding-theme {
+    background-color: DarkOrange;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    line-height: 3rem;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    color: var(--color-lightest);
+}
+
+.tippy-popper[x-placement^=bottom] .tippy-tooltip.outstanding-theme .tippy-arrow {
+    border-bottom-color: DarkOrange;
+}
+
 /* --- loader ---
    src: https://www.w3schools.com/howto/howto_css_loader.asp
 */

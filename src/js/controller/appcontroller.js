@@ -13,6 +13,7 @@ import SettingsService from "../service/settingsservice.js";
 import StorageService from "../service/storageservice.js";
 import WeatherService from "../service/weatherservice.js";
 import MoodController from "./moodcontroller.js";
+import GuideController from "./guidecontroller.js";
 
 /**
  * Class representing main app controller.
@@ -80,6 +81,7 @@ export default class AppController extends AppControllerComponent {
         SearchHistoryController: new SearchHistoryController(),
         WeatherController: new WeatherController(),
         MoodController: new MoodController(),
+        GuideController: new GuideController(),
       },
     });
   }

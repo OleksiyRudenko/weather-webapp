@@ -231,6 +231,22 @@ export const appConfig = {
           },
         },
       } // imagery
+    }, // mood
+    guide: {
+      playOrder: ['userInput', 'unitSwitch', 'manageFavourite'],
+      tipOptions: {
+        placement: 'bottom',
+        // arrowTransform: 'scale(2.0)',
+        animation: 'shift-toward',
+        inertia: true,
+        duration: 300,
+        arrow: true,
+        delay: 800,
+        size: 'large',
+        theme: 'outstanding',
+        createPopperInstanceOnInit: true,
+      },
+      exposureDuration: 1500,
     },
   },
   uiElements: {
@@ -271,7 +287,12 @@ export const appConfig = {
     },
     MoodController: {
       container: 'body',
-    }
+    },
+    GuideController: {
+      userInput: 'search-input',
+      unitSwitch: 'unit-switch',
+      manageFavourite: 'favourite-no',
+    },
   },
 
 };
