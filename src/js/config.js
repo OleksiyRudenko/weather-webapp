@@ -274,6 +274,7 @@ export const appConfig = {
     },
     SearchHistoryController: {
       container: 'history-container',
+      textInput: 'search-input',
     },
     WeatherController: {
       container: 'weather-container',
