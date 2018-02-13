@@ -15,7 +15,7 @@ export default class SettingsService extends AppServiceComponent {
     };
     this._storeName = 'settings';
     this._settings = {
-      Units: 'metric',
+      Units: 'imperial',
     };
     this._units = {
       windSpeed: {
