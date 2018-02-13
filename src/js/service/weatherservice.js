@@ -42,7 +42,7 @@ export default class WeatherService extends AppServiceComponent {
       })
       .then(data => {
         // verbalize icon
-        this.debugThisClassName('apiRequest ' + queryClass);
+        // this.debugThisClassName('apiRequest ' + queryClass);
         switch (queryClass) {
           case 'current':
             data.weather[0].verbose = this.decomposeIconId(data.weather[0].icon);
@@ -53,11 +53,11 @@ export default class WeatherService extends AppServiceComponent {
             });
             break;
         }
-        console.log(data);
+        // console.log(data);
         return data;
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
         throw error;
       });
   }
@@ -79,7 +79,7 @@ export default class WeatherService extends AppServiceComponent {
         return URL.createObjectURL(blob);
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
         throw error;
       });
   }
