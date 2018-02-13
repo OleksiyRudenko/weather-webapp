@@ -154,11 +154,11 @@ input.search {
     background-color: rgba(255,255,255,0.1);
     border-width: 0 0 0.06rem 0;
     border-bottom: 0.1rem solid var(--color-neutral);
-    height: 2rem;
+    height: 3rem;
     flex: auto;
     font-size: 2rem;
     font-weight: bolder;
-    line-height: 2.2rem;
+    line-height: 3.2rem;
     padding-left: 0.5rem;
 }
 
@@ -253,6 +253,7 @@ input.search::placeholder {
 }
 
 .wt-row {
+    margin-top: 1rem;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
