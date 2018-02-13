@@ -294,6 +294,11 @@ export const appConfig = {
       unitSwitch: 'unit-switch',
       manageFavourite: 'favourite-no',
     },
+    FavCityController: {
+      addFavCity: 'favourite-no',
+      removeFavCity: 'favourite-yes',
+      cityFullName: 'wt-cityFull',
+    }
   },
 
 };
