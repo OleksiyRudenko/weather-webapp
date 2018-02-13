@@ -77,7 +77,7 @@ export default class CityListService extends AppServiceComponent {
       .then(data => {
         // console.log(data);
         let list = data.map(entry =>
-          ({id: entry.id, name:entry.name + ', ' + entry.country, nameUC: (entry.name + ', ' + entry.country).toUpperCase()})
+          ({id: entry.id, name:entry.name + ', ' + entry.country, nameUC: (entry.name + ',' + entry.country).toUpperCase()})
         ).filter(el => /^[^\d\W]/.test(el.name));
         return list.sort((a,b) => a.nameUC < b.nameUC ? -1 : 1 );
       })
