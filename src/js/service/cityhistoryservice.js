@@ -38,9 +38,9 @@ export default class CityHistoryService extends AppServiceComponent {
     // update item content
     item.lastQueried = + new Date();
     // store item
-    this.dependencies.Services.StorageService.put(this._storeName,item).then(() => {
+    this.dependencies.Services.StorageService.put(this._storeName,item); /*.then(() => {
       console.log('Search item added. {' + item.name + ', ' + item.lastQueried + '}');
-    });
+    }); */
   }
 
   /**
@@ -65,11 +65,11 @@ export default class CityHistoryService extends AppServiceComponent {
   updateStorage() {
     this.dependencies.Services.StorageService.storeCount(this._storeName).then(count => {
       if (!count) {
-        this.dependencies.Services.StorageService.put(this._storeName, this.config.historyInitialSet).then(()=>{
+        this.dependencies.Services.StorageService.put(this._storeName, this.config.historyInitialSet); /*.then(()=>{
           console.log('History initialized.');
-        });
+        }); */
       }
-      console.log('CityListService.updateStorage(cities).count==' + count);
+      // console.log('CityListService.updateStorage(cities).count==' + count);
     });
   }
 }
