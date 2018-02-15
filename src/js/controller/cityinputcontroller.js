@@ -118,9 +118,9 @@ export default class CityInputController extends AppUiControllerComponent {
    */
   focus() {
     this.uiElements.textInput.focus();
-    if (!this.uiElements.textInput.value.length) {
+    /* if (!this.uiElements.textInput.value.length) {
       this.dependencies.UiControllers.SearchHistoryController.show();
-    }
+    } */
   }
 
   /**

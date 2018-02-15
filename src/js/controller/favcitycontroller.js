@@ -1,10 +1,14 @@
 import AppUiControllerComponent from "../framework/appuicontrollercomponent.js";
 import FavCityService from "../service/favcityservice.js";
+import CityInputController from "./cityinputcontroller.js";
 
 export default class FavCityController extends AppUiControllerComponent {
   constructor() {
     super();
     this.dependencies = {
+      UiControllers: {
+        CityInputController: 'CityInputController',
+      },
       Services: {
         FavCityService: 'FavCityService',
       },
@@ -45,6 +49,7 @@ export default class FavCityController extends AppUiControllerComponent {
       name: this.uiElements.cityFullName.textContent,
     }).then(()=>{
       this.checkCityIsFav(this.uiElements.cityFullName.textContent);
+      this.dependencies.UiControllers.CityInputController.focus();
     });
   }
 
@@ -58,6 +63,7 @@ export default class FavCityController extends AppUiControllerComponent {
       this.uiElements.cityFullName.textContent
     ).then(()=>{
       this.checkCityIsFav(this.uiElements.cityFullName.textContent);
+      this.dependencies.UiControllers.CityInputController.focus();
     });
   }
 }
