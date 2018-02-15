@@ -40,7 +40,7 @@ export default class SearchHistoryController extends AppUiControllerComponent {
     this.dependencies.Services.CityHistoryService.getItems().then(list => {
       // show history
       this.uiElements.container.innerHTML = list.map((value, index) =>
-        '<div id="city-list-element-' + index + '" class="city-list-element">' + value + '</div>'
+        '<div id="city-list-element-' + index + '" class="city-list-element"><i class="material-icons">history</i> ' + value + '</div>'
       ).join('');
       this.uiElements.container.classList.add('city-container-visible');
       this._isActive = true;
@@ -76,12 +76,9 @@ export default class SearchHistoryController extends AppUiControllerComponent {
 
   /*****
    * https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_autocomplete
-   * <i class="fas fa-star"></i>
-   * <i class="fas fa-history"></i>
-   * <i class="fas fa-magic"></i>
-   * <i class="far fa-keyboard"></i>
-   * <i class="fas fa-keyboard"></i>
-   * <i class="fas fa-database"></i>
+   * <i class="material-icons">star_border</i>
+   * <i class="material-icons">star</i>
+   * <i class="material-icons">history</i>
    * ************* */
 
   autocomplete(inp, arr) {

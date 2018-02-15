@@ -540,7 +540,13 @@ input.search::placeholder {
 }
 
 .city-list-element {
-    padding: 0 0.5em 0 0.5em;
+    padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+    font-size: 1.5rem;
+    cursor: default;
+}
+
+.city-list-element > i {
+    font-size: 1.5rem;
 }
 
 .city-list-element:hover {
