@@ -30,8 +30,7 @@ export default class GuideController extends AppUiControllerComponent {
     Object.keys(this.uiElements).forEach((uiElementIdx) => {
       tippy(this.uiElements[uiElementIdx], this.config.guide.tipOptions)
     });
-    this.playTip('userInput');
-    // playNextTip();
+    window.setTimeout(() => {this.playTip('userInput')}, this.config.guide.onloadDelay);
   }
 
   /**
@@ -44,8 +43,8 @@ export default class GuideController extends AppUiControllerComponent {
     if (element) {
       this.playedTips[elementName] = true;
       // console.log(this.playedTips);
-      window.setTimeout(() => {element._tippy.show()}, this.config.guide.exposureDuration);
-      window.setTimeout(() => {element._tippy.hide()}, this.config.guide.exposureDuration * 2);
+      element._tippy.show();
+      window.setTimeout(() => {element._tippy.hide()}, this.config.guide.exposureDuration);
     }
   }
 
