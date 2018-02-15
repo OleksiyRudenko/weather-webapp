@@ -141,7 +141,7 @@ export default class CityInputController extends AppUiControllerComponent {
     if (value.length) {
       this.uiElements.textInput.value = value;
       if (value.length >= this._settings.minChar) {
-        this.uiElements.searchAction.classList.remove('btn-inactive');
+        this.uiElements.searchAction.disabled = false;
         if (doSearch) {
           this.uiElements.textInput.blur();
           this.uiElements.searchAction.click();
@@ -150,11 +150,11 @@ export default class CityInputController extends AppUiControllerComponent {
           helper.setCaretPosition(this.uiElements.textInput, caretPosition);
         }
       } else {
-        this.uiElements.searchAction.classList.add('btn-inactive');
+        this.uiElements.searchAction.disabled = true;
       }
     } else {
       this.uiElements.textInput.value = '';
-      this.uiElements.searchAction.classList.add('btn-inactive');
+      this.uiElements.searchAction.disabled = true;
       this.dependencies.UiControllers.SearchHistoryController.show();
     }
   }
@@ -190,13 +190,13 @@ export default class CityInputController extends AppUiControllerComponent {
     // DEBUG: console.log('<"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
 
     if (target.value.length >= this._settings.minChar) {
-      this.uiElements.searchAction.classList.remove('btn-inactive');
+      this.uiElements.searchAction.disabled = false;
       if (eventType === 'keyup' && key === 'Enter') {
         this.uiElements.textInput.blur();
         this.uiElements.searchAction.click();
       }
     } else {
-      this.uiElements.searchAction.classList.add('btn-inactive');
+      this.uiElements.searchAction.disabled = true;
     }
     // console.log(eventType + '>' + key + ':' + code + ':' + keyCode);
     if (eventType === 'keyup' && target.value.length === 0 && key !== 'Escape') {

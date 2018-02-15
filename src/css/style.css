@@ -117,8 +117,12 @@ button {
     line-height: 1.2rem;
 }
 
-.btn-frameless:hover {
+.btn-frameless:hover:enabled {
     background-color: CornflowerBlue;
+}
+
+.btn-frameless:disabled {
+    cursor: not-allowed;
 }
 
 .btn-round {
@@ -147,9 +151,9 @@ button {
     font-size: 2rem;
 }
 
-.btn-inactive {
+.btn-search:disabled {
     color: var(--color-light);
-    cursor: default;
+    background-color: var(--color-lightest-xparent);
 }
 
 button.btn-row {
