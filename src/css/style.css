@@ -552,3 +552,18 @@ input.search::placeholder {
 .city-list-element:hover {
     background-color: #84a5ff;
 }
+
+input[type=radio].city-list-radio {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+input[type=radio].city-list-radio:checked + .city-list-element {
+    background-color: yellow;
+}
