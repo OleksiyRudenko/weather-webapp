@@ -48,11 +48,11 @@ export default class CityInputController extends AppUiControllerComponent {
    */
   attachClickHandlers() {
     this.attachOnClickHandler(this.uiElements.searchAction, this.actionSearch);
-    this.uiElements.textInput.onkeydown = this.onUserCharInput.bind(this);
-    this.uiElements.textInput.onkeyup = this.onUserCharInput.bind(this); // onkeydown/keypress caused missing last key pressed
-    this.uiElements.textInput.onfocus = this.onUserInputFocus.bind(this);
-    this.uiElements.textInput.onblur = this.onUserInputBlur.bind(this);
-    this.uiElements.textInput.addEventListener('click', this.onUserInputClick.bind(this));
+    this.uiElements.textInput.addEventListener('input', this.onUserCharInput.bind(this));
+    this.uiElements.textInput.addEventListener('keydown', this.onUserSpecialKey.bind(this));
+    this.uiElements.textInput.addEventListener('focus', this.onUserInputFocus.bind(this));
+    this.uiElements.textInput.addEventListener('blur', this.onUserInputBlur.bind(this));
+    this.attachOnClickHandler(this.uiElements.textInput, this.onUserInputClick);
   }
 
   /**
@@ -161,62 +161,42 @@ export default class CityInputController extends AppUiControllerComponent {
 
   /**
    * Validates user input, activates and deactivates search button
-   * @param {object} e - keydown event
+   * @param {object} e - input event
    */
   onUserCharInput(e) {
     const target = this.uiElements.textInput;
-    // see https://stackoverflow.com/questions/2353550/how-to-capture-a-backspace-on-the-onkeydown-event for keys/codes details
-    const keyCode = e.keyCode;
-    const key = e.key;
-    const code = e.code;
-    const eventType = e.type; // keyup, keydown
-    let caretPosition = helper.getCaretPosition(target);
-    // console.log(e);
-
-    // DEBUG: console.log('>"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
     // remove letters if input value starts with [\-.\d] as an indication of geocoords input
     if (target.value.length > 0 && /^[\-\d.,]/.test(target.value)) {
       target.value = target.value.replace(/[^\-\d.,\s]/g,'');
     }
-
-    // skip initial spaces and every second space
-    /*if (['Space', 'Backspace', 'Delete'].includes(key)) {
-      target.value = helper.sanitizeWhitespaces(target.value);
-    } */
-
     target.value = helper.sanitizeWhitespaces(target.value);
-
-    caretPosition = helper.getCaretPosition(target);
-    // DEBUG: console.log('<"'+target.value.replace(/\s/g,'*')+'" caret@' + caretPosition);
-
-    if (target.value.length >= this._settings.minChar) {
-      this.uiElements.searchAction.disabled = false;
-      if (eventType === 'keyup' && key === 'Enter') {
-        this.uiElements.textInput.blur();
-        this.uiElements.searchAction.click();
-      }
+    this.uiElements.searchAction.disabled = (target.value.length < this._settings.minChar) ? true : false;
+    if (target.value.length === 0) {
+      this.dependencies.UiControllers.SearchHistoryController.show();
     } else {
-      this.uiElements.searchAction.disabled = true;
-    }
-    // console.log(eventType + '>' + key + ':' + code + ':' + keyCode);
-    if (eventType === 'keyup' && target.value.length === 0 && key !== 'Escape') {
-      this.onUserInputFocus({
-        target: this.uiElements.textInput,
-      });
-    } else {
-      // hide history
-      this.dependencies.UiControllers.SearchHistoryController.hide();
-    }
-    // hide history on escape key
-    if (eventType === 'keyup' && key === 'Escape') {
-      // console.log('HIDE');
       this.dependencies.UiControllers.SearchHistoryController.hide();
     }
   }
 
   /**
-   * Sanitize user input
-   * @param {object} e - keydown event
+   * Processes non-alphanumeric key presses
+   * @param {Event} e - keydown event
+   */
+  onUserSpecialKey(e) {
+    switch (e.keyCode) {
+      case 13:
+        this.uiElements.textInput.blur();
+        this.uiElements.searchAction.click();
+        break;
+      case 27:
+        this.dependencies.UiControllers.SearchHistoryController.hide();
+        break;
+    }
+  }
+
+  /**
+   * Sanitize user input and hide lists on blur
+   * @param {Event} e - blur event
    */
   onUserInputBlur(e) {
     const target = this.uiElements.textInput;

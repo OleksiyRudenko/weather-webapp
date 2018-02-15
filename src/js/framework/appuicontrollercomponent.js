@@ -39,7 +39,7 @@ export default class AppUiControllerComponent extends AppControllerComponent {
    * @param {callback} eventHandler
    */
   attachOnClickHandler(htmlElement, eventHandler) {
-    htmlElement.onclick = eventHandler.bind(this);
-    htmlElement.ontouchstart = eventHandler.bind(this);
+    htmlElement.addEventListener('click', eventHandler.bind(this));
+    htmlElement.addEventListener('touchstart', eventHandler.bind(this));
   }
 }
