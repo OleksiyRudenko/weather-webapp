@@ -40,21 +40,25 @@ export default class SearchHistoryController extends AppUiControllerComponent {
    * Shows search history list
    */
   show() {
-    return this.dependencies.Services.CityHistoryService.getItems().then(list => {
-      // show history
-      /*
-      this.uiElements.container.innerHTML =
-        list.map((value, index) =>
-          this.renderEntry(index, value, 'history')
-      ).join(''); */
+    return Promise.all([this.getFavourites(),this.getHistory()]).then(lists => {
       this.uiElements.container.innerHTML = '';
-      list.forEach((value, index) => {
-        this.uiElements.container.appendChild(this.renderEntry(index, value, 'history'));
+
+      const icons = ['star', 'history'];
+      // populate joint list with unique values
+      let superList = [];
+      lists.forEach((list, listIndex) => {
+        list.forEach((entry) => {
+          const any = superList.find(el => el.value === entry);
+          if (!any) superList.push({value: entry, icon: icons[listIndex]});
+        });
       });
 
+      // build HTML elements
+      superList.forEach((item, index) => {
+        this.uiElements.container.appendChild(this.renderEntry(index, item.value, item.icon));
+      });
       this.uiElements.container.classList.add('city-container-visible');
       this.uiElements.firstListItem = document.getElementById('city-list-element-0');
-      this._isActive = true;
       return true;
     });
   }
@@ -164,5 +168,13 @@ export default class SearchHistoryController extends AppUiControllerComponent {
     // console.log(container);
 
     return container;
+  }
+
+  getFavourites() {
+    return this.dependencies.Services.FavCityService.getItems();
+  }
+
+  getHistory() {
+    return this.dependencies.Services.CityHistoryService.getItems();
   }
 }
