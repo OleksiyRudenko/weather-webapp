@@ -64,11 +64,11 @@ export const appConfig = {
           },
         ],
         // [1]: upgrade to v.2
-        [
+        /* [
           {
             storeName: 'weather',
           },
-        ],
+        ], */
       ], // store
     }, // storage
     icons: {
