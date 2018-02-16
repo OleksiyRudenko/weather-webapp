@@ -137,6 +137,7 @@ export default class CityInputController extends AppUiControllerComponent {
    * @param {boolean} doSearch
    */
   setValue(value, caretPosition=null, doSearch=true) {
+    // this.debugThisClassName('setValue');
     // console.log('cityInput: "' + value + '"(' + value.length + '), caret:' + caretPosition + '; doSearch:' + doSearch);
     if (value.length) {
       this.uiElements.textInput.value = value;

@@ -82,16 +82,17 @@ export default class SearchHistoryController extends AppUiControllerComponent {
    */
   onClick(e) {
     const target = e.target;
-    this.debugThisClassName('onClick');
+    /* this.debugThisClassName('onClick');
     console.log(e.target);
-    console.log(e);
-    const cityName = e.target.getAttribute('data-value');
-    /* console.log('Clicked on ' + cityName);
     console.log(e); */
+    const cityName = (e.clientX && e.clientY) ? e.target.getAttribute('data-value') : e.target.value;
+    // console.log('Clicked on ' + cityName);
+    // console.log(e);
 
     // Hide list
     this._isActive = false;
     if (e.clientX && e.clientY) {
+      e.preventDefault();
       this.uiElements.container.classList.remove('city-container-visible');
       this.dependencies.UiControllers.CityInputController.setValue(cityName);
     }
@@ -106,12 +107,15 @@ export default class SearchHistoryController extends AppUiControllerComponent {
     mainRadioInput.classList.add('city-list-radio');
     if (!index) mainRadioInput.setAttribute('checked', '');
     mainRadioInput.addEventListener('keydown', (e) => {
-      if (e.keyCode === 13) {
-        /* console.log('ENTER on');
-        console.log(e);
-        console.log(e.target.value); */
-        this.uiElements.container.classList.remove('city-container-visible');
-        this.dependencies.UiControllers.CityInputController.setValue(e.target.value);
+      switch (e.keyCode) {
+        case 13:
+          this.uiElements.container.classList.remove('city-container-visible');
+          this.dependencies.UiControllers.CityInputController.setValue(e.target.value);
+          break;
+        case 27:
+          this.hide();
+          this.dependencies.UiControllers.CityInputController.focus();
+          break;
       }
     });
 
