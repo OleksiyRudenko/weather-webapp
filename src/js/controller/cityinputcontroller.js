@@ -193,7 +193,7 @@ export default class CityInputController extends AppUiControllerComponent {
         this.dependencies.UiControllers.SearchHistoryController.hide();
         break;
       case 40:
-        this.debugThisClassName('onUserSpecialKey');
+        // this.debugThisClassName('onUserSpecialKey');
         this.dependencies.UiControllers.SearchHistoryController.show().then(() =>
           this.dependencies.UiControllers.SearchHistoryController.focus());
         break;

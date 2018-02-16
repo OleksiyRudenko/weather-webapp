@@ -70,7 +70,7 @@ export default class SearchHistoryController extends AppUiControllerComponent {
    */
   focus() {
     this.debugThisClassName('focus');
-    console.log(this.uiElements.firstListItem);
+    // console.log(this.uiElements.firstListItem);
     this.uiElements.firstListItem.focus();
   }
 
@@ -82,9 +82,9 @@ export default class SearchHistoryController extends AppUiControllerComponent {
    */
   onClick(e) {
     const target = e.target;
-    /* this.debugThisClassName('onClick');
-    console.log(e.target);
-    console.log(e); */
+    // this.debugThisClassName('onClick');
+    // console.log(e.target);
+    // console.log(e);
     const cityName = (e.clientX && e.clientY) ? e.target.getAttribute('data-value') : e.target.value;
     // console.log('Clicked on ' + cityName);
     // console.log(e);
@@ -119,13 +119,26 @@ export default class SearchHistoryController extends AppUiControllerComponent {
       }
     });
 
+    let mainContentIcon = null;
+    if (icon) {
+      mainContentIcon = document.createElement('i');
+      mainContentIcon.classList.add('material-icons');
+      const mainContentIconAttr = document.createAttribute('data-value');
+      mainContentIconAttr.value = value;
+      mainContentIcon.setAttributeNode(mainContentIconAttr);
+      mainContentIcon.innerHTML = icon;
+    }
+
+    const mainContentText = document.createTextNode(value);
+
     const mainContent = document.createElement('div');
     mainContent.classList.add('city-list-element');
     const mainContentAttr = document.createAttribute('data-value');
     mainContentAttr.value = value;
     mainContent.setAttributeNode(mainContentAttr);
     mainContent.setAttribute('data-value', value);
-    mainContent.innerHTML = (icon ? '<i class="material-icons">' + icon + '</i> ' : '') + value;
+    mainContentIcon && mainContent.appendChild(mainContentIcon);
+    mainContent.appendChild(mainContentText);
     mainContent.addEventListener('hover', (e) => {
       console.log('HOVER on');
       console.log(e);
@@ -145,8 +158,8 @@ export default class SearchHistoryController extends AppUiControllerComponent {
     const container = document.createElement('div');
     container.appendChild(label);
 
-    this.debugThisClassName('renderEntry');
-    console.log(container);
+    // this.debugThisClassName('renderEntry');
+    // console.log(container);
 
     return container;
   }
