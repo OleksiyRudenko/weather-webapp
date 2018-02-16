@@ -156,12 +156,6 @@ button {
     background-color: var(--color-lightest-xparent);
 }
 
-button.btn-row {
-    padding-right: 1.5vmin;
-    padding-left: 1.5vmin;
-}
-
-/* --- Context Lists >>> */
 .input-container {
     position: relative;
 
@@ -170,33 +164,6 @@ button.btn-row {
     align-items: stretch;
     flex: auto;
 }
-.input-container-items {
-    position: absolute;
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
-    /*position the autocomplete items to be the same width as the container:*/
-    top: 100%;
-    left: 0;
-    right: 0;
-}
-.input-container-items div {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #fff;
-    border-bottom: 1px solid #d4d4d4;
-}
-.input-container-items div:hover {
-    /*when hovering an item:*/
-    background-color: #e9e9e9;
-}
-.input-container-active {
-    /*when navigating through the items using the arrow keys:*/
-    background-color: DodgerBlue !important;
-    color: #ffffff;
-}
-/* <<< Context Lists --- */
 
 input.search {
     flex: auto;
@@ -361,7 +328,6 @@ input.search::placeholder {
     padding: 0 10px 0 10px;
 }
 
-
 .wt-descrIcon {
     padding: 0;
     justify-content: center;
@@ -435,14 +401,6 @@ input.search::placeholder {
     background-color: var(--color-lightest-xparent);
     color: var(--color-darkest);
 }
-
-/* .wf-item:nth-child(1) {
-    padding: 0.5em 0.5em 0.5em 0;
-}
-
-.wf-item:nth-last-child(1) {
-    padding: 0.5em 0 0.5em 0.5em;
-} */
 
 .wf-icon {
 }
