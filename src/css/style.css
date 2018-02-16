@@ -532,7 +532,8 @@ input.search::placeholder {
     background-color: #fff;
     border: 1px solid #999;
     display: none;
-    width: calc(100% - 1rem);
+    width: 100%;
+    margin-top: 3rem;
 }
 
 .city-container-visible {
