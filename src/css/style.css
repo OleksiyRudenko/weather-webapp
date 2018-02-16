@@ -565,5 +565,5 @@ input[type=radio].city-list-radio {
 }
 
 input[type=radio].city-list-radio:checked + .city-list-element {
-    background-color: yellow;
+    background-color: #84a5ff; /* yellow */
 }
