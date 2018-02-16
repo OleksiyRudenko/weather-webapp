@@ -44,7 +44,6 @@ export default class FavCityController extends AppUiControllerComponent {
    * @param {Event} e
    */
   handleAddFavCity(e) {
-    e.preventDefault();
     this.dependencies.Services.FavCityService.addEntry({
       name: this.uiElements.cityFullName.textContent,
     }).then(()=>{

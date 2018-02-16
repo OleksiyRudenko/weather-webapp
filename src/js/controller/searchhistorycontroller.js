@@ -115,6 +115,7 @@ export default class SearchHistoryController extends AppUiControllerComponent {
     mainRadioInput.addEventListener('keydown', (e) => {
       switch (e.keyCode) {
         case 13:
+          e.preventDefault();
           this.uiElements.container.classList.remove('city-container-visible');
           this.dependencies.UiControllers.CityInputController.setValue(e.target.value);
           break;
