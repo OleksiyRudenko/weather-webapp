@@ -1,6 +1,7 @@
 import AppUiControllerComponent from "../framework/appuicontrollercomponent.js";
 import CityHistoryService from "../service/cityhistoryservice.js";
 import CityInputController from "./cityinputcontroller.js";
+import FavCityService from "../service/favcityservice.js";
 
 /** Class representing search history service. */
 export default class SearchHistoryController extends AppUiControllerComponent {
@@ -14,6 +15,7 @@ export default class SearchHistoryController extends AppUiControllerComponent {
     this.dependencies = {
       Services: {
         CityHistoryService: 'CityHistoryService',
+        FavCityService: 'FavCityService',
       },
       UiControllers: {
         CityInputController: 'CityInputController',
