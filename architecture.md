@@ -12,7 +12,8 @@
   - [Services](#services)
   - [UI Controllers](#ui-controllers)
   - [Functional Controllers](#functional-controllers)
-- [Former architecture docs](#former-architecture-docs)
+- [External Data Providers](#external-data-providers)
+- [Principal App Architecture](#principal-app-architecture)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -24,16 +25,22 @@ App comprises:
 - Functional Controllers
 - Services
 - Proprietary Data Providers
+- Assets
 
 View Elements are managed by UI Controllers only.
 Functional Controllers are app component bootstrappers and
 activity medias.
+
 Controllers may interact with other Controllers and Services.
 Services respond to data requests from Controllers and other Services
 and store data supplied by Controllers.
+
 Services employ Data Providers and external services
 like `IndexedDB`, `localStorage`, foreign resources
 over API, static and/or non-persistent sources.
+
+Assets should be employed by Services. In this application assets
+(imagery) employed by UI Controllers.
 
 [_-- TOC --_](#table-of-contents)
 
@@ -81,6 +88,8 @@ and methods specific to Controllers managing View elements.
 ### UI Controllers
 
  * `CityInputController` - manages user input, launches search
+ * `GuideController` - provides for guiding tips
+ * `FavCityController` - manages favourite cities user interaction
  * `MoodController` - updates mood media based on weather conditions
  * `ProgressController` - updates progress on data load
  * `SearchHistoryController` - manages search history view
@@ -95,7 +104,14 @@ and methods specific to Controllers managing View elements.
 
 [_-- TOC --_](#table-of-contents)
 
-## Former architecture docs
+## External Data Providers
+
+The App employs [Open Weather Map](https://openweathermap.org/api)
+to deliver weather information.
+
+[_-- TOC --_](#table-of-contents)
+
+## Principal App Architecture
 
 ![Weather App Architecture diagram](weather-app-architecture.png)
 
@@ -103,43 +119,11 @@ and methods specific to Controllers managing View elements.
 
  * Green box - browser feature
  * Blue box - App Controller
- * Magenta box - App Service
- * Grey box - Incomplete App Controller / Service
+ * Purple box - App Service
  * Yellow box - external service
+ * Magenta box - assets
 
-> NB! Architecture description below doesn't reflect latest updates.
-
- * `View` - represented with HTML and CSS
- * `AppController` - main app controller
-   - bootstraps the app
-   - supplies `View` with variable data
-   - reports errors via `View`
-     - offline, cached data supplied
-     - offline, no data available
-   - reacts on user actions
-     - choose city
-     - add favourite city
-     - change units
-   - inquires `WeatherService` using user input and settings
-   - dismisses inquiry result when new inquiry arrives from user
- * `SettingsService` - keeps user settings
- * `FavCityService` - keeps user's favourite cities list
- * `CityHistoryService` - keeps search history (list of cities)
-   - cities are ranked by:
-     - date (latest on top)
-     - number of queries
-   - supplies last 20 cities max
-   - stores 100 cities max
-   - removes cities ranked 20+ searched earlier than a month ago
-     for the last time
- * `WeatherService` - supplies weather data
-   - inquires `External Data Provider` over API
-   - caches weather data employing `StorageService`
-   - once a day purges cached data older than 3 days
-   - when app is online and idle updates data for favourite cities
-   - only caches external inquiry when new inquiry from
-     `AppController` arrives
-   - cached record: datetime, city, units, forecast depth
- * `External Data Provider` - [Open Weather Map](https://openweathermap.org/api)
+Bootstrappers are not shown as those interact with every component
+on app and/or component initialization.
 
 [_-- TOC --_](#table-of-contents)
