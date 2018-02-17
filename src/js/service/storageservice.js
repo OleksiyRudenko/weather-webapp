@@ -1,6 +1,6 @@
-import * as idb from '../../../node_modules/idb/lib/node.js';
+import * as idb from '../../../node_modules/idb/lib/node.js'; // causes non-critical error when built
 import AppServiceComponent from "../framework/appservicecomponent.js";
-import ProgressController from "../controller/progresscontroller.js"; // causes non-critical error when built
+import ProgressController from "../controller/progresscontroller.js";
 
 /** Class representing storage service.
  * Uses https://github.com/jakearchibald/idb -- https://www.npmjs.com/package/idb
