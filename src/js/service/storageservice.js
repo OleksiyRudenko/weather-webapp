@@ -1,4 +1,4 @@
-import * as idb from '../../../node_modules/idb/lib/node.js'; // causes non-critical error when built
+import idb from '../../../node_modules/idb/lib/node.js'; // causes non-critical error when built
 import AppServiceComponent from "../framework/appservicecomponent.js";
 import ProgressController from "../controller/progresscontroller.js";
 
