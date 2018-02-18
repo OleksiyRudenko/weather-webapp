@@ -18,7 +18,8 @@
     "prebuild-dev": "node node.prebuild.js",
     "build-dev": "parcel build ./src/index.html --no-minify --public-url ./",
     "prebuild": "node node.prebuild.js",
-    "build": "parcel build ./src/index.html --public-url ./"
+    "build": "parcel build ./src/index.html --public-url ./",
+    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "dependencies": {
     "idb": "^2.0.4"
