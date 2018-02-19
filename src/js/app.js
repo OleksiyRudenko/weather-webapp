@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import { appConfig } from "./config.js";
 import AppController from "./controller/appcontroller.js";
 const app = new AppController(appConfig);

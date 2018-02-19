@@ -2,7 +2,7 @@
   "presets": [
     ["env", {
       "targets": {
-        "browsers": ["last 2 versions", "> 1%", "safari >= 7"]
+        "browsers": ["> 1%", "last 2 versions"]
       },
       "include": ["transform-es2015-arrow-functions", "es6.map"],
       "exclude": ["transform-regenerator", "es6.set"],
